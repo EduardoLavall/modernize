@@ -73,7 +73,7 @@ with sync_playwright() as p:
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',testid)
     assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'review'
     assert page.locator('[data-action="complete"]').is_enabled()
-    page.locator('input[name="name"]').fill('Pessoa Fictícia QA - REVISADA')
+    page.locator('#review-form input[name="name"]').fill('Pessoa Fictícia QA - REVISADA')
     page.locator('[data-action="complete"]').click()
     assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'done'
     page.screenshot(path=str(OUT/'demo-complete.png'))
