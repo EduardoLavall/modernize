@@ -35,6 +35,8 @@
 
 | D-026 | **Modelo comercial: implantação + mensalidade** | Implantação cobre configuração, adaptação inicial e treinamento; mensalidade cobre plataforma, suporte e acompanhamento; personalizações maiores podem ser cobradas separadamente. Valores ainda não definidos. |
 
+| D-027 | **Cenário financeiro-base A — Entrada acessível** | Implantação R$ 990, mensalidade R$ 299, meta hipotética de 8 novos clientes em 12 meses e custo fixo preliminar R$ 1.000/mês; parâmetros **não validados** e sujeitos a simulações de churn, CAC, impostos e custos variáveis |
+
 ## Hipóteses em investigação (não decisões definitivas)
 
 | ID | Hipótese | O que falta |
