@@ -1,0 +1,4 @@
+Cenário;Novos no ano;Churn mensal;CAC R$;Fixos mês R$;Variável/ativo mês R$;Implantação direta/novo R$;Taxa sobre receita;Caixa inicial R$;Assinatura/ativo mês R$;Implantação/novo R$;Pró-labore extra mês R$
+Pessimista;4;0.05;900;1300;65;350;0.08;3000;299;990;2500
+Base;8;0.02;600;1000;40;250;0.06;3000;299;990;2500
+Otimista;12;0.01;450;1000;30;200;0.06;3000;299;990;2500
