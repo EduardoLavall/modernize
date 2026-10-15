@@ -4,7 +4,7 @@
 
 **Decisão:** visão B2B para pequenas empresas/escritórios de diferentes setores, com foco geográfico inicial em **Santa Maria, Rio Grande do Sul**.
 
-**Hipótese de segmentação:** imobiliárias são um possível primeiro nicho por possuírem rotinas de atendimento, documentos, divulgação e agendamentos. Isso ainda necessita de validação local.
+**Decisão de produto (15/10/2026):** imobiliárias são o **segmento inicial do MVP da Modernize IA**, com foco no cadastro documental de interessados em locação. A Modernize continua com visão B2B multissetorial. **A existência de demanda, a intensidade do problema e a disposição de pagamento em Santa Maria ainda são hipóteses a validar.**
 
 ## Pessoas envolvidas na compra
 
@@ -35,4 +35,4 @@ Dores compartilhadas; recorrência das tarefas; facilidade de demonstrar resulta
 
 ## Pendências
 
-Pesquisar quantidade e perfil de empresas na região com fontes verificáveis; escolher subsegmento inicial; validar quem paga; estimar TAM/SAM/SOM; entrevistar ou aplicar outra metodologia de evidência, se possível.
+Pesquisar quantidade e perfil de imobiliárias na região com fontes verificáveis; validar quem paga e a frequência/custo do cadastro documental; estimar TAM/SAM/SOM; entrevistar ou aplicar outra metodologia de evidência, se possível.
