@@ -30,13 +30,11 @@ Esta frase é uma **hipótese de posicionamento**, não um slogan final nem prov
 - **Rotina administrativa:** integração entre e-mail, arquivos, planilhas e calendário.
 - **Treinamento:** demonstração guiada de usos reais de ChatGPT e outras IAs.
 
-**A linha Modernize IA está definida conceitualmente, mas o MVP e o primeiro fluxo operacional ainda não.**
+**MVP e fluxo definidos:** empregado da imobiliária cria solicitação → interessado envia documentos básicos por link sem login → IA extrai/confere/resume → funcionário revisa e conclui. Ver [13 — MVP](13-mvp-modernize-ia.md).
 
-## Candidatos a primeiro MVP / serviço piloto
+## Primeiro MVP definido e alternativas adiadas
 
-A. Atendimento inteligente; B. Marketing assistido por IA; C. Automação administrativa; D. Capacitação profissional em IA.
-
-**MVP (produto mínimo viável):** a versão menor de uma oferta capaz de testar se usuários percebem valor. Para uma consultoria, pode ser um workshop piloto ou diagnóstico com demonstração supervisionada — não precisa ser software próprio.
+**Escolha:** automação administrativa do cadastro de interessados em locação, com documentos de identidade, residência e renda, IA assistiva e revisão obrigatória. Atendimento genérico, marketing, e-signature, score de crédito, editor de processos e integrações ERP estão **fora do MVP**. A demonstração da disciplina será sintética e navegável, nunca IA de produção fingida.
 
 ## Como mostrar valor
 

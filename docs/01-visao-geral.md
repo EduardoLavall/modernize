@@ -1,6 +1,6 @@
 # 01 — Visão geral do negócio
 
-**Situação:** concepção inicial, não plano final.
+**Situação:** documentação acadêmica de negócio revisada em 15/10/2026; implementação e validação comercial pendentes.
 
 ## Identidade
 
@@ -11,7 +11,7 @@
 - **Diferencial prioritário:** acompanhamento tecnológico contínuo, com identificação recorrente de oportunidades de melhoria.
 - **Geografia de entrada desejada:** Santa Maria, RS.
 - **Mercado em potencial:** pequenas empresas e escritórios de vários setores (B2B).
-- **Setor inicial sob investigação:** imobiliárias.
+- **Setor inicial ESCOLHIDO para o MVP:** imobiliárias, sem demanda local validada.
 
 ## Três pilares da Modernize
 
@@ -36,8 +36,7 @@ Não existem ainda evidências de demanda, economia de tempo, disposição de pa
 ## Abrangência x foco
 
 **Visão de longo prazo:** atender diferentes segmentos.
-**Estratégia de entrada sob estudo:** começar por um recorte (possivelmente imobiliárias) e por uma oferta replicável.
-A escolha definitiva do primeiro serviço ainda não foi feita.
+**Estratégia de entrada decidida:** imobiliárias de Santa Maria; primeiro fluxo: cadastro documental de interessados em locação com IA e revisão humana. Ver [MVP](13-mvp-modernize-ia.md).
 
 ## Restrições e cuidados
 
@@ -45,4 +44,4 @@ A Modernize não deve prometer decisões legais, financeiras ou contratuais aut�
 
 ## Questões abertas
 
-Quem paga? Por qual resultado concreto? Qual serviço piloto? Qual faixa de preços e duração? Quais licenças e custos? Qual capacidade operacional? Quais indicadores provam o benefício? O nome possui disponibilidade jurídica e de domínio?
+**Decidido:** quem paga é a imobiliária, R$ 990 na implantação e R$ 299 mensais **por imobiliária** como hipótese comercial; serviço inicial documental já delimitado. **Pendente:** comprovar demanda e ROI, estimar custos reais/capacidade de suporte, investigar nome/dominio, medir resultados com clientes.

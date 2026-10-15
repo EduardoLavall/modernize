@@ -17,7 +17,7 @@
 | H02 | Ferramentas de IA podem apoiar ao menos uma tarefa com segurança | Prova de conceito com dados fictícios e revisão | Não testada |
 | H03 | Gestores veem valor econômico no serviço | Conversas, propostas e disposição real de contratação | Não testada |
 | H04 | É possível entregar serviço replicável a custo sustentável | Tempo técnico, licenças e custo de atendimento | Não testada |
-| H05 | A demanda identificada em Florianópolis se aplica a Santa Maria | Evidência local comparável | Não testada |
+| H05 | Uma possível demanda em outras regiões se aplica a Santa Maria | Evidência local comparável | Não testada |
 
 ## Entrevistas — se acontecerem
 
@@ -28,6 +28,10 @@ Conversar com corretores conhecidos de Florianópolis pode ajudar, mas não é d
 O material da disciplina diferencia métricas de vaidade (ex.: visualizações/downloads) de métricas acionáveis (ex.: ativação, retenção e receita). Para uma consultoria, métricas úteis podem ser: adoção após o treinamento, tarefas efetivamente melhoradas, recompra ou renovação do suporte, indicação e satisfação. Definir métricas com base na oferta escolhida.
 
 O teste de Sean Ellis conhecido como "40%" considera a fração que ficaria **muito desapontada** sem o produto. O slide 9 do PDF de PMF traz uma indicação invertida ("nem um pouco desapontado"); o slide 18 usa "muito desapontado". Não reproduzir a inversão na apresentação. A referência é heurística, não comprovação automática de PMF, e não se aplica sem usuários reais.
+
+## Documentos recentes
+
+[18 — Protocolo detalhado, entrevistas não indutivas e funil comercial](18-validacao-e-gtm.md); [16 — evidências nacionais, concorrentes e limites do mercado municipal](16-mercado-e-concorrencia.md). **Pesquisa secundária ≠ entrevistas reais nem disposição de pagamento.** O requisito acadêmico “problema validado” ainda **não** está satisfeito empiricamente.
 
 ## Saída desta fase
 

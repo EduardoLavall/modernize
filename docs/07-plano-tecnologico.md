@@ -12,7 +12,11 @@ Este documento separa **a tecnologia utilizada para apresentar o trabalho** da *
 - Preferir visual com pouco texto, demonstrações e participação da turma.
 - O domínio do GitHub Pages e o workflow serão configurados só quando existir código. Para site de projeto, Vite deverá usar a base correta do repositório.
 
-## B. Tecnologia possível para serviços da Modernize (hipótese)
+## B. Arquitetura SaaS do produto Modernize IA
+
+**Definido como proposta:** Google OIDC para Admin/Funcionários; autorização vinculada ao tenant; portal externo com link individual; PostgreSQL e storage privado; worker assíncrono; adapter de IA; revisão humana. Veja o [diagrama e plano técnico de referência](17-arquitetura-referencia.md). **Nenhum serviço produtivo foi implantado.**
+
+## C. Tecnologia possível para serviços adicionais da Modernize (hipótese)
 
 Fluxo conceitual para um piloto futuro:
 
@@ -35,4 +39,4 @@ Exemplos de sistemas: e-mail, armazenamento de arquivos, planilhas e agenda. A d
 
 ## Pendências de arquitetura
 
-Escolher o serviço piloto, o fluxo técnico correspondente, stack da implantação, serviços de nuvem necessários, custos de operação, redundância e estratégia de atualização. Incluir um diagrama técnico no entregável acadêmico.
+O serviço piloto e diagrama estão escolhidos e documentados. Pendências reais: hospedeiro/modelo/provedor definitivos, cotação de token/armazenamento, testes de backup/isolamento, LGPD e custos de suporte. A [demo acadêmica](21-plano-implementacao-granaxp.md) não tratará documentos reais.
