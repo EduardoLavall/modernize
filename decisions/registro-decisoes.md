@@ -15,6 +15,10 @@
 | D-007 | Desenvolvimento **documentação primeiro**, depois implementação ampla e microajustes | Evitar programar antes de fechar narrativa e requisitos |
 | D-008 | Ensino incremental de empreendedorismo durante o projeto | Explicar conceitos e aplicá-los à Modernize |
 | D-009 | Entrevistas com corretores **não podem ser dependência do trabalho** | Contatos existem em Florianópolis; conversas talvez ocorram |
+| D-010 | **Modernização Tecnológica Contínua** é o posicionamento da empresa-mãe | A IA pode ser uma linha de produto, não todo o portfólio |
+| D-011 | **Modernize IA** como produto híbrido acompanhado de treinamento | Plataforma central extensível e personalizável por cliente |
+| D-012 | **Acompanhamento tecnológico contínuo** é o diferencial principal escolhido | Ainda depende de validação com compradores; não é exclusividade comprovada |
+| D-013 | Usar pesquisa verificável para sustentar a tese do problema | Guardar percentuais, fontes e limitações sem fabricar validação local |
 
 ## Hipóteses em investigação (não decisões definitivas)
 
@@ -28,7 +32,8 @@
 
 ## Pendências decisórias importantes
 
-- [ ] Eleger serviço inicial, escopo e entrega mínima.
+- [ ] Definir o MVP da plataforma Modernize IA e o limite entre núcleo e personalização.
+- [ ] Definir a cadência e os entregáveis do acompanhamento tecnológico contínuo.
 - [ ] Definir a persona compradora versus usuária da oferta.
 - [ ] Determinar modelo de cobrança e canais de vendas.
 - [ ] Validar mercado e concorrência em Santa Maria.

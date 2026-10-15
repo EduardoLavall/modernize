@@ -13,7 +13,8 @@ Projeto acadêmico de Inovação Tecnológica e Empreendedorismo: planejamento d
 - **Primeiro segmento em investigação:** imobiliárias. Ainda não é uma exclusividade comercial nem um nicho validado.
 - **Oferta considerada:** diagnóstico de processos, aulas/workshops práticos, automação administrativa, integrações entre ferramentas e acompanhamento.
 - **Exemplos de tecnologias:** ChatGPT e outras IAs, conectores de e-mail, arquivos, planilhas, calendários, ferramentas de produtividade e fluxos de automação.
-- **Diferenciação pretendida:** aplicação prática e contextualizada, em vez de apenas ensinar a escrever prompts. Isso é uma hipótese de valor, não uma vantagem já comprovada.
+- **Produto escolhido conceitualmente:** Modernize IA, plataforma híbrida com funcionalidades básicas extensíveis e personalizáveis, acompanhada de treinamentos.
+- **Diferencial prioritário escolhido:** acompanhamento tecnológico contínuo (ainda não validado comercialmente).
 
 ## Objetivo acadêmico e formato
 
@@ -50,4 +51,4 @@ A entrega acadêmica também prevê: sumário executivo (1 página), arquitetura
 5. Usar dados fictícios nas interações públicas da apresentação.
 6. Evitar implementar os slides antes de concluir a documentação principal.
 
-**Próxima decisão:** escolher qual serviço será a porta de entrada da Modernize (atendimento, marketing, automação administrativa ou capacitação), sem abandonar o portfólio potencial mais amplo.
+**Próximo passo:** definir o MVP da Modernize IA, detalhar o acompanhamento tecnológico contínuo e validar disposição de pagamento e viabilidade.

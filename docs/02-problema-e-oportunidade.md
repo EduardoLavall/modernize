@@ -2,6 +2,14 @@
 
 **Estado:** conjunto de hipóteses; ainda sem pesquisa de campo conclusiva.
 
+## Problema central adotado para o pitch (tese a validar)
+
+A IA e outras tecnologias evoluem rapidamente, e empresas podem ter dificuldade para acompanhar novidades, capacitar equipes e transformar ferramentas em melhorias sustentáveis no trabalho. A Modernize responde com acompanhamento tecnológico contínuo, não apenas uma entrega pontual.
+
+**Evidências secundárias iniciais:** o Cetic.br reporta uso de IA em 17% das empresas pesquisadas em 2025, 15% entre pequenas (10 a 49 pessoas) e 50% entre grandes (250+). A OCDE documenta falta de competências como obstáculo em PMEs e a Microsoft/LinkedIn aponta lacunas no treinamento corporativo de usuários. Metodologia, percentuais, fontes e limitações estão em [pesquisa sobre lacunas de adoção](../research/2026-lacunas-adocao-ia.md).
+
+Essas pesquisas demonstram lacunas agregadas, **não** que todas as empresas brasileiras, ou empresas de Santa Maria, precisam contratar a Modernize. O diferencial e a disposição de pagamento ainda não foram validados.
+
 ## Problema geral proposto
 
 Pequenas empresas podem ter dificuldade para converter o avanço das ferramentas de IA em rotinas úteis e seguras. As barreiras possíveis incluem desconhecimento das capacidades, falta de tempo para aprender, processos pouco organizados, receio de segurança e dificuldade para integrar ferramentas.

@@ -44,3 +44,7 @@ Estas obras foram mencionadas pelos PDFs, não consultadas diretamente durante e
 - **Documento/slide que usa a evidência:**
 
 É proibido apresentar estimativas sem fonte como pesquisas concluídas ou atribuir entrevistas que não ocorreram.
+
+## Pesquisa acrescentada em 15/10/2026
+
+- [Lacunas de adoção de IA, competências e treinamento corporativo](2026-lacunas-adocao-ia.md): números de Cetic.br, OCDE e Microsoft/LinkedIn, com metodologias, limites e utilização permitida no pitch.

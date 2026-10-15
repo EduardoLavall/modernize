@@ -6,6 +6,16 @@
 
 Esta frase é uma **hipótese de posicionamento**, não um slogan final nem prova de resultados.
 
+## Modernize IA — linha de produto escolhida
+
+**Modelo híbrido:** plataforma central com funcionalidades básicas comuns, extensível por integrações ou soluções específicas de cada empresa. O produto será acompanhado de treinamento e implantação assistida.
+
+**Diferencial principal escolhido:** acompanhamento tecnológico contínuo — entender a evolução das ferramentas, identificar oportunidades na empresa, ensinar colaboradores, propor melhorias e revisitar resultados. Ainda é uma proposta, não vantagem validada.
+
+**Distinção em relação a agregadores multimodelo:** acesso a várias IAs, sozinho, não é diferencial suficiente. A Modernize pretende competir pelo processo contínuo de adoção e atualização. Não afirmar exclusividade dessa proposta sem análise competitiva.
+
+**Risco:** personalizações em excesso podem comprometer margem e escalabilidade. Definir o que é módulo comum e o que é projeto adicional.
+
 ## Portfólio possível (não totalmente definido)
 
 1. **Diagnóstico de processos:** mapear rotina, identificar gargalos e priorizar oportunidades.
@@ -20,7 +30,7 @@ Esta frase é uma **hipótese de posicionamento**, não um slogan final nem prov
 - **Rotina administrativa:** integração entre e-mail, arquivos, planilhas e calendário.
 - **Treinamento:** demonstração guiada de usos reais de ChatGPT e outras IAs.
 
-**Nenhum dos quatro foi escolhido como oferta inicial definitiva.**
+**A linha Modernize IA está definida conceitualmente, mas o MVP e o primeiro fluxo operacional ainda não.**
 
 ## Candidatos a primeiro MVP / serviço piloto
 

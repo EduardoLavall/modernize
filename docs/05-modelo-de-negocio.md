@@ -5,14 +5,18 @@
 | Bloco | Hipótese atual |
 | --- | --- |
 | Segmentos de clientes | Pequenas empresas e escritórios de Santa Maria; imobiliárias como nicho inicial sob estudo |
-| Proposta de valor | Tornar IA utilizável em tarefas de trabalho com orientação e implantação prática |
+| Proposta de valor | Modernize IA: plataforma híbrida com treinamento e acompanhamento tecnológico contínuo; tese comercial ainda não validada |
 | Canais | Prospecção direta, indicações, demonstrações e conteúdo educativo — a testar |
-| Relacionamento | Diagnóstico, onboarding/treinamento e acompanhamento conforme o pacote |
-| Fontes de receita | Workshop por turma, consultoria por projeto, implementação e suporte recorrente — alternativas |
+| Relacionamento | Implantação, treinamento e acompanhamento recorrente; periodicidade pendente |
+| Fontes de receita | Produto, treinamento, implementação personalizada e acompanhamento recorrente; formatos e preços ainda indefinidos |
 | Recursos-chave | Conhecimento técnico/didático, materiais de treinamento, ferramentas e tempo da equipe |
 | Atividades-chave | Pesquisa, venda consultiva, diagnóstico, treinamento, integração e suporte |
 | Parcerias | Fornecedores de IA/cloud, comunidade empresarial e parceiros locais — apenas possibilidades |
 | Custos | Horas da equipe, aquisição, transporte, licenças, infraestrutura, tributos, administrativo |
+
+## Definições recentes
+
+Foi escolhida uma **linha de produto híbrida com treinamento** e acompanhamento contínuo como diferencial principal. A cobrança por assinatura + implantação/workshops é uma **opção a analisar**, não uma decisão financeira. O custo de manutenção e atualização contínua deverá entrar na margem e no fluxo de caixa.
 
 ## Decisões comerciais que faltam
 

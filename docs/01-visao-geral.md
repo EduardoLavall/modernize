@@ -5,11 +5,21 @@
 ## Identidade
 
 - **Nome de trabalho escolhido:** Modernize.
-- **Ideia central:** levar conhecimento e aplicação prática de inteligência artificial a organizações que desejam modernizar o trabalho.
-- **Formato:** consultoria, capacitação e possível implementação de soluções.
+- **Ideia central:** modernização tecnológica contínua, com diagnóstico, capacitação recorrente e implementação de melhorias.
+- **Formato:** empresa de produtos e serviços tecnológicos; inteligência artificial é uma linha, não o limite do negócio.
+- **Produto definido conceitualmente:** Modernize IA — plataforma híbrida com núcleo comum, possibilidade de expansão e personalizações por empresa, acompanhada de treinamento.
+- **Diferencial prioritário:** acompanhamento tecnológico contínuo, com identificação recorrente de oportunidades de melhoria.
 - **Geografia de entrada desejada:** Santa Maria, RS.
 - **Mercado em potencial:** pequenas empresas e escritórios de vários setores (B2B).
 - **Setor inicial sob investigação:** imobiliárias.
+
+## Três pilares da Modernize
+
+1. Capacitação contínua, incluindo novos workshops à medida que tecnologias mudam.
+2. Consultoria de proximidade para entender processos e detectar necessidades reais.
+3. Implementação de soluções tecnológicas, incluindo automações, integrações, sistemas sob medida e avaliação de opções open source quando justificadas.
+
+**Exemplo em estudo:** avaliar substituições de soluções Microsoft por alternativas open source se houver custos relevantes. Não pressupor economia: verificar compatibilidade, migração, segurança, licenças, treinamento, hospedagem, suporte e manutenção no custo total.
 
 ## Visão do serviço
 
