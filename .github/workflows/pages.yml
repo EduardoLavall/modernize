@@ -1,0 +1,41 @@
+name: Publicar Modernize no GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Preparar site estático
+        run: |
+          mkdir -p _site/assets/brand _site/css _site/js
+          cp index.html slides.html demo.html sw.js _site/
+          cp css/app.css css/slides.css css/demo.css _site/css/
+          cp js/finance.js js/slides.js js/demo.js _site/js/
+          cp "assets/brand/Modernize logo.png" _site/assets/brand/
+          cp "assets/brand/Glossy Red and Graphite M Logo.png" _site/assets/brand/
+          touch _site/.nojekyll
+      - name: Enviar arquivos
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4
