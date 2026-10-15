@@ -8,7 +8,7 @@ Materiais fornecidos para estudo:
 2. *Material_Economia_Unitaria_Projecao_Financeira.pdf* (15 páginas).
 3. *ProductMarketFit(PMF).pdf* (19 slides).
 
-Os arquivos originais foram analisados durante o planejamento; eles não foram copiados para este repositório.
+Os PDFs de plano de negócios (5 páginas) e economia unitária (15 páginas) foram lidos integralmente na auditoria de 15/10. O terceiro material de PMF é citado do histórico, porém **não foi recuperado nesta auditoria**. Os PDFs não foram copiados para o repositório.
 
 ## Fases da atividade
 
@@ -21,7 +21,7 @@ O enunciado prevê equipes de **3–5 integrantes**; composição da equipe aind
 
 ## Entregáveis explícitos
 
-- [ ] **Sumário executivo** de uma página: texto-base [15](15-sumario-executivo.md) pronto, diagramação A4 final ainda a conferir.
+- [x] **Sumário executivo**: texto-base [15](15-sumario-executivo.md) e **PDF A4 verificado com exatamente uma página** gerado como artefato da conversa; PDF ainda não versionado no GitHub.
 - [x] **Arquitetura de referência** documentada com diagrama e stack ([17](17-arquitetura-referencia.md)); implantação real pendente.
 - [x] **Projeção financeira** de **12 meses** com 3 cenários, planilha XLSX gerada nesta conversa e CSVs em [finance](../finance/).
 - [ ] **Pitch Deck** de até 10 slides: [storyboard](20-storyboard-pitch-final.md) pronto; implementar slides web.
