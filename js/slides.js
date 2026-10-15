@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const slides = [...document.querySelectorAll('.slide')];
-  const chapters = ['VISÃO','PROBLEMA','MERCADO','SOLUÇÃO','DEMO','DIFERENCIAL','RECEITA','TECNOLOGIA','FINANÇAS','CONTINUIDADE'];
+  const chapters = ['EMPRESA','OPORTUNIDADE','SERVIÇOS','MERCADO','MODERNIZE IA','DEMO','NEGÓCIO','TECNOLOGIA','FINANÇAS','PRÓXIMOS PASSOS'];
   const overview = document.getElementById('overview');
   const help = document.getElementById('help-dialog');
   const fromHash = () => { const match = location.hash.match(/^#slide-(\d+)$/); return match ? Math.max(0, Math.min(slides.length-1,Number(match[1])-1)) : 0; };
