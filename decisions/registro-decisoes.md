@@ -31,6 +31,8 @@
 | D-023 | Login interno exclusivamente com **Google** | Autorização da imobiliária segue obrigatória |
 | D-024 | **SaaS multi-tenant** | Mesma aplicação, dados/usuários segregados entre imobiliárias |
 
+| D-025 | **Estratégia técnica B — MVP escalável enxuto** | APIs de IA no início, abstração para outros modelos/provedores, PostgreSQL, processamento assíncrono e segregação multi-tenant; fornecedores e dimensionamento ainda não definidos |
+
 ## Hipóteses em investigação (não decisões definitivas)
 
 | ID | Hipótese | O que falta |
