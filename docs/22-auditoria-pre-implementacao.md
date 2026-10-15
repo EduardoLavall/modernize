@@ -48,7 +48,7 @@
 3. **[BLOCKER PARA TAM NUMÉRICO FACTUAL]** número atualizado de imobiliárias Santa Maria com fonte e data.
 4. **[BLOCKER PARA VIABILIDADE REAL]** custo efetivo de API/arquivos, carga de suporte, folha/pró-labore e regime tributário/caixa inicial.
 5. **[BLOCKER PARA PRODUÇÃO]** contratos/controlador-operador, retenção, segurança, isolamento entre tenants, auditoria, políticas IA e teste de dados reais.
-6. **[PENDENTE DE FORMATAÇÃO]** sumário executivo Markdown precisa ser diagramado em **uma única página física** no artefato final, não só existir como texto.
+6. **[VERIFICADO COMO ARTEFATO EXTERNO]** sumário executivo diagramado em **PDF A4 com uma página**; arquivo disponibilizado para download na conversa, **não enviado como binário ao GitHub**.
 7. **[PENDENTE DE IMPLEMENTAÇÃO]** slides HTML, demo/QA/exports e eventual protótipo de operação real ainda não existem no repo Modernize.
 
 ## Protocolo de revisão antes de publicar slides
