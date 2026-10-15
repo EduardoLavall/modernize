@@ -1,6 +1,6 @@
 # Contrato de implementação futura — slides + MVP Modernize IA a partir do GranaXP
 
-**IMPORTANTE:** esta etapa **NÃO implementa código**. Documento de handoff para o próximo trabalho. Repositório-base de referência: https://github.com/EduardoLavall/GranaXP ; destino: https://github.com/EduardoLavall/modernize . Inspeção do GranaXP feita em 15/10/2026.
+**NOTA HISTÓRICA:** este documento começou como handoff sem código. A seção de execução ao final registra a implementação posterior do **protótipo acadêmico**, não do SaaS de produção. Repositório-base de referência: https://github.com/EduardoLavall/GranaXP ; destino: https://github.com/EduardoLavall/modernize . Inspeção do GranaXP feita em 15/10/2026.
 
 ## 1. Inventário REAL do repositório GranaXP
 
@@ -82,3 +82,9 @@ Stack final pode ser **JS puro a partir do GranaXP** ou **Vite+TypeScript**, pre
 ## 7. Limites e decisões pendentes que não impedem a demo
 
 Equipe real (nomes/atores), fornecedor final de IA, regime fiscal, dados reais de market sizing, entrevistas e formato de autenticação de produção não bloqueiam a **demonstração acadêmica honesta**; bloqueiam marketing como produto validado/produção. O usuário pediu aguardar autorização antes de escrever slides + MVP.
+
+## Atualização de execução — 15/10/2026
+
+A etapa de **protótipo acadêmico sintético** descrita acima foi implementada nos arquivos [slides.html](../slides.html), [demo.html](../demo.html), [css/](../css/) e [js/](../js/). A tela de slides contém exatamente dez telas e o painel possui criação, link de envio fictício, quatro cenários determinísticos de documentos, alertas, revisão manual e conclusão. A aplicação persiste apenas o estado simulado localmente. Existe [service worker](../sw.js) para cache offline após a primeira visita e [README de execução](../README-IMPLEMENTACAO.md).
+
+**Testes:** contagem dos dez slides, sintaxe JS, links de assets e coerência de três cenários financeiros conferidos estaticamente. [Playwright E2E](../tests/qa.spec.py) foi adicionado ao GitHub Actions para avaliar navegação e jornada completa, com resultado a acompanhar no pipeline. O GitHub Pages ainda requer habilitação inicial manual em Settings → Pages caso o repositório não esteja configurado. **O MVP SaaS produtivo (Google real, PostgreSQL, IA externa, storage e LGPD operacional) continua não implementado.**
