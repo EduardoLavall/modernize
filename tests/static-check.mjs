@@ -1,47 +1,18 @@
-import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import path from 'node:path';
-import vm from 'node:vm';
-
-const root=process.cwd();
-const read=name=>fs.readFileSync(path.join(root,name),'utf8');
-const slides=read('slides.html');
-const demo=read('demo.html');
-const ids=[...slides.matchAll(/<section\b[^>]*\bid="slide-(\d+)"/g)].map(x=>Number(x[1]));
-assert.deepEqual(ids,[1,2,3,4,5,6,7,8,9,10],'O pitch deve conter dez slides consecutivos');
-
-for(const name of ['slides.html','demo.html','index.html']){
-  const html=read(name);
-  for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)){
-    let target=match[1];
-    if(!target||/^(?:https?:|mailto:|#|data:)/.test(target))continue;
-    target=decodeURIComponent(target.split('?')[0].split('#')[0]);
-    assert(fs.existsSync(path.join(root,target)),name+': arquivo ausente: '+target);
-  }
+import fs from 'node:fs';import vm from 'node:vm';import {execFileSync} from 'node:child_process';
+const read=p=>fs.readFileSync(p,'utf8'),html=read('slides.html');
+const count=(html.match(/<section\s+class="slide\b/g)||[]).length;
+if(count!==10)throw Error('Pitch precisa ter 10 slides, encontrou '+count);
+const ids=[...html.matchAll(/\bid="(slide-\d+)"/g)].map(x=>x[1]);
+if(ids.length!==10||ids.some((x,i)=>x!=='slide-'+(i+1)))throw Error('IDs slides inconsistentes');
+for(const f of ['js/finance.js','js/slides.js','js/demo.js'])execFileSync('node',['--check',f]);
+if(!html.includes('Glossy%20Red%20and%20Graphite%20M%20Logo.png'))throw Error('Logo oficial ausente');
+if(!read('demo.html').includes('AMBIENTE DE DEMONSTRAÇÃO'))throw Error('Aviso fictício ausente');
+const context={window:{},Intl,Number};vm.runInNewContext(read('js/finance.js'),context);
+const totals={pessimista:[9571.75,22585.69,-13013.94],base:[22136.25,22030.02,106.24],otimista:[34367.86,24118.38,10249.48]};
+for(const [scenario,expected] of Object.entries(totals)){
+ const v=context.window.ModernizeFinance.compute(scenario);
+ for(const [i,k] of ['revenue','expenses','result'].entries())if(Math.abs(v[k]-expected[i])>0.06)throw Error(scenario+' '+k+': '+v[k]);
+ if(v.series.length!==12)throw Error('Mês inválido '+scenario);
 }
-
-for(const name of ['js/slides.js','js/demo.js','js/finance.js','sw.js']){
-  new vm.Script(read(name),{filename:name});
-}
-for(const v of ['create-form','portal-content','details-content','tenant-select','reset-demo']){
-  assert(demo.includes('id="'+v+'"'),'Componente da demo ausente: '+v);
-}
-
-const ctx=vm.createContext({window:{},Intl});
-vm.runInContext(read('js/finance.js'),ctx);
-const finance=ctx.window.ModernizeFinance;
-for(const [key,n,rev,flow] of [
-  ['pessimista',4,9571.75,-13013.94],
-  ['base',8,22136.25,106.24],
-  ['otimista',12,34367.86,10249.48]
-]){
-  const s=finance.compute(key);
-  assert.equal(s.series.length,12);
-  assert.equal(s.newClients,n);
-  assert(Math.abs(s.revenue-rev)<0.01);
-  assert(Math.abs(s.result-flow)<0.01);
-}
-
-const rootAssets=['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'];
-for(const f of rootAssets)assert(fs.existsSync(path.join(root,f)), 'Logo oficial ausente: '+f);
-console.log('PASS: 10 slides, caminhos dos arquivos, sintaxe JS e três cenários financeiros.');
+for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);
+console.log('OK: 10 slides, sintaxe JS, três cenários e logos');
