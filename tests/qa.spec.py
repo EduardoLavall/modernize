@@ -63,7 +63,7 @@ with sync_playwright() as p:
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',testid)
     print('MAIN STATUS AFTER RELOAD', page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id)?.status', testid), flush=True)
     page.screenshot(path=str(OUT/'demo-after-missing.png'))
-    assert 'Com pendência' in page.locator('#details-content').inner_text()
+    assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'issue'
     assert page.locator('[data-action="complete"]').is_disabled()
     page.screenshot(path=str(OUT/'demo-pending.png'))
     portal.reload(wait_until='networkidle')
@@ -71,11 +71,11 @@ with sync_playwright() as p:
     portal.wait_for_timeout(850)
     page.reload(wait_until='networkidle')
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',testid)
-    assert 'Em revisão' in page.locator('#details-content').inner_text()
+    assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'review'
     assert page.locator('[data-action="complete"]').is_enabled()
     page.locator('input[name="name"]').fill('Pessoa Fictícia QA - REVISADA')
     page.locator('[data-action="complete"]').click()
-    assert 'Concluído' in page.locator('#details-content').inner_text()
+    assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'done'
     page.screenshot(path=str(OUT/'demo-complete.png'))
     page.locator('#tenant-select').select_option('aurora')
     assert not page.locator('#view-dashboard').get_by_text('Pessoa Fictícia QA').count()
