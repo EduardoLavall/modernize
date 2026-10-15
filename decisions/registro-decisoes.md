@@ -33,6 +33,8 @@
 
 | D-025 | **Estratégia técnica B — MVP escalável enxuto** | APIs de IA no início, abstração para outros modelos/provedores, PostgreSQL, processamento assíncrono e segregação multi-tenant; fornecedores e dimensionamento ainda não definidos |
 
+| D-026 | **Modelo comercial: implantação + mensalidade** | Implantação cobre configuração, adaptação inicial e treinamento; mensalidade cobre plataforma, suporte e acompanhamento; personalizações maiores podem ser cobradas separadamente. Valores ainda não definidos. |
+
 ## Hipóteses em investigação (não decisões definitivas)
 
 | ID | Hipótese | O que falta |
