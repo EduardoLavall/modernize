@@ -1,37 +1,23 @@
-# 05 — Modelo de negócio e hipóteses de receita
+# 05 — Modelo comercial escolhido e hipóteses
 
-**Estado:** rascunho de Business Model Canvas; elementos abaixo não estão validados.
+**Decisões D-026/D-027:** cobrança **por imobiliária**, taxa inicial **R$ 990** para implantação e treinamento, e assinatura de **R$ 299/mês** para plataforma, suporte e acompanhamento contínuo. Não cobrar por imóvel ou por locatário. Personalizações extensas à parte. O preço é escolhido para **simulação**, não validado com compradores.
 
-| Bloco | Hipótese atual |
+## Canvas B2B
+
+| Bloco | Proposta |
 | --- | --- |
-| Segmentos de clientes | Pequenas empresas e escritórios de Santa Maria; imobiliárias como nicho inicial sob estudo |
-| Proposta de valor | Modernize IA: plataforma híbrida com treinamento e acompanhamento tecnológico contínuo; tese comercial ainda não validada |
-| Canais | Prospecção direta, indicações, demonstrações e conteúdo educativo — a testar |
-| Relacionamento | Implantação, treinamento e acompanhamento recorrente; periodicidade pendente |
-| Fontes de receita | Produto, treinamento, implementação personalizada e acompanhamento recorrente; formatos e preços ainda indefinidos |
-| Recursos-chave | Conhecimento técnico/didático, materiais de treinamento, ferramentas e tempo da equipe |
-| Atividades-chave | Pesquisa, venda consultiva, diagnóstico, treinamento, integração e suporte |
-| Parcerias | Fornecedores de IA/cloud, comunidade empresarial e parceiros locais — apenas possibilidades |
-| Custos | Horas da equipe, aquisição, transporte, licenças, infraestrutura, tributos, administrativo |
+| Segmento | Imobiliárias de Santa Maria/RS, primeiro nicho; Modernize mantém visão multissetorial |
+| Pagante | Gestor/proprietário da imobiliária |
+| Usuários | Admin e funcionários internos; interessados fazem upload sem login, gratuitamente |
+| Valor | Gestão de cadastro documental assistida por IA com revisão humana |
+| Diferencial em teste | Diagnóstico, treinamento e modernização contínua, não exclusividade de IA |
+| Canais hipotéticos | Prospecção direta, demonstrações, indicação e parcerias |
+| Receita | Implantação + mensalidade + serviços adicionais delimitados |
+| Custos | CAC, horas de implantação, infraestrutura, IA, suporte, impostos, equipe |
+| Parceiros potenciais | Provedores de nuvem/IA e canais empresariais, sem acordos confirmados |
 
-## Definições recentes
+**Limites da mensalidade por definir antes da venda real:** nº de cadastros/documentos por mês, volume máximo, suporte incluído, nível de serviço, cancelamento e política de preços; não vender “IA ilimitada”.
 
-Foi escolhida uma **linha de produto híbrida com treinamento** e acompanhamento contínuo como diferencial principal. A cobrança por assinatura + implantação/workshops é uma **opção a analisar**, não uma decisão financeira. O custo de manutenção e atualização contínua deverá entrar na margem e no fluxo de caixa.
+**Funil hipotético que torna a meta de 8 contratos plausível, sem comprovar:** 12 contatos/mês × 30% viram reunião × 20% dessas reuniões viram contrato = 0,72/mês esperado (~8,64/ano). Base CAC R$ 600 com 8h comerciais × R$ 50 + R$ 150 mídia + R$ 50 despesas; ver [18 — GTM](18-validacao-e-gtm.md).
 
-## Decisões comerciais que faltam
-
-- Qual é a **unidade de cobrança**: por turma, por colaborador, por diagnóstico, por projeto ou mensalidade?
-- Quem contrata e quem precisa usar?
-- O cliente paga licenças de terceiros diretamente ou como parte do pacote?
-- O que está incluído e o que é cobrado à parte?
-- Há custo de implantação e manutenção?
-- Qual capacidade de atendimento por consultor? Como medir entrega?
-- Qual é o canal inicial realista de aquisição e o CAC correspondente?
-
-## Cuidado ao usar métricas SaaS
-
-A atividade acadêmica exige CAC, LTV, churn, payback, break-even e runway. Entretanto, a Modernize pode operar como **empresa de serviços**, com receitas pontuais e/ou recorrentes. É preciso definir uma unidade econômica coerente. Se houver assinatura/suporte recorrente, churn mensal faz sentido para a carteira recorrente; para projetos avulsos, não se deve inventar uma taxa de cancelamento de assinaturas inexistentes. A modelagem e as adaptações deverão ser explicadas à banca.
-
-## Hipótese estratégica
-
-Começar por uma oferta simples, repetível e delimitada pode facilitar precificação e estudo de viabilidade; expandir para outros segmentos após adquirir evidências.
+**Riscos:** concorrentes [Kenlo](https://fresh.kenlo.com.br/support/solutions/articles/156000020527-%E2%97%BE-imob-como-cadastrar-um-cliente-interessado-) e [Superlógica](https://imobiliarias.superlogica.com/hc/pt-br/articles/40409180280983-Como-criar-contrato-de-loca%C3%A7%C3%A3o) já fazem gestão documental/atendimentos; o ganho incremental e disposição a pagar necessitam comprovação. [08 — finanças](08-plano-financeiro.md) demonstra resultados extremamente sensíveis à remuneração e à receita real.

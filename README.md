@@ -1,54 +1,27 @@
-# Modernize
+# Modernize — Modernização Tecnológica Contínua
 
-**Modernização Tecnológica Contínua.**
+**Documentação do projeto acadêmico revisada em 15/10/2026.** A Modernize ainda é proposta de negócio, sem clientes, produto real ou validação comercial.
 
-Projeto acadêmico de Inovação Tecnológica e Empreendedorismo: planejamento de uma empresa de modernização tecnológica contínua: capacitação periódica, consultoria para identificar oportunidades e implementação de soluções tecnológicas, com IA como foco inicial, mas não exclusivo.
+**Empresa proposta:** diagnóstico de processos, capacitação, implantação e acompanhamento tecnológico contínuo para pequenas empresas B2B. **Primeiro produto Modernize IA:** automação assistida do cadastro documental de interessados em locação para **imobiliárias de Santa Maria/RS**. A plataforma real seria multi-tenant, com revisão humana, painéis, equipe com login Google e interessado enviando documentos por link individual sem login.
 
-> **Estado: descoberta do negócio (v0.1, 15/10/2026).** A Modernize é uma proposta em construção, não uma empresa estabelecida. Público, serviços, receita e projeções ainda contêm hipóteses a validar.
+**Quem paga:** a **imobiliária** inteira, com **R$ 990 de implantação + R$ 299 por mês** como valores **hipotéticos**; o interessado/locatário não paga à Modernize. Meta de **8 novos contratos no ano 1** não significa vendas obtidas.
 
-## Visão resumida
+## Documentação acadêmica: por onde começar
 
-- **Mercado geográfico pretendido:** Santa Maria, RS, com possibilidade futura de expansão.
-- **Clientes potenciais:** pequenas empresas e escritórios de diferentes setores (B2B).
-- **Primeiro segmento em investigação:** imobiliárias. Ainda não é uma exclusividade comercial nem um nicho validado.
-- **Oferta considerada:** diagnóstico de processos, aulas/workshops práticos, automação administrativa, integrações entre ferramentas e acompanhamento.
-- **Exemplos de tecnologias:** ChatGPT e outras IAs, conectores de e-mail, arquivos, planilhas, calendários, ferramentas de produtividade e fluxos de automação.
-- **Produto escolhido conceitualmente:** Modernize IA, plataforma híbrida com funcionalidades básicas extensíveis e personalizáveis, acompanhada de treinamentos.
-- **Diferencial prioritário escolhido:** acompanhamento tecnológico contínuo (ainda não validado comercialmente).
+- [14 — Exigências da aula confrontadas com o projeto](docs/14-matriz-aderencia-academica.md).
+- [15 — Sumário executivo, texto-base de uma página](docs/15-sumario-executivo.md).
+- [16 — Mercado, concorrentes, personas e TAM/SAM/SOM](docs/16-mercado-e-concorrencia.md).
+- [17 — Arquitetura de referência com diagrama](docs/17-arquitetura-referencia.md).
+- [18 — Validação planejada e funil comercial](docs/18-validacao-e-gtm.md).
+- [19 — Operação, LGPD, SWOT e riscos](docs/19-operacao-riscos-lgpd.md).
+- [08 — Plano financeiro de 12 meses](docs/08-plano-financeiro.md) + [CSV de três cenários](finance/).
+- [20 — Storyboard de 10 slides em 4m50s](docs/20-storyboard-pitch-final.md).
+- [21 — Plano de implementação com base no GranaXP](docs/21-plano-implementacao-granaxp.md).
+- [22 — Auditoria crítica e pontos pendentes](docs/22-auditoria-pre-implementacao.md).
+- [13 — Escopo do MVP](docs/13-mvp-modernize-ia.md); [09 — Marca e logos aprovados](docs/09-identidade-visual.md); [Decisões D-001–D-027](decisions/registro-decisoes.md); [Fontes](research/fontes-e-referencias.md).
 
-## Objetivo acadêmico e formato
+**Financeiro:** cenário-base tem ~R$ 106 de fluxo líquido anual positivo **antes de remuneração fixa integral da equipe**. Não é prova de lucratividade. Os CSVs auditáveis estão no GitHub; o XLSX editável foi gerado e disponibilizado na conversa, **mas ainda não foi versionado no GitHub**.
 
-O projeto responde ao **TechStartup Business Plan & Pitch Sprint**. A apresentação será **presencial e interativa, construída com HTML, CSS e TypeScript/JavaScript**, hospedada no **GitHub Pages**, **sem vídeo gravado**. A implementação ocorrerá depois do planejamento/documentação. O pitch de referência do material tem 3–5 minutos e no máximo 10 slides (ou vídeo, alternativa descartada).
+**Rigor:** toda validação com imobiliárias está pendente. Pesquisa nacional de adoção de IA não comprova dor local. Concorrentes como Kenlo e Superlógica já realizam partes do processo. Uma demo sintética não é SaaS real nem tratamento LGPD homologado.
 
-A entrega acadêmica também prevê: sumário executivo (1 página), arquitetura de referência e planilha com fluxo de caixa de pelo menos 12 meses. Slides não eliminam esses entregáveis.
-
-## Documentação viva
-
-| Documento | Assunto |
-| --- | --- |
-| [00 — Roteiro de trabalho](docs/00-roteiro-de-trabalho.md) | Fases e pendências |
-| [01 — Visão geral](docs/01-visao-geral.md) | Proposta e escopo |
-| [02 — Problema e oportunidade](docs/02-problema-e-oportunidade.md) | Dores a investigar |
-| [03 — Público-alvo](docs/03-publico-alvo.md) | Personas, geografia e mercado |
-| [04 — Proposta de valor](docs/04-proposta-de-valor.md) | Serviços e MVP em discussão |
-| [05 — Modelo de negócio](docs/05-modelo-de-negocio.md) | Hipóteses comerciais |
-| [06 — Validação](docs/06-validacao-de-mercado.md) | Pesquisa, entrevistas e PMF |
-| [07 — Plano tecnológico](docs/07-plano-tecnologico.md) | Arquitetura futura e slides web |
-| [08 — Plano financeiro](docs/08-plano-financeiro.md) | Premissas, indicadores, cenários |
-| [09 — Identidade visual](docs/09-identidade-visual.md) | Direção visual provisória |
-| [10 — Apresentação](docs/10-roteiro-apresentacao.md) | Roteiro preliminar de slides |
-| [11 — Requisitos da disciplina](docs/11-requisitos-academicos.md) | Critérios e entregáveis |
-| [12 — Glossário](docs/12-glossario.md) | Conceitos para estudo |
-| [Decisões](decisions/registro-decisoes.md) | Confirmado, hipótese, pendente |
-| [Fontes](research/fontes-e-referencias.md) | Materiais recebidos e lacunas |
-
-## Princípios do projeto
-
-1. Registrar decisões separadamente de hipóteses e estimativas.
-2. Não apresentar entrevistas, métricas, clientes, retorno financeiro ou dados de mercado como reais sem evidências.
-3. Priorizar um problema claro para o MVP antes de oferecer automações para tudo e todos.
-4. Preservar privacidade, permissões de acesso e supervisão humana nas demonstrações de IA.
-5. Usar dados fictícios nas interações públicas da apresentação.
-6. Evitar implementar os slides antes de concluir a documentação principal.
-
-**Próximo passo:** definir o MVP da Modernize IA, detalhar o acompanhamento tecnológico contínuo e validar disposição de pagamento e viabilidade.
+**Próxima etapa — após autorização do grupo:** criar **slides web (até 10)** e **demo/MVP acadêmico funcional com dados fictícios**, usando o [GranaXP](https://github.com/EduardoLavall/GranaXP) como referência de navegação, exportação, fluxo e testes; a marca Modernize manterá sua estética própria. **Nenhum código de aplicação foi implantado nesta etapa documental.**
