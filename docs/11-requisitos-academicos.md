@@ -24,7 +24,7 @@ O enunciado prevê equipes de **3–5 integrantes**; composição da equipe aind
 - [x] **Sumário executivo**: texto-base [15](15-sumario-executivo.md) e **PDF A4 verificado com exatamente uma página** gerado como artefato da conversa; PDF ainda não versionado no GitHub.
 - [x] **Arquitetura de referência** documentada com diagrama e stack ([17](17-arquitetura-referencia.md)); implantação real pendente.
 - [x] **Projeção financeira** de **12 meses** com 3 cenários, planilha XLSX gerada nesta conversa e CSVs em [finance](../finance/).
-- [ ] **Pitch Deck** de até 10 slides: [storyboard](20-storyboard-pitch-final.md) pronto; implementar slides web.
+- [x] **Pitch Deck** em [10 slides web interativos](../slides.html) com gráfico e [demo sintética](../demo.html); [storyboard](20-storyboard-pitch-final.md) pronto. **Publicação no GitHub Pages, testes visuais finais e ensaio presencial** dependem de verificação adicional.
 - [x] **Roteiro** de pitch de 3–5 minutos: [4m50s](20-storyboard-pitch-final.md); falta ensaio real.
 
 O material de finanças incentiva **24 meses** quando possível, mas pede **12 meses** como entregável.
