@@ -1,8 +1,8 @@
 # Modernize
 
-**Inteligência artificial aplicada a negócios.**
+**Modernização Tecnológica Contínua.**
 
-Projeto acadêmico de Inovação Tecnológica e Empreendedorismo: planejamento de uma empresa de consultoria, capacitação e implantação de soluções de inteligência artificial no trabalho.
+Projeto acadêmico de Inovação Tecnológica e Empreendedorismo: planejamento de uma empresa de modernização tecnológica contínua: capacitação periódica, consultoria para identificar oportunidades e implementação de soluções tecnológicas, com IA como foco inicial, mas não exclusivo.
 
 > **Estado: descoberta do negócio (v0.1, 15/10/2026).** A Modernize é uma proposta em construção, não uma empresa estabelecida. Público, serviços, receita e projeções ainda contêm hipóteses a validar.
 
