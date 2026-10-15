@@ -7,7 +7,7 @@
 - **Pitch:** `index.html` ou `slides.html` (10 slides, 4min50s planejados).
 - **Demo:** `demo.html` (cadastro de interessados, portal de envio fictício, extração predefinida, pendências, revisão manual e conclusão).
 - Para rodar localmente a partir da raiz do repositório, use `python -m http.server 8080` e abra `http://localhost:8080/`. **Não use dados pessoais reais.**
-- GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`, se o Pages ainda não estiver habilitado. URL esperada após habilitar e publicar: `https://eduardolavall.github.io/modernize/` (verificar no painel, **não tratar como confirmada**).
+- GitHub Pages: Settings → Pages → **Source: GitHub Actions** (`pages.yml`), se o Pages ainda não estiver habilitado. URL esperada após habilitar e publicar: `https://eduardolavall.github.io/modernize/` (verificar no painel, **não tratar como confirmada**).
 - Um service worker armazena os arquivos estáticos após a primeira visita em HTTPS/localhost, permitindo repetir a demo sem conexão. Para primeira apresentação offline, prefira rodar o servidor local e carregar tudo antes.
 
 ## Controles dos slides
@@ -54,3 +54,10 @@ tests/qa.spec.py           roteiro automatizado Playwright (se navegador dispon�
 - Contagem HTML de 10 slides, ausência de CDN, sintaxe JavaScript com `node --check`, verificação de projeção financeira contra CSV e testes estáticos.
 - Roteiro `tests/qa.spec.py` disponível para testes reais de UI, mas depende de executar Chromium sem bloqueio do ambiente. **Sem execução satisfatória, não afirmar que QA visual passou.**
 - Recomenda-se executar manualmente em 1366×768 (projetor), 1920×1080 e celular; confirmar que texto, botões, portal e cenários são legíveis sem internet.
+
+## Revisão da auditoria
+- Slide 3: TAM/SAM/SOM ilustrativos 120/72/8, não contagem atual local.
+- Slide 9: remuneração adicional de R$ 2.500/mês (checkbox, ligada por padrão), break-even e runway; não é folha completa.
+- Slide 10: preencher apenas nomes reais em `js/team.js` (3–5 integrantes).
+- Demo: salvar revisão humana confirmada, corrigir divergências e reenviar arquivos fictícios ausentes/ilegíveis.
+- Planilha XLSX corrigida e sumário PDF devem acompanhar a entrega como artefatos separados.

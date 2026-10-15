@@ -26,7 +26,7 @@ jobs:
           python-version: '3.12'
       - name: Instalar Playwright e Chromium
         run: |
-          python -m pip install playwright
+          python -m pip install playwright pypdf
           python -m playwright install --with-deps chromium
       - name: Executar jornadas E2E com dados sintéticos
         run: |
@@ -69,7 +69,7 @@ jobs:
           mkdir -p _site/assets/brand _site/css _site/js
           cp index.html slides.html demo.html sw.js _site/
           cp css/app.css css/slides.css css/demo.css _site/css/
-          cp js/finance.js js/slides.js js/demo.js _site/js/
+          cp js/finance.js js/slides.js js/demo.js js/team.js _site/js/
           cp "assets/brand/Modernize logo.png" _site/assets/brand/
           cp "assets/brand/Glossy Red and Graphite M Logo.png" _site/assets/brand/
           touch _site/.nojekyll

@@ -64,7 +64,7 @@
     const c=find(selectedId);
     if(!c||c.tenant!==state.tenant){goto('applications');return;}
     const url=relPortalUrl(c);
-    const completed=uploadedCount(c)===3 && c.issues.length===0 && c.status!=='awaiting' && c.status!=='processing';
+    const completed=uploadedCount(c)===3 && c.issues.length===0 && c.status==='review' && c.reviewed===true;
     const fields=c.fields||{};
     $('details-content').innerHTML=`
       <button class="details-back" type="button" data-go="applications">← Voltar às solicitações</button>
@@ -72,7 +72,7 @@
       <div class="detail-layout"><div>
         <div class="detail-section"><h2>Documentação recebida</h2><p>Checklist básico. Itens sintéticos, sem bytes de documentos reais.</p>${kinds.map(k=>`<div class="detail-doc-row"><div class="doc-part"><span class="doc-icon">▤</span><div><strong>${k.label}</strong><small>${k.small}</small></div></div><span class="badge ${c.docs[k.key]?'done':'wait'}">${c.docs[k.key]?'Recebido (demo)':'Pendente'}</span></div>`).join('')}</div>
         ${(c.status==='issue'&&c.issues.length)?`<div class="detail-alert"><strong>Pendências identificadas no cenário:</strong><ul>${c.issues.map(x=>`<li>${safe(x)}</li>`).join('')}</ul></div>`:''}
-        ${(c.status==='review'||c.status==='issue'||c.status==='done')?`<form id="review-form" class="detail-section"><h2>Resumo da extração <span class="badge processing">IA SIMULADA</span></h2><p>Confira os campos abaixo com os documentos de teste. Nenhum valor foi obtido de uma IA real.</p><div class="field-grid"><label class="field">Nome extraído<input name="name" value="${safe(fields.name)}" ${c.status==='done'?'disabled':''} maxlength="70"/></label><label class="field">Identificação de teste<input name="id" value="${safe(fields.id)}" ${c.status==='done'?'disabled':''} maxlength="70"/></label><label class="field">Endereço extraído<input name="address" value="${safe(fields.address)}" ${c.status==='done'?'disabled':''} maxlength="90"/></label><label class="field">Renda / observação<input name="income" value="${safe(fields.income)}" ${c.status==='done'?'disabled':''} maxlength="70"/></label></div>${c.status==='done'?'<div class="detail-alert detail-success">Cadastro revisado e concluído manualmente nesta simulação.</div>':`<div class="detail-actions"><button class="btn btn-outline" type="submit">Salvar correções <span>✓</span></button>${c.issues.length?'<button class="btn btn-outline" type="button" data-action="resolve">Resolver pendência na simulação <span>↗</span></button>':''}<button class="btn btn-primary" type="button" data-action="complete" ${completed?'':'disabled title="Faltam documentos ou existem pendências"'}>Concluir após revisão <span>✓</span></button></div>`}</form>`:''}
+        ${(c.status==='review'||c.status==='issue'||c.status==='done')?`<form id="review-form" class="detail-section"><h2>Resumo da extração <span class="badge processing">IA SIMULADA</span></h2><p>Confira os campos abaixo com os documentos de teste. Nenhum valor foi obtido de uma IA real.</p><div class="field-grid"><label class="field">Nome extraído<input name="name" value="${safe(fields.name)}" ${c.status==='done'?'disabled':''} maxlength="70"/></label><label class="field">Identificação de teste<input name="id" value="${safe(fields.id)}" ${c.status==='done'?'disabled':''} maxlength="70"/></label><label class="field">Endereço extraído<input name="address" value="${safe(fields.address)}" ${c.status==='done'?'disabled':''} maxlength="90"/></label><label class="field">Renda / observação<input name="income" value="${safe(fields.income)}" ${c.status==='done'?'disabled':''} maxlength="70"/></label></div>${c.status==='done'?'<div class="detail-alert detail-success">Cadastro revisado e concluído manualmente nesta simulação.</div>':`<label class="review-confirm"><input type="checkbox" name="verified" required> Comparei os campos com os documentos fictícios e confirmo esta revisão humana.</label><div class="detail-actions"><button class="btn btn-outline" type="submit">Salvar correções <span>✓</span></button>${c.issues.length&&c.scenario==='mismatch'?'<button class="btn btn-outline" type="button" data-action="resolve">Validar nome corrigido <span>↗</span></button>':''}<button class="btn btn-primary" type="button" data-action="complete" ${completed?'':'disabled title="Faltam documentos ou existem pendências"'}>Concluir após revisão <span>✓</span></button></div>`}</form>`:''}
       </div><aside>
         <div class="detail-section"><h2>Portal do interessado</h2><p>Envio por link fictício. Este endereço não é um token seguro nem uma credencial de produção.</p><code class="share-url">${safe(url)}</code><div class="share-options"><button type="button" data-action="open-portal">↗ Abrir portal</button><button type="button" data-action="copy-link">▣ Copiar link</button></div></div>
         <div class="detail-section"><h2>Histórico de ações</h2><ul class="timeline">${c.history.map(e=>`<li><strong>${safe(e.action)}</strong><small>${safe(e.who)} · ${safe(e.at)}</small></li>`).join('')}</ul></div>
@@ -80,7 +80,7 @@
         <p class="detail-note">Acesso isolado por imobiliária aqui é apenas filtragem local. No SaaS real, o isolamento exigirá autenticação, backend e políticas do banco de dados.</p>
       </aside></div>`;
     const form=$('review-form');
-    if(form)form.addEventListener('submit',e=>{e.preventDefault();if(c.status==='done')return;const data=new FormData(form);c.fields=Object.fromEntries(['name','id','address','income'].map(k=>[k,String(data.get(k)||'')]));c.reviewed=true;log(c,'Campos conferidos e corrigidos pela equipe');save();toast('Revisão registrada','Os valores foram atualizados manualmente.');renderDetails();});
+    if(form)form.addEventListener('submit',e=>{e.preventDefault();if(c.status==='done')return;const data=new FormData(form);c.fields=Object.fromEntries(['name','id','address','income'].map(k=>[k,String(data.get(k)||'')]));c.reviewed=true;log(c,'Revisão humana confirmada e campos salvos pela equipe');save();toast('Revisão registrada','Os valores foram atualizados manualmente.');renderDetails();});
   }
   function renderInsights(){const list=cases();const groups=[['Aguardando','awaiting'],['Em processamento','processing'],['Em revisão','review'],['Com pendência','issue'],['Concluídos','done']];
     $('insights-content').innerHTML=`<div class="insight-grid"><div class="insight-card"><span>Solicitações da imobiliária</span><strong>${list.length}</strong><p>Volume criado apenas para demonstração.</p></div><div class="insight-card"><span>Documentos simulados</span><strong>${list.reduce((s,c)=>s+uploadedCount(c),0)}</strong><p>Contagem de itens de checklist, sem upload real.</p></div><div class="insight-card"><span>Cadastros concluídos</span><strong>${list.filter(c=>c.status==='done').length}</strong><p>Finalizados por ação de revisão humana simulada.</p></div></div><div class="insight-chart"><h2>Etapas do fluxo — casos fictícios</h2>${groups.map(([label,status])=>{const n=list.filter(c=>c.status===status).length;return `<div class="bar-line"><span>${label}</span><div class="bar-track"><i style="width:${list.length?n/list.length*100:0}%"></i></div><b>${n}</b></div>`;}).join('')}<p class="insight-disclaimer">Estes indicadores não representam clientes reais, produtividade alcançada, economia ou precisão de IA.</p></div>`;
@@ -117,15 +117,20 @@
     else if(action==='refresh'){renderDetails();toast('Situação atualizada',labels[c.status]);}
     else if(action==='resolve'){
       if(!c.issues.length)return;
-      if(uploadedCount(c)<3){toast('Falta documento','Abra o portal e escolha “envio completo” para simular o complemento.');return;}
-      c.issues=[];c.status='review';c.reviewed=true;
-      if(c.scenario==='mismatch')c.fields.name=c.name.replace(/\s*\(DEMO\)\s*/ig,'').trim();
-      log(c,'Pendência corrigida manualmente na simulação');save();renderDetails();toast('Pendência resolvida','Agora confira o resumo e conclua manualmente.');
+      if(c.scenario!=='mismatch'){
+        toast('Reenvio obrigatório','Para arquivo faltante ou ilegível, abra o portal e faça novo envio fictício.');return;
+      }
+      if(!c.reviewed){toast('Revisão necessária','Corrija e salve o nome após confirmar a revisão humana.');return;}
+      const expected=c.name.replace(/\s*\(DEMO\)\s*/ig,'').trim();
+      if(c.fields.name.trim()!==expected){toast('Nome divergente','Confira o nome de referência fictício: '+expected);return;}
+      c.issues=[];c.status='review';
+      log(c,'Nome corrigido pela equipe e validado com referência fictícia');
+      save();renderDetails();toast('Divergência resolvida','A correção foi registrada no histórico.');
     }
     else if(action==='complete'){
-      if(uploadedCount(c)!==3||c.issues.length||c.status==='processing'||c.status==='awaiting'){toast('Cadastro incompleto','Confira o checklist e resolva as pendências antes de concluir.');return;}
+      if(uploadedCount(c)!==3||c.issues.length||c.status!=='review'||!c.reviewed){toast('Revisão pendente','Confira, salve a revisão humana e resolva as pendências antes de concluir.');return;}
       const form=$('review-form');
-      if(form){const data=new FormData(form);c.fields=Object.fromEntries(['name','id','address','income'].map(k=>[k,String(data.get(k)||'')]));}
+      if(form){const data=new FormData(form);const pending=Object.fromEntries(['name','id','address','income'].map(k=>[k,String(data.get(k)||'')]));if(JSON.stringify(pending)!==JSON.stringify(c.fields)){toast('Alterações não salvas','Confirme a revisão e salve as correções antes de concluir.');return;}}
       c.status='done';c.reviewed=true;log(c,'Cadastro concluído após revisão humana');save();renderDetails();toast('Cadastro concluído','A conclusão foi uma ação humana dentro da simulação.');
     }
   }
