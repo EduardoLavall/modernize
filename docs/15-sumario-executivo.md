@@ -1,0 +1,21 @@
+# Modernize — Sumário executivo (texto-base para UMA página)
+
+**Status: proposta acadêmica / hipótese de negócio, sem operação comercial confirmada. Atualização: 15/10/2026.**
+
+**Quem somos.** A **Modernize — Modernização Tecnológica Contínua** é uma proposta de negócio B2B para apoiar pequenas e médias empresas na adoção de tecnologia por meio de diagnóstico, capacitação, implantação de soluções e acompanhamento contínuo. O produto inicial, **Modernize IA**, será uma ferramenta de automação de rotinas administrativas, sem limitar a atuação futura da empresa ao setor imobiliário.
+
+**Problema e oportunidade.** Equipes empresariais podem enfrentar tarefas documentais fragmentadas, digitação redundante e dificuldade para transformar ferramentas de IA em processos confiáveis. A TIC Empresas 2025 mostra que 15% das pequenas empresas brasileiras pesquisadas (com 10 a 49 pessoas ocupadas) usavam IA, versus 50% das grandes; os dados indicam diferença de adoção agregada, **não medem a dor das imobiliárias de Santa Maria**. [Cetic.br, TIC Empresas 2025](https://cetic.br/pt/noticia/uso-de-inteligencia-artificial-por-empresas-brasileiras-avanca-e-atinge-17-aponta-pesquisa-do-cetic-br/).
+
+**Cliente e solução.** O pagante será **a imobiliária**, não o locatário. O MVP atende o processo de cadastro de interessados em locação: colaborador cria solicitação, interessado envia documentos por link seguro sem login, IA propõe extração e conferência de dados, e funcionário revisa, solicita complementos e conclui o cadastro. Haverá painel por etapas, responsáveis, histórico e acesso da equipe com Google. O produto será uma plataforma compartilhada com separação de dados por imobiliária. **A decisão sobre locação permanece humana.**
+
+**Diferencial e concorrência.** ERPs imobiliários já disponibilizam cadastros, documentos e gestão de atendimentos; a Modernize não pode alegar inexistência de concorrência. A diferenciação proposta é focar na automação assistida de uma etapa e combiná-la com **treinamento de equipe, implantação e evolução contínua**; vantagem competitiva a validar. [Kenlo](https://fresh.kenlo.com.br/support/solutions/articles/156000020527-%E2%97%BE-imob-como-cadastrar-um-cliente-interessado-); [Superlógica](https://imobiliarias.superlogica.com/hc/pt-br/articles/40409180280983-Como-criar-contrato-de-loca%C3%A7%C3%A3o).
+
+**Negócio e rota de entrada.** [D] Implantação de **R$ 990 por imobiliária** e mensalidade de **R$ 299 por imobiliária**; personalizações especiais à parte. [H] Começar em Santa Maria/RS com prospecção consultiva e demonstração de caso sintético; meta de **oito novas imobiliárias em 12 meses**. Não há contratos, pesquisa de preço nem vendas registradas.
+
+**Tecnologia e proteção.** Proposta de SPA web + API privada + PostgreSQL e arquivos privados + fila assíncrona de IA de terceiros sob camada abstrata; isolamento multi-tenant, autenticação Google da equipe, link limitado para interessados, revisão humana e política de retenção de dados alinhada à LGPD. Os provedores e controles exigem validação antes de uso real.
+
+**Finanças (simulação, não projeção comprovada).** Com R$ 1.000/mês de custo fixo preliminar, hipótese de CAC R$ 600, churn mensal 2%, custo variável recorrente R$ 40/cliente e 6% sobre receita como taxa ilustrativa, o cenário-base produz **aproximadamente R$ 22.136 de entradas, R$ 22.030 de saídas e apenas R$ 106 de fluxo líquido positivo no ano 1**. O cálculo **não inclui pró-labore fixo integral**; se adicionarmos R$ 2.500/mês de remuneração estrutural, o resultado anual aproximado vira **–R$ 29.894**. A viabilidade é **condicional**; não há PMF.
+
+**Equipe e pedido do pitch.** A composição exigida de **3–5 integrantes** e as funções reais precisam ser inseridas pelo grupo; **não inventar nomes**. No pitch, apresentar pedido **simulado** de acesso a imobiliárias piloto, mentoria e eventual capital após validação — valor de captação a justificar por cenário e reserva, não afirmar investimento conseguido.
+
+*Para a entrega de uma página: converter este conteúdo em layout A4 com resumo visual, mantidas todas as ressalvas e sem aumentar o texto. A versão Markdown é a fonte editorial do sumário, não prova de paginação final.*
