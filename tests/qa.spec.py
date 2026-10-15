@@ -95,7 +95,7 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT/'demo-complete.png'))
 
     # Segunda jornada: divergência bloqueia até o nome ser corrigido e confirmado
-    page.locator('#dashboard-new').click()
+    page.evaluate('window.ModernizeDemo.goto("create")')
     page.locator('#create-name').fill('Marina Vieira (DEMO)')
     page.locator('#create-form button[type="submit"]').click()
     mismatch_id=page.evaluate("window.ModernizeDemo.getState().cases.at(-1).id")
