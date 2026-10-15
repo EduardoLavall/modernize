@@ -49,11 +49,22 @@ jobs:
     steps:
       - name: Obter código
         uses: actions/checkout@v4
+      - name: Verificar se Pages foi ativado no repositório
+        id: pages_check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages ainda não ativado. Acesse Settings > Pages > Source: GitHub Actions e execute novamente este workflow."
+          fi
       - name: Configurar Pages
+        if: steps.pages_check.outputs.enabled == 'true'
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Preparar site estático
+        if: steps.pages_check.outputs.enabled == 'true'
         run: |
           mkdir -p _site/assets/brand _site/css _site/js
           cp index.html slides.html demo.html sw.js _site/
@@ -63,9 +74,11 @@ jobs:
           cp "assets/brand/Glossy Red and Graphite M Logo.png" _site/assets/brand/
           touch _site/.nojekyll
       - name: Enviar arquivos
+        if: steps.pages_check.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
       - name: Publicar
+        if: steps.pages_check.outputs.enabled == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
