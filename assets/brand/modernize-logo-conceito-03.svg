@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Modernize — conceito de logo 03</title>
+<desc id="desc">Monograma M grafite com fita vermelha ascendente, símbolo de evolução tecnológica contínua, seguido de Modernize.</desc>
+<defs>
+ <linearGradient id="red" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#7E1E29"/><stop offset=".52" stop-color="#B4232F"/><stop offset="1" stop-color="#E63A48"/></linearGradient>
+ <linearGradient id="shadow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#343943"/><stop offset="1" stop-color="#1F232B"/></linearGradient>
+ <linearGradient id="ribbon" x1="0" y1="1" x2="0.92" y2="0"><stop stop-color="#851925"/><stop offset=".65" stop-color="#C52735"/><stop offset="1" stop-color="#D93440"/></linearGradient>
+</defs>
+<!-- Ícone — M com movimento ascendente -->
+<g transform="translate(246 66)">
+ <path d="M31 423 116 92c5-20 17-30 40-30h52l153 213 149-213h55c20 0 34 10 39 30l83 331H530L475 207 360 366 242 207 188 423Z" fill="url(#shadow)"/>
+ <path d="M125 70c18-12 43-13 62 0L360 287 528 64c11-14 27-22 44-22h46c17 0 25 18 16 32L392 394c-16 21-44 25-64 5L135 168 93 300 43 423H0l75-291c7-28 23-48 50-62Z" fill="url(#ribbon)"/>
+ <path d="M386 313 540 92l-47-10 133-47-15 136-25-43-154 228Z" fill="url(#red)"/>
+ <path d="M143 94 359 347 559 82" fill="none" stroke="#F7A0A4" stroke-opacity=".32" stroke-width="5" stroke-linecap="round"/>
+</g>
+<!-- Assinatura tipográfica -->
+<text x="600" y="615" fill="#1F232B" font-family="Outfit, Inter, Avenir Next, Arial, sans-serif" font-size="117" font-weight="700" letter-spacing="-5" text-anchor="middle">Modern<tspan fill="#B4232F">ize</tspan></text>
+<text x="600" y="670" fill="#5E646C" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="6.5" text-anchor="middle">MODERNIZAÇÃO TECNOLÓGICA CONTÍNUA</text>
+</svg>
