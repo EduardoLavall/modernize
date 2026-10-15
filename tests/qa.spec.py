@@ -21,6 +21,9 @@ with sync_playwright() as p:
     assert page.locator('.slide').count()==10
     assert page.locator('.slide:not([hidden])').count()==1
     assert page.locator('#slide-counter').inner_text()=='01 / 10'
+    # A empresa deve aparecer ANTES do caso de uso imobiliário.
+    assert 'consultoria' in page.locator('.hero-sub').inner_text().lower() or 'diagnóstico' in page.locator('.hero-sub').inner_text().lower()
+    assert 'acompanhamento' in page.locator('.hero-sub').inner_text().lower()
     page.screenshot(path=str(OUT/'slide-01.png'))
     page.keyboard.press('ArrowRight')
     assert page.locator('#slide-counter').inner_text()=='02 / 10'
@@ -37,10 +40,22 @@ with sync_playwright() as p:
     assert '19.751' in page.locator('#finance-result').inner_text()
     page.locator('#finance-include-team').uncheck()
     page.screenshot(path=str(OUT/'slide-09-finance.png'))
-    page.evaluate('window.ModernizeSlides.goTo(4)')
-    page.screenshot(path=str(OUT/'slide-05-demo.png'))
     page.evaluate('window.ModernizeSlides.goTo(2)')
+    assert page.locator('#slide-3').get_by_text('Diagnóstico e consultoria').count()==1
+    assert page.locator('#slide-3').get_by_text('Treinamento e capacitação').count()==1
+    assert page.locator('#slide-3').get_by_text('Implementação',exact=True).count()==1
+    assert page.locator('#slide-3').get_by_text('Acompanhamento contínuo',exact=True).count()==1
+    page.screenshot(path=str(OUT/'slide-03-servicos.png'))
+    page.evaluate('window.ModernizeSlides.goTo(5)')
+    assert page.locator('#launch-demo').is_visible()
+    assert 'Modernize IA' in page.locator('#slide-6').inner_text()
+    page.screenshot(path=str(OUT/'slide-06-demo.png'))
+    page.evaluate('window.ModernizeSlides.goTo(3)')
     assert page.locator('.market-sizing-panel').get_by_text('SIMULAÇÃO, NÃO PESQUISA LOCAL').count()==1
+    page.evaluate('window.ModernizeSlides.goTo(6)')
+    assert page.locator('.position-revenue').get_by_text('R$ 990').count()==1
+    assert page.locator('.position-revenue').get_by_text('R$ 299').count()==1
+    assert 'DEMAIS SERVIÇOS DA EMPRESA' in page.locator('#slide-7').inner_text()
     page.evaluate('window.ModernizeSlides.goTo(9)')
     assert page.locator('#team-list').get_by_text('Nome a confirmar').count()==4
     pdf=page.pdf(print_background=True,prefer_css_page_size=True)
@@ -55,7 +70,11 @@ with sync_playwright() as p:
         value=page.locator(f'#slide-{i+1}').evaluate('(el)=>({scroll:el.scrollHeight,client:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
         if value['scroll']-value['client']>10 or value['sw']-value['cw']>10:
             raise AssertionError(f'Slide {i+1} transborda no projetor: {value}')
+    # Ao sair da demonstração, a sequência continua no slide 7.
+    demo_link=page.locator('#launch-demo').get_attribute('href')
+    assert 'demo.html' in demo_link
     page.goto(BASE+'/demo.html',wait_until='networkidle')
+    assert page.locator('.back-to-deck').first.get_attribute('href')=='slides.html#slide-7'
     assert page.locator('#dashboard-stats .stat-card').count()==4
     page.screenshot(path=str(OUT/'demo-dashboard.png'))
     page.locator('#dashboard-new').click()

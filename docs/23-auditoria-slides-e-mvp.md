@@ -81,3 +81,9 @@
 **QA independente via GitHub Actions:** as duas jornadas (pendência/reenvio e divergência com correção) e PDF de dez páginas passaram no workflow do commit `dcbf20245729d63e92cc3ecc5b7a0bac0999eec4`, execução [38791238891](https://github.com/EduardoLavall/modernize/actions/runs/38791238891). 
 
 **Questões sem resposta empírica — não registrar como solucionadas:** nomes da equipe (3–5), entrevistas/teste real de interesse, TAM/SAM de Santa Maria com fonte atual, custo integral de pessoal, preço realmente pago, cálculo fiscal verdadeiro, IA/OAuth/backend/segurança de SaaS real. São pendências acadêmicas ou de operação e exigem evidências futuras.
+
+## Revisão institucional do pitch — 15/10/2026
+
+O usuário identificou que os slides originalmente retratavam a Modernize quase exclusivamente como fornecedora do Modernize IA para imobiliárias. **A narrativa foi reordenada sem elevar de 10 slides**: problema de modernização em PMEs, quatro frentes de serviços da empresa, segmento inicial e só então Modernize IA como primeira aplicação. O diferencial de acompanhamento contínuo ficou explícito; preços e finanças são delimitados à **primeira oferta imobiliária**, não à operação inteira da empresa. O deck ainda distingue evidências nacionais de hipóteses locais, mantém supervisão humana e solicita nomes reais de equipe e validação.
+
+**Nova ordem:** Empresa → Oportunidade → Serviços → Mercado → Produto → Demo → Negócio → Tecnologia → Finanças → Equipe/próximos passos. Navegação de retorno da demo alterada para o **slide 7**. Para conformidade, verificar no GitHub Actions os testes atualizados de conteúdo institucional, cenário de apresentação e PDF de 10 páginas. Nenhum recurso de IA ou SaaS real foi adicionado.

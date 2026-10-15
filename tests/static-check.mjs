@@ -16,6 +16,10 @@ for(const [scenario,expected] of Object.entries(totals)){
  if(Math.abs(remunerado.result-(v.result-30000))>0.06)throw Error('Custo extra equipe incorreto '+scenario);
  if(v.series.length!==12)throw Error('Mês inválido '+scenario);
 }
+if(!html.includes('O QUE A MODERNIZE ENTREGA')||!html.includes('Diagnóstico e consultoria')||!html.includes('Acompanhamento contínuo'))throw Error('Proposta da empresa ausente dos slides');
+if(!html.includes('PRIMEIRO PRODUTO · MODERNIZE IA'))throw Error('Produto não está identificado como parte da Modernize');
+if(!html.includes('DEMAIS SERVIÇOS DA EMPRESA'))throw Error('Preços não distinguem a primeira oferta e demais serviços');
+if(!read('demo.html').includes('href="slides.html#slide-7"'))throw Error('Retorno da demo não acompanha reordenação');
 if(!html.includes('SIMULAÇÃO, NÃO PESQUISA LOCAL'))throw Error('TAM sem aviso explícito');
 if(!html.includes('finance-include-team'))throw Error('Cenário de equipe não interativo');
 for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);

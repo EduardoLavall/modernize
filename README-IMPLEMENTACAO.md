@@ -4,7 +4,7 @@
 
 ## Acessar
 
-- **Pitch:** `index.html` ou `slides.html` (10 slides, 4min50s planejados).
+- **Pitch:** `index.html` ou `slides.html` (10 slides, 4min50s planejados). Os slides 1–3 apresentam a **empresa Modernize**, suas quatro frentes de serviço e o diferencial de acompanhamento contínuo. A **Modernize IA** aparece a partir do slide 5 como **primeira aplicação**, e não como toda a empresa.
 - **Demo:** `demo.html` (cadastro de interessados, portal de envio fictício, extração predefinida, pendências, revisão manual e conclusão).
 - Para rodar localmente a partir da raiz do repositório, use `python -m http.server 8080` e abra `http://localhost:8080/`. **Não use dados pessoais reais.**
 - GitHub Pages: Settings → Pages → **Source: GitHub Actions** (`pages.yml`), se o Pages ainda não estiver habilitado. URL esperada após habilitar e publicar: `https://eduardolavall.github.io/modernize/` (verificar no painel, **não tratar como confirmada**).
@@ -13,7 +13,7 @@
 ## Controles dos slides
 
 - `→`, `Espaço`: próximo; `←`: anterior; `Home/End`: primeiro/último; `Esc`: visão geral; `F`: tela cheia; `P`: impressão/PDF pelo navegador; `D`: demo.
-- Clique em “Abrir demonstração” no slide 5; “Voltar ao pitch” direciona ao slide 6.
+- Clique em “Abrir demonstração” no **slide 6**; “Voltar ao pitch” direciona ao **slide 7** (diferencial e modelo de negócio).
 - Slide 9: alternância dos três cenários financeiros por botões. **Valores calculados de `js/finance.js`** segundo `finance/` e `docs/08-plano-financeiro.md`.
 
 ## Percurso funcional da demo
@@ -61,3 +61,7 @@ tests/qa.spec.py           roteiro automatizado Playwright (se navegador dispon�
 - Slide 10: preencher apenas nomes reais em `js/team.js` (3–5 integrantes).
 - Demo: salvar revisão humana confirmada, corrigir divergências e reenviar arquivos fictícios ausentes/ilegíveis.
 - Planilha XLSX corrigida e sumário PDF devem acompanhar a entrega como artefatos separados.
+
+## Evolução do posicionamento institucional
+
+A apresentação foi reorganizada para colocar **a empresa Modernize** como protagonista. A jornada é: visão da empresa → problema de adoção tecnológica das PMEs → quatro frentes de serviço → mercado e primeiro nicho → produto Modernize IA → demo → diferencial e receitas por oferta → arquitetura → finanças da primeira oferta → equipe e próximos passos. O preço e a projeção **não representam faturamento de todos os serviços**; são hipóteses apenas do piloto com imobiliárias. O SaaS de produção não foi implementado.
