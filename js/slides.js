@@ -55,11 +55,15 @@
   const chart=$('finance-chart');
   const svg=(tag,attrs={},text='')=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;return n;};
   function drawFinance(key){
-    const s=window.ModernizeFinance.compute(key);
+    const includeTeam=$('finance-include-team').checked;
+    const s=window.ModernizeFinance.compute(key,includeTeam);
     const money=window.ModernizeFinance.money;
     $('finance-revenue').textContent=money(s.revenue);$('finance-expenses').textContent=money(s.expenses);
     $('finance-result').textContent=(s.result>=0?'+ ':'− ')+money(Math.abs(s.result));
-    $('finance-warning').textContent=s.warning;
+    $('finance-warning').textContent=includeTeam?'Remuneração extra ilustrativa: R$ 2.500/mês ainda não paga integralmente 3–5 integrantes.':s.warning;
+    $('finance-breakeven').textContent=s.breakeven+' imobiliárias';
+    $('finance-runway').textContent=s.runway===null?'sem consumo inicial':s.runway.toFixed(1).replace('.',',')+' meses';
+    $('finance-team-note').textContent=includeTeam?'Com R$ 2.500/mês adicionais':'Sem remuneração estrutural adicional';
     $('finance-chart-label').textContent=`Cenário ${s.label.toLowerCase()}`;
     $('finance-customers').textContent=s.newClients;
     $('finance-cac').textContent=money(s.cac);
@@ -88,6 +92,20 @@
     chart.setAttribute('aria-label',`Caixa projetado ${s.label}: ${money(s.lastCash)} no mês 12; menor caixa ${money(s.minCash)}. Simulação.`);
   }
   document.querySelectorAll('[data-scenario]').forEach(button=>button.addEventListener('click',()=>drawFinance(button.dataset.scenario)));
-  goTo(index);drawFinance('base');
+  $('finance-include-team').addEventListener('change',()=>drawFinance(document.querySelector('[data-scenario].is-selected').dataset.scenario));
+  function renderTeam(){
+    const list=$('team-list');
+    list.replaceChildren();
+    const members=(window.ModernizeTeam||[]).filter(m=>m&&m.role);
+    for(const member of members){
+      const item=document.createElement('span');
+      const label=document.createElement('strong');label.textContent=member.name?.trim()||'Nome a confirmar';
+      const role=document.createElement('small');role.textContent=member.role;
+      item.append(label,role);list.append(item);
+    }
+    const pending=members.filter(m=>!m.name?.trim()).length;
+    $('team-disclaimer').textContent=pending?`${pending} integrante(s) sem nome — preencher apenas com dados reais antes da banca.`:'Equipe declarada conforme arquivo de configuração.';
+  }
+  renderTeam();goTo(index);drawFinance('base');
   window.ModernizeSlides = {goTo,current:()=>index,slideCount:slides.length};
 })();

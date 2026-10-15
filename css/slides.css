@@ -18,3 +18,35 @@ body.pitch-app{height:100dvh;overflow:hidden;background:#ede8e3}.presentation-he
 
 /* Wordmark oficial: recorte de apresentação apenas por background-position, sem modificar o PNG original. */
 .brand-logo-image{width:198px;height:41px;display:block;background:url("../assets/brand/Modernize%20logo.png") center center/198px auto no-repeat}.brand{min-width:0}@media(max-width:760px){.brand-logo-image{width:168px;height:36px;background-size:168px auto}}
+
+/* AUDITORIA: mercado ilustrativo, equipe verificável e viabilidade com equipe */
+.market-sizing-panel{background:#1d232c;color:#fff;padding:26px 29px;border-radius:24px;box-shadow:0 24px 65px #1f232b29;min-width:0}
+.sizing-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#d5d6dc;font-weight:800}
+.sizing-heading b{color:#ffc5cd;border:1px solid #9d4052;background:#74303b55;font-size:9px;padding:7px;border-radius:8px;text-align:center}
+.sizing-context{font-size:12px;line-height:1.6;color:#bfc3ce;margin:15px 0}
+.sizing-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sizing-steps>div{background:#ffffff0b;border:1px solid #ffffff27;border-radius:13px;padding:13px 10px;min-width:0}
+.sizing-steps>div.sizing-final{background:#982433;border-color:#ce6472}
+.sizing-steps small{font-size:10px;color:#e2d2d8;font-weight:750;line-height:1.4;display:block}
+.sizing-steps strong{display:block;font-size:43px;letter-spacing:-.08em;margin:10px 0 6px}
+.sizing-steps p{margin:0;font-size:10px;line-height:1.5;color:#d3c8cd}
+.sizing-footer{margin-top:17px;padding-top:15px;border-top:1px solid #ffffff30;color:#c4c2c9;font-size:10px;line-height:1.55}
+.sizing-footer strong{color:#fff}
+.sizing-footer a{color:#ffc4cd;text-underline-offset:3px}
+.sizing-footer em{font-style:normal;color:#f6c7a2}
+.closing-team-block{border-top:1px solid #4e4c54;margin-top:13px;padding-top:12px}
+.closing-team-kicker{font-size:10px;letter-spacing:.1em;color:#e8a0aa;font-weight:850;display:block;margin-bottom:7px}
+.closing-team-list{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.closing-team-list>span{padding:8px 9px;background:#ffffff0b;border:1px solid #ffffff22;border-radius:10px;min-width:0}
+.closing-team-list strong{display:block;font-size:10px;color:white}
+.closing-team-list small{display:block;font-size:9px;margin-top:4px;color:#c4c3cc}
+#team-disclaimer{font-size:10px!important;color:#f0b5be!important;line-height:1.35!important;margin:9px 0 0!important}
+.team-cost-toggle{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;line-height:1.4;color:#5c6168;margin:12px 0 7px}
+.team-cost-toggle input{width:17px;height:17px;accent-color:#b4232f;flex-shrink:0}
+.finance-secondary{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin:6px 0}
+.finance-secondary span{color:#62656d;font-size:10px;font-weight:750}
+.finance-secondary b{color:#b4232f}
+@media(max-height:770px) and (min-width:900px){.market-sizing-panel{padding:19px}.sizing-context{margin:8px 0}.sizing-steps strong{font-size:32px;margin:5px 0}.sizing-footer{margin-top:10px;padding-top:9px;font-size:9px}.closing-team-block{padding-top:8px;margin-top:6px}.closing-team-list>span{padding:6px}.team-cost-toggle{font-size:10px;margin:7px 0 3px}.finance-secondary{margin:4px 0}}
+@media(max-width:1100px){.sizing-steps strong{font-size:29px}.market-sizing-panel{padding:19px}}
+@media(max-width:760px){.market-sizing-panel{width:100%}.sizing-steps small{font-size:9px}.sizing-steps strong{font-size:27px}.sizing-steps p{font-size:9px}.closing-team-list{grid-template-columns:1fr 1fr}.team-cost-toggle{font-size:10px}}
+@media print{@page{size:13.333in 7.5in;margin:0}.slide,.slide[hidden]{height:7.5in!important;min-height:7.5in!important;max-height:7.5in!important;page-break-after:always;break-after:page}.slide:last-child{page-break-after:auto;break-after:auto}.slide-inner{min-height:0!important;height:100%}.pitch-app{width:13.333in}}
