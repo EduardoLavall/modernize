@@ -21,11 +21,11 @@ O enunciado prevê equipes de **3–5 integrantes**; composição da equipe aind
 
 ## Entregáveis explícitos
 
-- [ ] **Sumário executivo** de uma página.
-- [ ] **Arquitetura de referência**, incluindo diagramas de infraestrutura e stack.
-- [ ] **Projeção financeira** em planilha com **12 meses de fluxo**.
-- [ ] **Pitch Deck** de **até 10 slides OU vídeo**. A equipe optou pelos **slides web**.
-- [ ] Preparar uma narrativa de pitch de **3–5 minutos**.
+- [ ] **Sumário executivo** de uma página: texto-base [15](15-sumario-executivo.md) pronto, diagramação A4 final ainda a conferir.
+- [x] **Arquitetura de referência** documentada com diagrama e stack ([17](17-arquitetura-referencia.md)); implantação real pendente.
+- [x] **Projeção financeira** de **12 meses** com 3 cenários, planilha XLSX gerada nesta conversa e CSVs em [finance](../finance/).
+- [ ] **Pitch Deck** de até 10 slides: [storyboard](20-storyboard-pitch-final.md) pronto; implementar slides web.
+- [x] **Roteiro** de pitch de 3–5 minutos: [4m50s](20-storyboard-pitch-final.md); falta ensaio real.
 
 O material de finanças incentiva **24 meses** quando possível, mas pede **12 meses** como entregável.
 
@@ -40,14 +40,14 @@ O material de finanças incentiva **24 meses** quando possível, mas pede **12 m
 
 ## Fase 3 — Checklist específico
 
-- [ ] Unidade de cobrança explícita.
-- [ ] Premissas com valores, justificativas/fonte e confiança.
-- [ ] Contribuição, LTV, CAC, LTV:CAC, payback, break-even, burn e runway.
-- [ ] Fluxo de caixa mês a mês.
-- [ ] Três cenários e premissa mais crítica.
-- [ ] Diagnóstico de 5–10 linhas sobre viabilidade e capital necessário.
-- [ ] CAC considera esforço de marketing/vendas e tempo de pessoas.
-- [ ] Valor de investimento/captação estimado pelo pior saldo com reserva.
+- [x] Unidade de cobrança por **imobiliária** explícita.
+- [x] Premissas com justificativas/fonte e confiança (geralmente baixa).
+- [x] Contribuição, LTV, CAC, LTV:CAC, payback, break-even, burn e runway modelados.
+- [x] Fluxo de caixa mês a mês.
+- [x] Três cenários e premissa mais crítica.
+- [x] Diagnóstico de 8 frases sobre viabilidade e capital necessário.
+- [x] CAC considera esforço de marketing/vendas e tempo de pessoas como hipótese.
+- [x] Capital adicional calculado por pior saldo com reserva em cenário pessimista (não pedido aprovado).
 
 ## PMF — conteúdos de apoio
 
@@ -58,3 +58,7 @@ Métricas acionáveis versus vaidade; funil AARRR; retenção; pesquisa de PMF; 
 ## Exigência de rigor
 
 Não inventar entrevistas, PMF, receita, valores de empresas locais ou resultados; marcar premissas e citar pesquisas quando efetivamente realizadas.
+
+## Auditoria 15/10/2026
+
+Ver [14 — Matriz de exigências e documentos](14-matriz-aderencia-academica.md). **O PDF da fase 1 pede problema validado; pesquisa secundária e plano de teste não substituem evidência de campo.** Nomes da equipe de 3–5 pessoas, diagramação executiva de uma página e ensaio são pendências de entrega. O material de PMF citado no histórico não esteve disponível para leitura direta nesta revisão, portanto nenhuma nova exigência foi atribuída a ele.

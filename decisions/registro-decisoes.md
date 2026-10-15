@@ -30,11 +30,8 @@
 | D-022 | Dois perfis internos: **Administrador e Funcionário** | Controle de acessos |
 | D-023 | Login interno exclusivamente com **Google** | Autorização da imobiliária segue obrigatória |
 | D-024 | **SaaS multi-tenant** | Mesma aplicação, dados/usuários segregados entre imobiliárias |
-
 | D-025 | **Estratégia técnica B — MVP escalável enxuto** | APIs de IA no início, abstração para outros modelos/provedores, PostgreSQL, processamento assíncrono e segregação multi-tenant; fornecedores e dimensionamento ainda não definidos |
-
 | D-026 | **Modelo comercial: implantação + mensalidade** | Implantação cobre configuração, adaptação inicial e treinamento; mensalidade cobre plataforma, suporte e acompanhamento; personalizações maiores podem ser cobradas separadamente. Valores ainda não definidos. |
-
 | D-027 | **Cenário financeiro-base A — Entrada acessível** | Implantação R$ 990, mensalidade R$ 299, meta hipotética de 8 novos clientes em 12 meses e custo fixo preliminar R$ 1.000/mês; parâmetros **não validados** e sujeitos a simulações de churn, CAC, impostos e custos variáveis |
 
 ## Hipóteses em investigação (não decisões definitivas)
@@ -51,10 +48,10 @@
 
 - [x] Definir o **escopo funcional inicial do MVP** da Modernize IA (ver [documento de MVP](../docs/13-mvp-modernize-ia.md)); limite exato de personalização ainda aberto.
 - [ ] Definir a cadência e os entregáveis do acompanhamento tecnológico contínuo.
-- [ ] Definir a persona compradora versus usuária da oferta.
-- [ ] Determinar modelo de cobrança e canais de vendas.
+- [x] Personas decididas: **imobiliária/gestor paga**, **equipe opera**, interessado envia documentos sem login.
+- [x] Modelo de cobrança **implantação + mensalidade por imobiliária**; [ ] canais de venda/conversões ainda por validar.
 - [ ] Validar mercado e concorrência em Santa Maria.
-- [ ] Fixar preços e custos com fontes para o financeiro.
+- [x] Definidos **preços hipotéticos para projeção**; [ ] obter fontes/cotações e validar disposição a pagar.
 - [x] Selecionar logos oficiais e direção visual; formalizar usos e design system ainda pendente.
 - [ ] Elaborar sumário, arquitetura, planilha e roteiro definitivo.
 - [ ] Definir equipe, prazos e responsabilidades.

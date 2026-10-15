@@ -40,8 +40,8 @@ Análise de crédito; decisões jurídicas; aprovação autônoma de locação; 
 - Dados usados em demonstrações devem ser fictícios/sintéticos; métricas de ganho devem ser medidas ou explicitamente simuladas.
 
 ## Em aberto — não interpretar como aprovado
-- Provedor/modelo de IA e estratégia (API, próprio ou híbrido).
-- Stack, hospedagem, banco, arquitetura de filas, autenticação, custos operacionais e preço.
+- **Estratégia D-025 aprovada:** APIs externas de IA no início com adapter para troca/hibridização futura; provedores/modelos exatos em aberto.
+- **Já escolhidos como projeto:** PostgreSQL, fila assíncrona, Google OIDC para equipe, multi-tenant; preço hipotético R$ 990 de implantação + R$ 299 por imobiliária/mês. **Em aberto:** provedor/hosting, volume e custos reais, impostos e validação do preço.
 - Política concreta de retenção e validade de links; limitações de formatos/tamanho e taxas de erro de IA.
 - Plano de acompanhamento tecnológico, níveis de serviço, aquisição de clientes e projeção financeira 12 meses.
 - Pesquisa com imobiliárias, concorrentes e evidência de viabilidade comercial em Santa Maria.
