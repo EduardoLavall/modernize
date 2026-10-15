@@ -1,4 +1,4 @@
-import re, time, json, pathlib
+import re, time, json, pathlib, os
 from playwright.sync_api import sync_playwright
 
 BASE='http://127.0.0.1:8767'
@@ -10,8 +10,12 @@ def guard(page):
     page.on('pageerror',lambda e: errors.append(str(e)))
 
 with sync_playwright() as p:
-    browser=p.chromium.launch(headless=True,executable_path='/usr/bin/chromium',args=['--no-sandbox'])
-    page=browser.new_page(viewport={'width':1366,'height':768},device_scale_factor=1)
+    launch_args={'headless':True,'args':['--no-sandbox']}
+    if not os.environ.get('CI') and os.path.exists('/usr/bin/chromium'):
+        launch_args['executable_path']='/usr/bin/chromium'
+    browser=p.chromium.launch(**launch_args)
+    context=browser.new_context(viewport={'width':1366,'height':768},device_scale_factor=1)
+    page=context.new_page()
     guard(page)
     page.goto(BASE+'/slides.html',wait_until='networkidle')
     assert page.locator('.slide').count()==10
@@ -46,7 +50,8 @@ with sync_playwright() as p:
     page.locator('#create-form button[type="submit"]').click()
     assert 'Pessoa Fictícia QA' in page.locator('#details-content').inner_text()
     testid=page.evaluate("window.ModernizeDemo.getState().cases.at(-1).id")
-    portal=browser.new_page(viewport={'width':1200,'height':830})
+    portal=context.new_page()
+    portal.set_viewport_size({'width':1200,'height':830})
     guard(portal)
     portal.goto(BASE+'/demo.html?mode=upload&id='+testid,wait_until='networkidle')
     assert portal.locator('[data-synthetic="missing"]').count()==1
