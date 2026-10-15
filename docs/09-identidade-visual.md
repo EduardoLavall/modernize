@@ -29,3 +29,12 @@ Não há paleta, logotipo, fontes, slogan ou identidade final aprovados. A maque
 ## Próximos passos
 
 Pesquisar referências visuais, decidir paleta/tipografia, criar wireframes e storyboard de cada interação, testar legibilidade.
+
+
+## Conceito de logotipo escolhido para aprofundamento — 15/10/2026
+
+Foi selecionada a **proposta visual 03**, marcada por um **M estilizado com movimento ascendente**, em vermelho e grafite. A versão vetorial **reinterpretada** está em [assets/brand/modernize-logo-conceito-03.svg](../assets/brand/modernize-logo-conceito-03.svg).
+
+**Atenção:** o SVG foi redesenhado com curvas editáveis a partir do conceito visual gerado em PNG, e **não é uma conversão fiel pixel a pixel do PNG original**. A versão final do logotipo ainda requer comparação visual, ajustes tipográficos, validação de legibilidade em tamanhos pequenos, uso monocromático, aplicação em fundos claros/escuros e aprovação.
+
+O conceito visual segue a direção já aprovada: vermelho moderno, grafite sofisticado, confiança e evolução tecnológica sem visual excessivamente futurista.
