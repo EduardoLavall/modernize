@@ -65,3 +65,11 @@ A versão mês a mês para os três cenários está em [finance/fluxo_12_meses.c
 8. É preciso validar horas, volume de documentos, retenção, CAC, tributação e valor percebido antes de dizer que o negócio é viável.
 
 **Alinhamento acadêmico:** PDF principal §2.5 sugere 24 meses como aprofundamento; entregável explícito requer **12 meses**, conforme PDF de finanças p.12. A conclusão honesta é **viabilidade ainda não demonstrada**, com necessidade de revisão antes de escalar.
+
+## Ajuste financeiro posterior à auditoria
+
+O indicador de **capital adicional para preservar reserva de dois meses de fixos** foi corrigido na planilha editável (`Indicadores!B18:D18`) para `MAX(0, 2 × fixos - menor caixa)`, evitando cobrar de novo uma reserva já existente. Em R$: **12.613,94 (pessimista), 1.636,39 (base) e 0,00 (otimista)**.
+
+Também foi incluída a aba **Base com equipe**, com gasto adicional de R$ 2.500/mês. Nessa sensibilidade, o fluxo anual é aproximadamente **−R$ 29.893,76**, o menor caixa projetado é **−R$ 26.893,76** e a necessidade de capital extra para manter dois meses de reserva sobe a **R$ 33.893,76**. **A remuneração assumida é parcial e ilustrativa: não representa a folha e os encargos de 3–5 colaboradores.** O cenário base anterior de R$ 106,24 permanece disponível **sem** essa remuneração para comparação acadêmica, mas não deve ser anunciado como lucro operacional efetivo.
+
+O arquivo XLSX editável revisado foi entregue nesta conversa. Os CSVs de fluxo no GitHub continuam descrevendo os **três cenários históricos sem remuneração fixa extra**; o cenário adicional com equipe pode ser reproduzido pela aba da planilha e pelo controle interativo do slide 9.

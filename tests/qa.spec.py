@@ -117,6 +117,30 @@ with sync_playwright() as p:
     assert page.locator('[data-action="complete"]').is_enabled()
     page.locator('[data-action="complete"]').click()
     assert page.evaluate('(id)=>window.ModernizeDemo.getState().cases.find(c=>c.id===id).status',mismatch_id)=='done'
+    # Terceira jornada: ilegibilidade exige reenvio, não um botão de resolução
+    page.evaluate('window.ModernizeDemo.goto("create")')
+    page.locator('#create-name').fill('Joana Fictícia (DEMO)')
+    page.locator('#create-form button[type="submit"]').click()
+    illegible_id=page.evaluate("window.ModernizeDemo.getState().cases.at(-1).id")
+    upload=context.new_page()
+    guard(upload)
+    upload.goto(BASE+'/demo.html?mode=upload&id='+illegible_id,wait_until='networkidle')
+    upload.locator('[data-synthetic="illegible"]').click()
+    upload.wait_for_timeout(850)
+    page.reload(wait_until='networkidle')
+    page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',illegible_id)
+    assert page.locator('[data-action="complete"]').is_disabled()
+    assert page.locator('[data-action="resolve"]').count()==0
+    upload.reload(wait_until='networkidle')
+    upload.locator('[data-synthetic="complete"]').click()
+    upload.wait_for_timeout(850)
+    upload.close()
+    page.reload(wait_until='networkidle')
+    page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',illegible_id)
+    page.locator('#review-form input[name="verified"]').check()
+    page.locator('#review-form button[type="submit"]').click()
+    page.locator('[data-action="complete"]').click()
+    assert page.evaluate('(id)=>window.ModernizeDemo.getState().cases.find(c=>c.id===id).status',illegible_id)=='done'
     page.locator('#tenant-select').select_option('aurora')
     assert not page.locator('#view-dashboard').get_by_text('Pessoa Fictícia QA').count()
     assert page.locator('#side-total').inner_text()=='1'

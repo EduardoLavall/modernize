@@ -21,3 +21,7 @@
 - Plano financeiro narrativo [docs/08-plano-financeiro.md](../docs/08-plano-financeiro.md). Fontes acadêmicas: PDFs originais do curso; preços públicos de fornecedores em [docs/17-arquitetura-referencia.md](../docs/17-arquitetura-referencia.md).
 
 **Este CSV não é apresentação de resultados reais; nenhum cliente está contratado.**
+
+## Indicadores revisados após auditoria
+
+O custo mínimo de equipe foi simulado separadamente do cenário-base original para evidenciar o risco de subestimar salários. Ver [documento financeiro](../docs/08-plano-financeiro.md) e `indicadores_corrigidos.csv` para números de reserva e capital extra. A planilha XLSX editável revisada é fornecida separadamente, pois seu arquivo binário ainda não foi versionado no repositório.

@@ -1,0 +1,8 @@
+Cenario;Fixos_mensais_sem_equipe_R$;Minimo_caixa_sem_equipe_R$;Reserva_2_meses_R$;Capital_adicional_corrigido_R$;Fluxo_anual_sem_equipe_R$;Fluxo_anual_com_equipe_2500_mes_R$
+Pessimista;1300;-10013.936567;2600;12613.936567;-13013.936567;-43013.936567
+Base;1000;363.608192;2000;1636.391808;106.238834;-29893.761166
+Otimista;1000;2311.869400;2000;0.000000;10249.480341;-19750.519659
+
+# Custos extras da equipe = R$ 2500 por mês, não folha integral.
+# Cenário Base com equipe: menor caixa -26893.761166, reserva alvo 7000, capital extra 33893.761166.
+# Todos os números são estimativas/simulações acadêmicas; nenhum cliente ou faturamento real.

@@ -66,3 +66,18 @@
 **Não apresentar como entrega final perfeita.** Está apto para uma rodada curta de correção **antes da banca** e **não precisa recomeçar do zero**. Ordem: (1) equipe e mercado no slide; (2) cenário financeiro com remuneração e fórmula de capital; (3) roteiro/viabilidade da demonstração; (4) ampliar testes e validar exportação; (5) ensaio real. Não misturar “prototipagem acadêmica suficiente para mostrar fluxo” com “software produtivo validado”.
 
 **Esta auditoria é documental e técnica. Nenhuma modificação de slides, demo, planilha ou código foi efetuada neste commit.**
+
+## Errata e fechamento das correções de implementação — 15/10/2026
+
+**Correções efetivamente publicadas no código:**
+1. **Slide 3:** exemplo de TAM/SAM/SOM = **120/72/8**, com rótulo visível **"SIMULAÇÃO, NÃO PESQUISA LOCAL"**, explicação de que ainda não existe contagem atual comprovada de imobiliárias de Santa Maria. A meta de oito contratos continua hipótese.
+2. **Slide 9:** botão para incluir/excluir custo de equipe de **R$ 2.500/mês adicional** (incluído por padrão), comparativo dos três cenários e break-even/runway recalculados. R$ 2.500 **não é salário integral de uma equipe de 3–5 pessoas**.
+3. **Slide 10:** quatro funções organizacionais em `js/team.js`; exibe **"Nome a confirmar"** enquanto não houver identificação real; faltam nomes dos integrantes e eventualmente o ajuste dos papéis pela equipe.
+4. **Demo:** conclusão somente após revisão humana registrada; não é mais possível limpar divergência de nome por um botão automático sem corrigir a referência fictícia; documento ausente ou ilegível exige **reenviar pacote sintético completo**.
+5. **Exportação e QA:** `@page` com proporção 16:9, teste de exatamente dez páginas em PDF; teste de overflow no projetor passou de aviso para **asserção bloqueante**. O GitHub Actions executou esses testes.
+6. **Planilha externa corrigida:** `Indicadores!B18:D18` agora aplica `MAX(0, 2 × custo_fixo - menor_caixa)` e contém aba **Base com equipe**; valores da reserva passam a R$ 12.613,94 (pessimista), R$ 1.636,39 (base) e R$ 0 (otimista). A planilha `.xlsx` revisada foi disponibilizada como arquivo de conversa, mas **não está versionada no GitHub**.
+7. **GitHub Pages:** `js/team.js` incorporado ao deploy e ao cache offline; README de publicação corrigido para a modalidade **GitHub Actions**.
+
+**QA independente via GitHub Actions:** as duas jornadas (pendência/reenvio e divergência com correção) e PDF de dez páginas passaram no workflow do commit `dcbf20245729d63e92cc3ecc5b7a0bac0999eec4`, execução [38791238891](https://github.com/EduardoLavall/modernize/actions/runs/38791238891). 
+
+**Questões sem resposta empírica — não registrar como solucionadas:** nomes da equipe (3–5), entrevistas/teste real de interesse, TAM/SAM de Santa Maria com fonte atual, custo integral de pessoal, preço realmente pago, cálculo fiscal verdadeiro, IA/OAuth/backend/segurança de SaaS real. São pendências acadêmicas ou de operação e exigem evidências futuras.
