@@ -62,3 +62,7 @@
 - [ ] Completar equipe, papel, fala final e pedido conforme material P1.
 
 **Parecer final:** documentação **apta a ser usada como briefing de implementação** dos slides e de demonstração acadêmica sintética; não apta a ser apresentada como mercado/produto já validado.
+
+## Complemento pós-implementação — 15/10/2026
+
+O handoff resultou em [slides.html](../slides.html), [demo.html](../demo.html), [CSS](../css/), [JS](../js/) e [workflow CI/CD](../.github/workflows/pages.yml). Foram feitas revisões estáticas de HTML/JS e dos valores do caixa dos três cenários; os scripts para QA de navegador e imagens estão em [tests/](../tests/). O status de **conclusão de deploy do GitHub Pages** depende da configuração no repositório; logs anteriores mostraram que a conta de automação não podia criar o site Pages sem habilitação administrativa. **Nunca confundir disponibilização de código com publicação pública ou teste visual integral.** O bloqueio comercial de validação local, preços, disponibilidade de clientes e segurança de produção permanece.
