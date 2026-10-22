@@ -50,7 +50,7 @@ with sync_playwright() as p:
     assert mobile.locator("#menu-toggle").get_attribute("aria-expanded") == "false"
     mobile.locator("#menu-toggle").click()
     assert mobile.locator("#menu-toggle").get_attribute("aria-expanded") == "true"
-    assert mobile.locator("#primary-navigation").is_visible()
+    mobile.locator("#primary-navigation").wait_for(state="visible", timeout=3000)
     mobile.locator("#primary-navigation").get_by_text("Serviços", exact=True).click()
     assert mobile.locator("#menu-toggle").get_attribute("aria-expanded") == "false"
     assert mobile.evaluate("document.documentElement.scrollWidth <= window.innerWidth+3"), "Landing transborda horizontalmente em 390px"
