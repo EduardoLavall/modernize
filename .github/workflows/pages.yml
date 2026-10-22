@@ -33,12 +33,19 @@ jobs:
           python -m http.server 8767 --bind 127.0.0.1 >/tmp/modernize-server.log 2>&1 &
           sleep 2
           python tests/qa.spec.py
+      - name: Verificar landing institucional com Chromium
+        run: |
+          python -m http.server 8788 --bind 127.0.0.1 >/tmp/modernize-landing.log 2>&1 &
+          sleep 2
+          python landing/tests/qa.py
       - name: Guardar capturas
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: modernize-browser-qa
-          path: tests/artifacts/
+          path: |
+            tests/artifacts/
+            landing/tests/artifacts/
           if-no-files-found: ignore
   deploy:
     needs: qa
@@ -72,6 +79,9 @@ jobs:
           cp js/finance.js js/slides.js js/demo.js js/team.js _site/js/
           cp "assets/brand/Modernize logo.png" _site/assets/brand/
           cp "assets/brand/Glossy Red and Graphite M Logo.png" _site/assets/brand/
+          mkdir -p _site/landing
+          cp landing/index.html landing/styles.css landing/main.js landing/vercel.json _site/landing/
+          cp -R landing/assets _site/landing/assets
           touch _site/.nojekyll
       - name: Enviar arquivos
         if: steps.pages_check.outputs.enabled == 'true'
