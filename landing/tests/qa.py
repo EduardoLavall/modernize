@@ -22,6 +22,10 @@ with sync_playwright() as p:
     assert "consultoria" in desktop.locator("#sobre").inner_text().lower()
     assert "Acompanhamento" in desktop.locator("#servicos").inner_text()
     assert "dados fictícios" in desktop.locator("#modernize-ia").inner_text()
+    assert desktop.locator('a[href*="demo.html"]').count() == 1
+    assert desktop.locator('a[href*="slides.html"], a[href*="github.com"]').count() == 0
+    for word in ["acadêmico", "projeto em desenvolvimento", "ver apresentação", "explorar protótipo"]:
+        assert word not in desktop.locator("body").inner_text().lower(), f"Marketing expõe bastidores: {word}"
     assert "https://eduardolavall.github.io/modernize/demo.html" in desktop.locator(".product-actions a").first.get_attribute("href")
     assert desktop.locator(".nav-brand img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
     assert desktop.locator(".orbit-core img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
@@ -71,7 +75,9 @@ with sync_playwright() as p:
     assert home.locator(".nav-brand img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
     assert home.locator(".orbit-core img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
     assert home.locator(".product-actions a").first.get_attribute("href") == "demo.html"
-    assert home.locator(".product-actions a").nth(1).get_attribute("href") == "slides.html"
+    assert home.locator(".product-actions a").count() == 1
+    assert home.locator('a[href*="demo.html"]').count() == 1
+    assert home.locator('a[href*="slides.html"], a[href*="github.com"]').count() == 0
     assert home.locator("#modernize-ia").is_visible()
     home.goto("http://127.0.0.1:8788/slides.html", wait_until="domcontentloaded")
     assert home.locator(".slide").count() == 10

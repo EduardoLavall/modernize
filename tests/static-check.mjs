@@ -5,6 +5,13 @@ if(count!==10)throw Error('Pitch precisa ter 10 slides, encontrou '+count);
 const ids=[...html.matchAll(/\bid="(slide-\d+)"/g)].map(x=>x[1]);
 if(ids.length!==10||ids.some((x,i)=>x!=='slide-'+(i+1)))throw Error('IDs slides inconsistentes');
 execFileSync('node',['landing/sync-home.mjs','--check']);
+for(const f of ['index.html','landing/index.html']){
+ const marketing=read(f).toLowerCase();
+ for(const forbidden of ['slides.html','github.com','ver apresentação','projeto em desenvolvimento','protótipo acadêmico']){
+  if(marketing.includes(forbidden))throw Error('Landing institucional menciona '+forbidden+' em '+f);
+ }
+ if((marketing.match(/href="[^"]*demo\.html"/g)||[]).length!==1)throw Error('Landing deve mencionar demo uma só vez: '+f);
+}
 for(const f of ['js/finance.js','js/slides.js','js/demo.js','js/team.js','landing/main.js'])execFileSync('node',['--check',f]);
 if(!html.includes('Glossy%20Red%20and%20Graphite%20M%20Logo.png'))throw Error('Logo oficial ausente');
 if(!read('demo.html').includes('AMBIENTE DE DEMONSTRAÇÃO'))throw Error('Aviso fictício ausente');

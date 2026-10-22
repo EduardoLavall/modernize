@@ -1,6 +1,6 @@
 /* Cache estático do site e da apresentação: fica disponível offline DEPOIS da primeira visita bem-sucedida.
    Dados do protótipo permanecem no navegador; nenhum documento real deve ser usado. */
-const CACHE='modernize-site-v3';
+const CACHE='modernize-site-v4';
 const FILES=['./','./index.html','./slides.html','./demo.html','./landing/','./landing/index.html','./landing/styles.css','./landing/main.js','./landing/assets/brand/Modernize%20logo.png','./landing/assets/brand/Glossy%20Red%20and%20Graphite%20M%20Logo.png','./css/app.css','./css/slides.css','./css/demo.css','./js/finance.js','./js/team.js','./js/slides.js','./js/demo.js','./assets/brand/Modernize%20logo.png','./assets/brand/Glossy%20Red%20and%20Graphite%20M%20Logo.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()]))});
