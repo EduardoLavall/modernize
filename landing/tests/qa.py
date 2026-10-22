@@ -19,7 +19,7 @@ with sync_playwright() as p:
     assert desktop.locator(".service-card").count() == 4
     assert desktop.locator(".method-tab").count() == 4
     assert desktop.locator("html").get_attribute("lang") == "pt-BR"
-    assert "Diagnóstico" in desktop.locator("#sobre").inner_text()
+    assert "consultoria" in desktop.locator("#sobre").inner_text().lower()
     assert "Acompanhamento" in desktop.locator("#servicos").inner_text()
     assert "dados fictícios" in desktop.locator("#modernize-ia").inner_text()
     assert "https://eduardolavall.github.io/modernize/demo.html" in desktop.locator(".product-actions a").first.get_attribute("href")
