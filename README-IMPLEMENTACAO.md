@@ -4,9 +4,11 @@
 
 ## Acessar
 
-- **Pitch:** `index.html` ou `slides.html` (10 slides, 4min50s planejados). Os slides 1–3 apresentam a **empresa Modernize**, suas quatro frentes de serviço e o diferencial de acompanhamento contínuo. A **Modernize IA** aparece a partir do slide 5 como **primeira aplicação**, e não como toda a empresa.
+- **Home da Modernize:** `index.html` (landing institucional, não redireciona; mesmo design de `landing/index.html`).
+- **Pitch:** `slides.html` (10 slides, 4min50s planejados). Os slides 1–3 apresentam a **empresa Modernize**, suas quatro frentes de serviço e o diferencial de acompanhamento contínuo. A **Modernize IA** aparece a partir do slide 5 como **primeira aplicação**, e não como toda a empresa.
 - **Demo:** `demo.html` (cadastro de interessados, portal de envio fictício, extração predefinida, pendências, revisão manual e conclusão).
 - Para rodar localmente a partir da raiz do repositório, use `python -m http.server 8080` e abra `http://localhost:8080/`. **Não use dados pessoais reais.**
+- A raiz pública `https://eduardolavall.github.io/modernize/` mostra a landing; os slides estão em `/slides.html` e a demo em `/demo.html`. A página principal é gerada de `landing/index.html` pelo comando `node landing/sync-home.mjs`.
 - GitHub Pages: Settings → Pages → **Source: GitHub Actions** (`pages.yml`), se o Pages ainda não estiver habilitado. URL esperada após habilitar e publicar: `https://eduardolavall.github.io/modernize/` (verificar no painel, **não tratar como confirmada**).
 - Um service worker armazena os arquivos estáticos após a primeira visita em HTTPS/localhost, permitindo repetir a demo sem conexão. Para primeira apresentação offline, prefira rodar o servidor local e carregar tudo antes.
 
@@ -34,7 +36,7 @@ O repositório [GranaXP](https://github.com/EduardoLavall/GranaXP) foi estudado 
 ## Código e artefatos
 
 ```text
-index.html                 ponto de entrada
+index.html                 homepage institucional espelhada de landing/index.html
 slides.html                pitch 10 slides
 css/app.css                tokens/elementos comuns
 css/slides.css             telas e impressão em PDF

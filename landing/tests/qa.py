@@ -1,4 +1,4 @@
-"""Verifica a landing institucional publicada separadamente dos slides."""
+"""Verifica a landing institucional como homepage e os slides em rota separada."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
@@ -58,6 +58,26 @@ with sync_playwright() as p:
         mobile.locator(sel).scroll_into_view_if_needed()
         mobile.wait_for_timeout(70)
     mobile.screenshot(path=str(OUT/"landing-mobile.png"), full_page=True)
+
+    # Home / deve apresentar a landing diretamente, sem redirecionar para os slides.
+    home = browser.new_page(viewport={"width": 1440, "height": 900})
+    home.on("pageerror", lambda e: errors.append(str(e)))
+    home.goto("http://127.0.0.1:8788/", wait_until="domcontentloaded")
+    assert home.url.rstrip("/") == "http://127.0.0.1:8788", home.url
+    assert home.title() == "Modernize — Modernização tecnológica contínua"
+    assert home.locator("h1").count() == 1
+    assert home.locator(".service-card").count() == 4
+    assert home.locator('link[rel="stylesheet"]').get_attribute("href") == "landing/styles.css"
+    assert home.locator(".nav-brand img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
+    assert home.locator(".orbit-core img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
+    assert home.locator(".product-actions a").first.get_attribute("href") == "demo.html"
+    assert home.locator(".product-actions a").nth(1).get_attribute("href") == "slides.html"
+    assert home.locator("#modernize-ia").is_visible()
+    home.goto("http://127.0.0.1:8788/slides.html", wait_until="domcontentloaded")
+    assert home.locator(".slide").count() == 10
+    home.goto("http://127.0.0.1:8788/demo.html", wait_until="domcontentloaded")
+    assert home.locator("#view-dashboard").count() == 1
+    home.close()
 
     # Sem biblioteca pesada nem ação externa para preencher um suposto contato.
     assert desktop.locator("form").count() == 0

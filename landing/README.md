@@ -1,6 +1,6 @@
 # Modernize — Landing page institucional
 
-Esta pasta contém o **site institucional** da Modernize, separado dos 10 slides e do protótipo acadêmico do repositório.
+Esta pasta contém o **site institucional** da Modernize, separado dos 10 slides e do protótipo acadêmico do repositório. **É também a fonte da página inicial oficial (`../index.html`) no GitHub Pages**. No Vercel (Root Directory `landing`), `landing/index.html` já é a homepage do projeto.
 
 ## Conteúdo e posicionamento
 - Modernize = consultoria, diagnóstico, capacitação, implementação e acompanhamento contínuo para negócios B2B;
@@ -33,3 +33,7 @@ Abra \`http://127.0.0.1:8787\`.
 - \`main.js\` — menu, progresso, animações e abas do método.
 - \`assets/brand/\` — **cópias dos dois PNGs oficiais já aprovados**, sem alteração visual.
 - \`vercel.json\` — configuração do site estático.
+
+## Sincronização da homepage GitHub Pages
+
+Na raiz do repositório, execute `node landing/sync-home.mjs` após modificar `landing/index.html` para atualizar o espelho `index.html`. O script corrige caminhos de CSS, JS e imagens para a raiz e aponta os botões de demo/slides para URLs locais. Use `node landing/sync-home.mjs --check` para verificar consistência; o GitHub Actions também valida isso. Não volte a usar um redirecionamento para `slides.html` na raiz.
