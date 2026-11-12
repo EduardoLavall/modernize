@@ -22,7 +22,7 @@
 | 6. Demonstração | 55s | Qual parte já pode ser demonstrada? | Demo acadêmica funcional com dados sintéticos, sem IA/OAuth reais |
 | 7. Diferencial e receita | 30s | Como compete e monetiza? | ERPs/alternativas existem; serviços de diagnóstico e acompanhamento; primeira oferta R$ 990 + R$ 299 por imobiliária; outros projetos sob escopo |
 | 8. Tecnologia | 25s | É tecnicamente plausível? | Arquitetura de referência do **primeiro produto**, não da empresa inteira, com controle humano |
-| 9. Projeção e riscos | 35s | A economia do primeiro produto fecha? | 12 meses, 3 cenários, custo adicional ilustrativo de equipe, CAC/churn, caixa, break-even e runway; não projeção do portfólio inteiro |
+| 9. Projeção e riscos | 35s | Como a Modernize pode ganhar escala? | 12 meses, três cenários da empresa completa, receita acumulada crescente, resultado anual separado, custos e premissas comerciais hipotéticas |
 | 10. Equipe e pedido | 20s | Como evoluímos? O que buscamos? | Equipe real (a preencher) e pedido de empresas piloto e mentoria, visando amadurecer e expandir a metodologia |
 
 **Tempo total: 290 segundos = 4min50s.** Ensaio real ainda deve medir deslocamentos, perguntas e tempo da demo. Se ultrapassar 5 minutos, reduzir fala do slide 7 ou demonstrar um caso já preparado.
@@ -37,7 +37,7 @@
 6. “Este fluxo navegável usa dados e resultados totalmente fictícios. Não estamos afirmando possuir IA produtiva ou clientes reais.”
 7. “Existem ERPs imobiliários e serviços de TI; queremos nos diferenciar por diagnóstico, ensino e acompanhamento contínuo. A oferta inicial tem implantação de R$ 990 e mensalidade de R$ 299 por imobiliária; outras consultorias e projetos seriam negociados separadamente.”
 8. “A arquitetura de referência ilustra como implantar a Modernize IA com isolamento entre imobiliárias, privacidade e revisão humana. Ainda não está em produção.”
-9. “A projeção apresentada cobre **a primeira oferta** durante 12 meses, não todos os serviços da Modernize. Com remuneração adicional simulada, o caixa deixa evidente a necessidade de capital e validação.”
+9. “Além da Modernize IA, a empresa prevê workshops e automações. A curva mostra receita acumulada e por isso cresce, mas não representa lucro. No cenário-base hipotético, projetamos 8 novas imobiliárias, 12 workshops e 7 projetos; o resultado anual é estreito e ainda não contempla remuneração integral.”
 10. “Nosso próximo passo é testar benefícios com empresas piloto e consolidar uma metodologia que possa evoluir para outros setores. Esta é a nossa equipe [incluir nomes e papéis reais]. Buscamos mentoria e parceiros para validar.”
 
 ## Storytelling e critérios de aceite
@@ -45,7 +45,7 @@
 - Antes de mencionar imobiliárias, **explicar que a Modernize é empresa de serviços/soluções tecnológicas** e quais são seus quatro serviços.
 - **Adoção e modernização contínua** são o problema/oportunidade geral. O cadastro de locação é caso inicial, não a única dor que atendemos.
 - Antes da demo, **diferenciar explicitamente Modernize (empresa) e Modernize IA (produto)**.
-- Ao mostrar preços e projeções, delimitar **“primeira oferta às imobiliárias”**, não inventar preços para workshops/projetos/empresas de outros setores.
+- Ao mostrar os R$ 990 + R$ 299, delimitar **“primeira oferta às imobiliárias”**. Preços adicionais de workshops/projetos são **hipóteses assumidas para a simulação**, não fatos validados ou ofertas definitivas.
 - Conservar no máximo dez slides, 3–5 min e os itens do material da disciplina: problema, solução/MVP, tamanho de mercado, cobrança, métricas (testes previstos sem inventar tração), equipe, pedido.
 - Legibilidade 1366×768 e impressão de 10 páginas 16:9; testar offline, atalhos, retorno da demo ao **slide 7**, sem perder o contexto do produto.
 - Logos aprovados PNG; paleta grafite/vinho/vermelho/marfim/azul-cinza, visual editorial sem pixel art.
