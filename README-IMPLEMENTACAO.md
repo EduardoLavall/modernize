@@ -16,7 +16,7 @@
 
 - `→`, `Espaço`: próximo; `←`: anterior; `Home/End`: primeiro/último; `Esc`: visão geral; `F`: tela cheia; `P`: impressão/PDF pelo navegador; `D`: demo.
 - Clique em “Abrir demonstração” no **slide 6**; “Voltar ao pitch” direciona ao **slide 7** (diferencial e modelo de negócio).
-- Slide 9: alternância dos três cenários financeiros por botões. **Valores calculados de `js/finance.js`** segundo `finance/` e `docs/08-plano-financeiro.md`.
+- Slide 9: alternância dos três cenários financeiros da **empresa completa**, com receitas hipotéticas de Modernize IA + workshops + projetos. A linha é de **receita acumulada (não lucro)**. Valores calculados via `computeCompany()` em `js/finance.js`, com premissas em `docs/23-projecao-financeira-empresa.md`. O método histórico `compute()` e os CSVs originais continuam auditáveis.
 
 ## Percurso funcional da demo
 
@@ -59,11 +59,11 @@ tests/qa.spec.py           roteiro automatizado Playwright (se navegador dispon�
 
 ## Revisão da auditoria
 - Slide 3: TAM/SAM/SOM ilustrativos 120/72/8, não contagem atual local.
-- Slide 9: remuneração adicional de R$ 2.500/mês (checkbox, ligada por padrão), break-even e runway; não é folha completa.
+- Slide 9: remuneração parcial adicional de R$ 2.500/mês (checkbox, ligada por padrão), margem e menor caixa estimados; não é folha completa. Workshop R$ 1.500, projeto R$ 4.000 e custo direto de serviços 30% são **hipóteses**, não preços/custos observados.
 - Slide 10: preencher apenas nomes reais em `js/team.js` (3–5 integrantes).
 - Demo: salvar revisão humana confirmada, corrigir divergências e reenviar arquivos fictícios ausentes/ilegíveis.
 - Planilha XLSX corrigida e sumário PDF devem acompanhar a entrega como artefatos separados.
 
 ## Evolução do posicionamento institucional
 
-A apresentação foi reorganizada para colocar **a empresa Modernize** como protagonista. A jornada é: visão da empresa → problema de adoção tecnológica das PMEs → quatro frentes de serviço → mercado e primeiro nicho → produto Modernize IA → demo → diferencial e receitas por oferta → arquitetura → finanças da primeira oferta → equipe e próximos passos. O preço e a projeção **não representam faturamento de todos os serviços**; são hipóteses apenas do piloto com imobiliárias. O SaaS de produção não foi implementado.
+A apresentação foi reorganizada para colocar **a empresa Modernize** como protagonista. A jornada é: visão da empresa → problema de adoção tecnológica das PMEs → quatro frentes de serviço → mercado e primeiro nicho → produto Modernize IA → demo → diferencial e receitas por oferta → arquitetura → projeção hipotética combinada da empresa → equipe e próximos passos. O preço do produto **R$ 990 + R$ 299** continua exclusivo do piloto com imobiliárias; valores e metas comerciais dos demais serviços foram inseridos apenas na simulação do slide 9. O SaaS de produção não foi implementado.
