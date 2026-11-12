@@ -34,6 +34,8 @@ jobs:
         run: |
           python -m http.server 8767 --bind 127.0.0.1 --directory _site >/tmp/modernize-server.log 2>&1 &
           sleep 2
+          curl -fsS http://127.0.0.1:8767/slides-live.html > /tmp/modernize-live-local.html || { cat /tmp/modernize-server.log; exit 1; }
+          grep -Fq 'RECEITA ACUMULADA PROJETADA' /tmp/modernize-live-local.html
           python tests/qa.spec.py
       - name: Verificar landing institucional com Chromium
         run: |
@@ -84,3 +86,19 @@ jobs:
         if: steps.pages_check.outputs.enabled == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Confirmar arquivos no GitHub Pages publicado
+        if: steps.pages_check.outputs.enabled == 'true'
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          SITE="${PAGE_URL%/}"
+          echo "Verificando a rota publicada em $SITE"
+          curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL "$SITE/slides-live.html?release=$GITHUB_SHA" >/tmp/modernize-live-remote.html
+          grep -Fq 'RECEITA ACUMULADA PROJETADA' /tmp/modernize-live-remote.html
+          grep -Fq 'src="js/slides-live.js"' /tmp/modernize-live-remote.html
+          curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL "$SITE/js/slides-live.js?release=$GITHUB_SHA" >/tmp/modernize-live-remote.js
+          grep -Fq 'month.cumulativeRevenue' /tmp/modernize-live-remote.js
+          curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL "$SITE/sw.js?release=$GITHUB_SHA" >/tmp/modernize-live-remote-sw.js
+          grep -Fq 'modernize-online-v6' /tmp/modernize-live-remote-sw.js
+          echo "OK: GitHub Pages publicado com receita crescente e sem cache legado"
