@@ -58,25 +58,52 @@
   const svg=(tag,attrs={},text='')=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;return n;};
   function drawFinance(key){
     const includeTeam=$('finance-include-team').checked;
-    const s=window.ModernizeFinance.compute(key,includeTeam);
+    const s=window.ModernizeFinance.computeCompany(key,includeTeam);
     const money=window.ModernizeFinance.money;
-    $('finance-revenue').textContent=money(s.revenue);$('finance-expenses').textContent=money(s.expenses);
+    const pct=v=>new Intl.NumberFormat('pt-BR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(v);
+    $('finance-revenue').textContent=money(s.revenue);
+    $('finance-expenses').textContent=money(s.expenses);
     $('finance-result').textContent=(s.result>=0?'+ ':'− ')+money(Math.abs(s.result));
-    // Todos os cenários continuam negativos com esta remuneração parcial (R$ 30 mil/ano).
-    // Nunca apresentar o cenário sem equipe como lucro ou validação de mercado.
+    $('finance-margin').textContent=pct(s.margin);
+    $('finance-min-cash').textContent=money(s.minCash);
     $('finance-warning').textContent=includeTeam
-      ? 'Com R$ 30 mil/ano de remuneração parcial, nenhum cenário fecha as contas no ano 1. Revisar preços, clientes e custos; isso ainda não paga uma equipe completa.'
-      : s.result >= 0
-        ? 'Resultado positivo apenas sem remuneração da equipe. Isso NÃO comprova sustentabilidade nem lucro operacional real.'
-        : 'Resultado negativo mesmo sem remuneração da equipe. É preciso rever preços, clientes e custos.';
-    $('finance-breakeven').textContent=s.breakeven+' imobiliárias';
-    $('finance-runway').textContent=s.runway===null?'sem consumo inicial':s.runway.toFixed(1).replace('.',',')+' meses';
-    $('finance-team-note').textContent=includeTeam?'Com R$ 2.500/mês adicionais':'Sem remuneração estrutural adicional';
-    $('finance-chart-label').textContent=`Cenário ${s.label.toLowerCase()}`;
+      ? (s.result>=0
+          ? 'Meta hipotética, sem vendas realizadas. A margem é sensível a custos e ainda não remunera toda a equipe.'
+          : 'Déficit nesta simulação. A receita acumulada cresce, mas não representa lucro ou sustentabilidade.')
+      : 'Resultado sem R$ 30 mil/ano de remuneração parcial: não equivale ao lucro real da empresa.';
+    $('finance-team-note').textContent=includeTeam?'Custos parciais incluídos nos indicadores':'Sem remuneração parcial nos indicadores';
+    $('finance-chart-label').textContent='Cenário '+s.label.toLowerCase();
     $('finance-customers').textContent=s.newClients;
-    $('finance-cac').textContent=money(s.cac);
-    $('finance-churn').textContent=(s.churn*100).toFixed(0)+'%';
-    document.querySelectorAll('[data-scenario]').forEach(b=>{const on=b.dataset.scenario===key;b.classList.toggle('is-selected',on);b.setAttribute('aria-pressed',String(on));});
+    $('finance-workshops').textContent=s.services.workshops;
+    $('finance-projects').textContent=s.services.projects;
+    document.querySelectorAll('[data-scenario]').forEach(b=>{
+      const selected=b.dataset.scenario===key;
+      b.classList.toggle('is-selected',selected);
+      b.setAttribute('aria-pressed',String(selected));
+    });
+    chart.replaceChildren();
+    // A curva representa RE-CEI-TA acumulada, não lucro, saldo ou caixa.
+    // Portanto sobe conforme existem vendas previstas, inclusive no cenário pessimista.
+    const values=s.series.map(month=>month.cumulativeRevenue);
+    const W=650,H=240,left=57,right=12,top=12,bottom=32;
+    const x=i=>left+i*(W-left-right)/11;
+    const max=Math.max(1000,...values)*1.08;
+    const y=v=>top+(max-v)/max*(H-top-bottom);
+    for(let i=0;i<5;i++){
+      const value=max*i/4,Y=y(value);
+      chart.appendChild(svg('line',{x1:left,x2:W-right,y1:Y,y2:Y,stroke:'#ffffff1c','stroke-width':1}));
+      chart.appendChild(svg('text',{x:0,y:Y+4,fill:'#b0bbc5','font-size':11},Math.round(value/1000)+'k'));
+    }
+    const points=values.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
+    chart.appendChild(svg('polygon',{points:`${x(0)},${y(0)} ${points} ${x(11)},${y(0)}`,fill:'#22c55e20'}));
+    chart.appendChild(svg('polyline',{points,fill:'none',stroke:'#4ade80','stroke-width':3.5,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    values.forEach((v,i)=>{
+      if(i===0||i===5||i===11)chart.appendChild(svg('circle',{cx:x(i),cy:y(v),r:4.5,fill:'#4ade80',stroke:'#171c23','stroke-width':2}));
+      if(i===0||i===5||i===11)chart.appendChild(svg('text',{x:x(i),y:H-8,'text-anchor':'middle',fill:'#acb0b9','font-size':12},'M'+(i+1)));
+    });
+    chart.setAttribute('aria-label',`Receita acumulada projetada, cenário ${s.label}: ${money(s.revenue)} no ano 1. Não é lucro. Resultado anual estimado: ${money(s.result)}.`);
+  }
+  document.querySelectorAll('[data-scenario]').forEach(b=>{const on=b.dataset.scenario===key;b.classList.toggle('is-selected',on);b.setAttribute('aria-pressed',String(on));});
     chart.replaceChildren();
     const values=s.series.map(x=>x.cash);
     const min=Math.min(0,...values)-1200,max=Math.max(3000,...values)+1100;
