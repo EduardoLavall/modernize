@@ -30,5 +30,7 @@ if(!html.includes('DEMAIS SERVIÇOS DA EMPRESA'))throw Error('Preços não disti
 if(!read('demo.html').includes('href="slides.html#slide-7"'))throw Error('Retorno da demo não acompanha reordenação');
 if(!html.includes('SIMULAÇÃO, NÃO PESQUISA LOCAL'))throw Error('TAM sem aviso explícito');
 if(!html.includes('finance-include-team'))throw Error('Cenário de equipe não interativo');
+if(!html.includes('id="finance-include-team" type="checkbox" checked') || !html.includes('id="finance-expenses">R$ 52.030') || !html.includes('id="finance-result">− R$ 29.894'))throw Error('Valores iniciais não correspondem ao cenário base com equipe marcada');
+if(!html.includes('Saldo acumulado'))throw Error('Legenda do gráfico não descreve saldo acumulado');
 for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);
 console.log('OK: 10 slides, sintaxe JS, três cenários e logos');
