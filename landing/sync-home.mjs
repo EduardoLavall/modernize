@@ -12,7 +12,7 @@ export function renderRootIndex(source) {
     .replace('href="styles.css"', 'href="landing/styles.css"')
     .replace('src="main.js"', 'src="landing/main.js"')
     .replaceAll("https://eduardolavall.github.io/modernize/demo.html", "demo.html")
-    .replaceAll("https://eduardolavall.github.io/modernize/", "slides.html");
+    .replaceAll("https://eduardolavall.github.io/modernize/slides.html", "slides.html");
 }
 const target = join(dir, "..", "index.html");
 const expected = renderRootIndex(readFileSync(join(dir, "index.html"), "utf8"));
