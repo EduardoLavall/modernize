@@ -40,6 +40,8 @@
     const el=e.target;
     if (['INPUT','TEXTAREA','SELECT'].includes(el.tagName) || el.isContentEditable) return;
     if(help.open) return;
+    // Espaço deve acionar o controle focado (ex.: cenários, ajuda, links), não trocar de slide.
+    if(e.key === ' ' && el.closest?.('button, a, summary, [role="button"], [role="tab"]')) return;
     if(!overview.hidden){if(e.key==='Escape'){e.preventDefault();closeOverview();}return;}
     const key=e.key.toLowerCase();
     if(['arrowright','arrowdown','pagedown',' '].includes(key)){e.preventDefault();goTo(index+1);}
