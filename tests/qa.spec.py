@@ -30,26 +30,38 @@ with sync_playwright() as p:
     page.keyboard.press('Escape'); assert page.locator('#overview').is_visible()
     page.locator('.overview-tile').nth(8).click()
     assert page.locator('#slide-counter').inner_text()=='09 / 10'
-    assert '22.136' in page.locator('#finance-revenue').inner_text()
-    assert '52.030' in page.locator('#finance-expenses').inner_text()
-    assert '29.894' in page.locator('#finance-result').inner_text()
-    assert 'Saldo acumulado' in page.locator('.chart-legend').inner_text()
-    assert 'nenhum cenário' in page.locator('#finance-warning').inner_text().lower()
-    # Espaço no botão focado seleciona cenário, sem avançar de slide.
+    assert '68.136' in page.locator('#finance-revenue').inner_text()
+    assert '65.830' in page.locator('#finance-expenses').inner_text()
+    assert '2.306' in page.locator('#finance-result').inner_text()
+    assert '3,4%' in page.locator('#finance-margin').inner_text()
+    assert 'RECEITA ACUMULADA' in page.locator('#slide-9').inner_text()
+    assert 'não é lucro' in page.locator('.chart-legend').inner_text()
+    assert page.locator('#finance-workshops').inner_text() == '12'
+    assert page.locator('#finance-projects').inner_text() == '7'
+    # A linha do gráfico sobe no cenário-base: compara coordenadas Y (menor Y = maior valor).
+    points = page.locator('#finance-chart polyline').get_attribute('points').split()
+    assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
+    # Tecla Espaço no botão focado muda o cenário e não a página.
     page.locator('[data-scenario="pessimista"]').focus()
     page.keyboard.press('Space')
     assert page.locator('#slide-counter').inner_text() == '09 / 10'
-    assert '9.572' in page.locator('#finance-revenue').inner_text()
-    page.locator('[data-scenario="pessimista"]').click()
-    assert '9.572' in page.locator('#finance-revenue').inner_text()
-    assert '−' in page.locator('#finance-result').inner_text()
+    assert '23.572' in page.locator('#finance-revenue').inner_text()
+    assert '33.214' in page.locator('#finance-result').inner_text()
+    assert 'Déficit' in page.locator('#finance-warning').inner_text()
+    points = page.locator('#finance-chart polyline').get_attribute('points').split()
+    assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
     page.locator('[data-scenario="otimista"]').click()
-    assert '34.368' in page.locator('#finance-revenue').inner_text()
-    page.locator('#finance-include-team').check()
-    assert '19.751' in page.locator('#finance-result').inner_text()
+    assert '109.368' in page.locator('#finance-revenue').inner_text()
+    assert '32.749' in page.locator('#finance-result').inner_text()
+    assert page.locator('#finance-workshops').inner_text() == '18'
+    assert page.locator('#finance-projects').inner_text() == '12'
+    points = page.locator('#finance-chart polyline').get_attribute('points').split()
+    assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
     page.locator('#finance-include-team').uncheck()
-    assert 'sem remuneração' in page.locator('#finance-warning').inner_text().lower()
+    assert '62.749' in page.locator('#finance-result').inner_text()
+    assert 'sem R$ 30 mil' in page.locator('#finance-warning').inner_text().lower()
     page.locator('#finance-include-team').check()
+    page.locator('[data-scenario="base"]').click()
     page.screenshot(path=str(OUT/'slide-09-finance.png'))
     page.evaluate('window.ModernizeSlides.goTo(2)')
     assert page.locator('#slide-3').get_by_text('Diagnóstico e consultoria').count()==1
