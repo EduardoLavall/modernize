@@ -89,12 +89,12 @@
       chart.appendChild(svg('text',{x:2,y:Y+4,fill:'#89909a','font-size':11},Math.round(value/1000)+'k'));
     }
     const zeroY=y(0);
-    chart.appendChild(svg('line',{x1:left,x2:W-right,y1:zeroY,y2:zeroY,stroke:'#e68b9588','stroke-dasharray':'6 6'}));
+    chart.appendChild(svg('line',{x1:left,x2:W-right,y1:zeroY,y2:zeroY,stroke:'#a4b9b988','stroke-dasharray':'6 6'}));
     const points=values.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
-    const area=svg('polygon',{points:`${x(0)},${y(min)} ${points} ${x(11)},${y(min)}`,fill:'#bd394b18'});chart.appendChild(area);
-    chart.appendChild(svg('polyline',{points,fill:'none',stroke:'#ed8290','stroke-width':3.5,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    const area=svg('polygon',{points:`${x(0)},${y(min)} ${points} ${x(11)},${y(min)}`,fill:'#22c55e20'});chart.appendChild(area);
+    chart.appendChild(svg('polyline',{points,fill:'none',stroke:'#4ade80','stroke-width':3.5,'stroke-linejoin':'round','stroke-linecap':'round'}));
     values.forEach((v,i)=>{
-      if(i===11||i===0||i===5) chart.appendChild(svg('circle',{cx:x(i),cy:y(v),r:4.5,fill:v>=0?'#ee8191':'#f5bd6f',stroke:'#171c23','stroke-width':2}));
+      if(i===11||i===0||i===5) chart.appendChild(svg('circle',{cx:x(i),cy:y(v),r:4.5,fill:'#4ade80',stroke:'#171c23','stroke-width':2}));
       if(i===0||i===5||i===11)chart.appendChild(svg('text',{x:x(i),y:H-8,'text-anchor':'middle',fill:'#acb0b9','font-size':12},'M'+(i+1)));
     });
     chart.setAttribute('aria-label',`Caixa projetado ${s.label}: ${money(s.lastCash)} no mês 12; menor caixa ${money(s.minCash)}. Simulação.`);
