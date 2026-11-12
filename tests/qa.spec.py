@@ -59,7 +59,7 @@ with sync_playwright() as p:
     assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
     page.locator('#finance-include-team').uncheck()
     assert '62.749' in page.locator('#finance-result').inner_text()
-    assert 'sem R$ 30 mil' in page.locator('#finance-warning').inner_text().lower()
+    assert 'sem r$ 30 mil' in page.locator('#finance-warning').inner_text().lower()
     page.locator('#finance-include-team').check()
     page.locator('[data-scenario="base"]').click()
     page.screenshot(path=str(OUT/'slide-09-finance.png'))
