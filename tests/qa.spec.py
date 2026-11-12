@@ -63,6 +63,20 @@ with sync_playwright() as p:
     page.locator('#finance-include-team').check()
     page.locator('[data-scenario="base"]').click()
     page.screenshot(path=str(OUT/'slide-09-finance.png'))
+    # Rota sem cache legado deve servir o slide 9 atual, inclusive CSS e JS específicos.
+    live = context.new_page()
+    guard(live)
+    live.goto(BASE+'/slides-live.html#slide-9',wait_until='networkidle')
+    assert live.locator('#slide-counter').inner_text()=='09 / 10'
+    assert 'RECEITA ACUMULADA PROJETADA' in live.locator('#slide-9').inner_text()
+    assert '68.136' in live.locator('#finance-revenue').inner_text()
+    assert live.locator('script[src="js/slides-live.js"]').count()==1
+    assert live.locator('script[src="js/finance-live.js"]').count()==1
+    assert live.locator('link[href="css/slides-live.css"]').count()==1
+    live_points=live.locator('#finance-chart polyline').get_attribute('points').split()
+    assert float(live_points[-1].split(',')[1]) < float(live_points[0].split(',')[1]), 'A curva do pitch sem cache ainda desce'
+    live.screenshot(path=str(OUT/'slide-09-live-sem-cache.png'))
+    live.close()
     page.evaluate('window.ModernizeSlides.goTo(2)')
     assert page.locator('#slide-3').get_by_text('Diagnóstico e consultoria').count()==1
     assert page.locator('#slide-3').get_by_text('Treinamento e capacitação').count()==1
