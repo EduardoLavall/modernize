@@ -65,7 +65,7 @@
     // Todos os cenários continuam negativos com esta remuneração parcial (R$ 30 mil/ano).
     // Nunca apresentar o cenário sem equipe como lucro ou validação de mercado.
     $('finance-warning').textContent=includeTeam
-      ? 'Com R$ 30 mil/ano de remuneração parcial, nenhum cenário é viável. Revisar preços, clientes e custos; isso ainda não paga uma equipe completa.'
+      ? 'Com R$ 30 mil/ano de remuneração parcial, nenhum cenário fecha as contas no ano 1. Revisar preços, clientes e custos; isso ainda não paga uma equipe completa.'
       : s.result >= 0
         ? 'Resultado positivo apenas sem remuneração da equipe. Isso NÃO comprova sustentabilidade nem lucro operacional real.'
         : 'Resultado negativo mesmo sem remuneração da equipe. É preciso rever preços, clientes e custos.';
