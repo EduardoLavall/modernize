@@ -62,7 +62,13 @@
     const money=window.ModernizeFinance.money;
     $('finance-revenue').textContent=money(s.revenue);$('finance-expenses').textContent=money(s.expenses);
     $('finance-result').textContent=(s.result>=0?'+ ':'− ')+money(Math.abs(s.result));
-    $('finance-warning').textContent=includeTeam?'Remuneração extra ilustrativa: R$ 2.500/mês ainda não paga integralmente 3–5 integrantes.':s.warning;
+    // Todos os cenários continuam negativos com esta remuneração parcial (R$ 30 mil/ano).
+    // Nunca apresentar o cenário sem equipe como lucro ou validação de mercado.
+    $('finance-warning').textContent=includeTeam
+      ? 'Com R$ 30 mil/ano de remuneração parcial, nenhum cenário é viável. Revisar preços, clientes e custos; isso ainda não paga uma equipe completa.'
+      : s.result >= 0
+        ? 'Resultado positivo apenas sem remuneração da equipe. Isso NÃO comprova sustentabilidade nem lucro operacional real.'
+        : 'Resultado negativo mesmo sem remuneração da equipe. É preciso rever preços, clientes e custos.';
     $('finance-breakeven').textContent=s.breakeven+' imobiliárias';
     $('finance-runway').textContent=s.runway===null?'sem consumo inicial':s.runway.toFixed(1).replace('.',',')+' meses';
     $('finance-team-note').textContent=includeTeam?'Com R$ 2.500/mês adicionais':'Sem remuneração estrutural adicional';
@@ -73,8 +79,8 @@
     document.querySelectorAll('[data-scenario]').forEach(b=>{const on=b.dataset.scenario===key;b.classList.toggle('is-selected',on);b.setAttribute('aria-pressed',String(on));});
     chart.replaceChildren();
     const values=s.series.map(x=>x.cash);
-    const min=Math.min(0,...values)-1600,max=Math.max(3000,...values)+1300;
-    const W=650,H=310,left=48,right=12,top=16,bottom=38;
+    const min=Math.min(0,...values)-1200,max=Math.max(3000,...values)+1100;
+    const W=650,H=240,left=48,right=12,top=12,bottom=32;
     const x=i=>left+i*(W-left-right)/11;
     const y=v=>top+(max-v)/(max-min)*(H-top-bottom);
     for(let i=0;i<5;i++){
