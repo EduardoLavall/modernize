@@ -21,6 +21,8 @@ jobs:
           node-version: '22'
       - name: Verificar arquivos e projeções
         run: node tests/static-check.mjs
+      - name: Gerar os arquivos exatos da publicação
+        run: node scripts/build-pages.mjs
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -30,12 +32,12 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Executar jornadas E2E com dados sintéticos
         run: |
-          python -m http.server 8767 --bind 127.0.0.1 >/tmp/modernize-server.log 2>&1 &
+          python -m http.server 8767 --bind 127.0.0.1 --directory _site >/tmp/modernize-server.log 2>&1 &
           sleep 2
           python tests/qa.spec.py
       - name: Verificar landing institucional com Chromium
         run: |
-          python -m http.server 8788 --bind 127.0.0.1 >/tmp/modernize-landing.log 2>&1 &
+          python -m http.server 8788 --bind 127.0.0.1 --directory _site >/tmp/modernize-landing.log 2>&1 &
           sleep 2
           python landing/tests/qa.py
       - name: Guardar capturas
@@ -72,17 +74,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Preparar site estático
         if: steps.pages_check.outputs.enabled == 'true'
-        run: |
-          mkdir -p _site/assets/brand _site/css _site/js
-          cp index.html slides.html demo.html sw.js _site/
-          cp css/app.css css/slides.css css/demo.css _site/css/
-          cp js/finance.js js/slides.js js/demo.js js/team.js _site/js/
-          cp "assets/brand/Modernize logo.png" _site/assets/brand/
-          cp "assets/brand/Glossy Red and Graphite M Logo.png" _site/assets/brand/
-          mkdir -p _site/landing
-          cp landing/index.html landing/styles.css landing/main.js landing/vercel.json _site/landing/
-          cp -R landing/assets _site/landing/assets
-          touch _site/.nojekyll
+        run: node scripts/build-pages.mjs
       - name: Enviar arquivos
         if: steps.pages_check.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
