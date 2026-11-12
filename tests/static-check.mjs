@@ -32,6 +32,7 @@ if(!html.includes('SIMULAÇÃO, NÃO PESQUISA LOCAL'))throw Error('TAM sem aviso
 if(!html.includes('finance-include-team'))throw Error('Cenário de equipe não interativo');
 if(!html.includes('id="finance-include-team" type="checkbox" checked') || !html.includes('id="finance-expenses">R$ 52.030') || !html.includes('id="finance-result">− R$ 29.894'))throw Error('Valores iniciais não correspondem ao cenário base com equipe marcada');
 if(!html.includes('Saldo acumulado'))throw Error('Legenda do gráfico não descreve saldo acumulado');
+if(!read('js/slides.js').includes("stroke:'#4ade80'") || !read('css/slides.css').includes('background:#4ade80'))throw Error('Gráfico do pitch deve usar a paleta verde');
 if(!html.includes('Simular remuneração parcial de R$ 2.500/mês') || !html.includes('id="finance-warning"') || !html.includes('viewBox="0 0 650 240"'))throw Error('Aviso de viabilidade ou gráfico compacto ausente');
 for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);
 console.log('OK: 10 slides, sintaxe JS, três cenários e logos');
