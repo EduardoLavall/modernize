@@ -29,5 +29,45 @@
     const burn = Math.max(0,-series[0].net);
     return {...s,key,includeTeam,teamCost,contribution,breakeven,runway:burn>0?3000/burn:null,series,revenue,expenses,result:revenue-expenses,lastCash:cash,newClients:s.months.length,active,minCash:Math.min(...series.map(x=>x.cash))};
   };
-  window.ModernizeFinance = Object.freeze({compute,settings,money});
+
+  // PLANEJAMENTO da empresa combinada, NÃO vendas/preços já realizados.
+  // O modelo compute() permanece intacto para auditar o produto Modernize IA.
+  const companyPlans = Object.freeze({
+    pessimista: { workshops: [3,6,9,12], projects: [4,10] },
+    base: { workshops: [1,2,3,4,5,6,7,8,9,10,11,12], projects: [1,2,4,6,8,10,12] },
+    otimista: { workshops: [1,2,3,4,5,6,7,8,9,10,11,12,2,4,6,8,10,12], projects: [1,2,3,4,5,6,7,8,9,10,11,12] }
+  });
+  const companyRates = Object.freeze({ workshop: 1500, project: 4000, serviceCost: 0.30 });
+  const computeCompany = (key, includeTeam = true) => {
+    const product = compute(key, includeTeam);
+    const plan = companyPlans[key];
+    if (!plan) throw new Error('Cenário inexistente: ' + key);
+    let extraRevenue = 0, extraCosts = 0, extraCash = 0;
+    let cumulativeRevenue = 0;
+    const series = product.series.map(month => {
+      const workshops = plan.workshops.filter(n => n === month.month).length;
+      const projects = plan.projects.filter(n => n === month.month).length;
+      const servicesRevenue = workshops * companyRates.workshop + projects * companyRates.project;
+      const servicesCosts = servicesRevenue * companyRates.serviceCost;
+      extraRevenue += servicesRevenue;
+      extraCosts += servicesCosts;
+      extraCash += servicesRevenue - servicesCosts;
+      cumulativeRevenue += month.receipts + servicesRevenue;
+      return {...month, workshops, projects, servicesRevenue, servicesCosts,
+        receipts: month.receipts + servicesRevenue,
+        costs: month.costs + servicesCosts,
+        cash: month.cash + extraCash,
+        net: month.net + servicesRevenue - servicesCosts,
+        cumulativeRevenue};
+    });
+    const revenue = product.revenue + extraRevenue;
+    const expenses = product.expenses + extraCosts;
+    const result = revenue - expenses;
+    return {...product, series, revenue, expenses, result, margin: revenue ? result / revenue : 0,
+      lastCash: series.at(-1).cash,
+      minCash: Math.min(3000, ...series.map(m => m.cash)),
+      services: {workshops: plan.workshops.length, projects: plan.projects.length, revenue: extraRevenue, costs: extraCosts},
+      rates: companyRates};
+  };
+  window.ModernizeFinance = Object.freeze({compute,computeCompany,companyPlans,companyRates,settings,money});
 })();
