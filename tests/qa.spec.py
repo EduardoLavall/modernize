@@ -14,7 +14,7 @@ with sync_playwright() as p:
     if not os.environ.get('CI') and os.path.exists('/usr/bin/chromium'):
         launch_args['executable_path']='/usr/bin/chromium'
     browser=p.chromium.launch(**launch_args)
-    context=browser.new_context(viewport={'width':1366,'height':768},device_scale_factor=1)
+    context=browser.new_context(viewport={'width':1366,'height':768},device_scale_factor=1, service_workers='block')
     page=context.new_page()
     guard(page)
     page.goto(BASE+'/slides.html',wait_until='domcontentloaded')
@@ -215,7 +215,7 @@ with sync_playwright() as p:
     assert not page.locator('#view-dashboard').get_by_text('Pessoa Fictícia QA').count()
     assert page.locator('#side-total').inner_text()=='1'
     # Small layout + source accessibility no horizontal overflow
-    small=browser.new_page(viewport={'width':390,'height':844},device_scale_factor=1)
+    small=browser.new_context(viewport={'width':390,'height':844},device_scale_factor=1, service_workers='block').new_page()
     guard(small)
     small.goto(BASE+'/slides.html')
     small.screenshot(path=str(OUT/'slide-01-mobile.png'))
