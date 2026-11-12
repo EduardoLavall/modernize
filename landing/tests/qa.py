@@ -27,6 +27,8 @@ with sync_playwright() as p:
     for word in ["acadêmico", "projeto em desenvolvimento", "ver apresentação", "explorar protótipo"]:
         assert word not in desktop.locator("body").inner_text().lower(), f"Marketing expõe bastidores: {word}"
     assert "https://eduardolavall.github.io/modernize/demo.html" in desktop.locator(".product-actions a").first.get_attribute("href")
+    assert desktop.locator(".hero-visual").get_attribute("role") == "img"
+    assert desktop.locator(".product-art").get_attribute("role") == "img"
     assert desktop.locator(".nav-brand img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
     assert desktop.locator(".orbit-core img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
     assert desktop.locator(".footer-mark img").evaluate("(img)=>img.complete&&img.naturalWidth>0")
