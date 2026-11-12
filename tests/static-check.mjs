@@ -30,9 +30,19 @@ if(!html.includes('DEMAIS SERVIÇOS DA EMPRESA'))throw Error('Preços não disti
 if(!read('demo.html').includes('href="slides.html#slide-7"'))throw Error('Retorno da demo não acompanha reordenação');
 if(!html.includes('SIMULAÇÃO, NÃO PESQUISA LOCAL'))throw Error('TAM sem aviso explícito');
 if(!html.includes('finance-include-team'))throw Error('Cenário de equipe não interativo');
-if(!html.includes('id="finance-include-team" type="checkbox" checked') || !html.includes('id="finance-expenses">R$ 52.030') || !html.includes('id="finance-result">− R$ 29.894'))throw Error('Valores iniciais não correspondem ao cenário base com equipe marcada');
-if(!html.includes('Saldo acumulado'))throw Error('Legenda do gráfico não descreve saldo acumulado');
+if(!html.includes('id="finance-include-team" type="checkbox" checked') || !html.includes('id="finance-revenue">R$ 68.136') || !html.includes('id="finance-expenses">R$ 65.830') || !html.includes('id="finance-result">+ R$ 2.306'))throw Error('Valores iniciais não correspondem ao cenário-base combinado');
+if(!html.includes('Receita acumulada — não é lucro'))throw Error('Legenda do gráfico deve informar receita acumulada, não lucro');
 if(!read('js/slides.js').includes("stroke:'#4ade80'") || !read('css/slides.css').includes('background:#4ade80'))throw Error('Gráfico do pitch deve usar a paleta verde');
-if(!html.includes('Simular remuneração parcial de R$ 2.500/mês') || !html.includes('id="finance-warning"') || !html.includes('viewBox="0 0 650 240"'))throw Error('Aviso de viabilidade ou gráfico compacto ausente');
+if(!read('js/slides.js').includes('month.cumulativeRevenue') || read('js/slides.js').includes('s.series.map(x=>x.cash)'))throw Error('Gráfico ainda usa saldo de caixa em vez de receita acumulada');
+const expectedCompany={pessimista:[23571.75,56785.69,-33213.94,4,2],base:[68136.25,65830.02,2306.24,12,7],otimista:[109367.86,76618.38,32749.48,18,12]};
+for(const [scenario,expected] of Object.entries(expectedCompany)){
+ const s=context.window.ModernizeFinance.computeCompany(scenario,true);
+ for(const [i,k] of ['revenue','expenses','result'].entries())if(Math.abs(s[k]-expected[i])>0.07)throw Error('Projeção combinada '+scenario+' '+k+': '+s[k]);
+ if(s.services.workshops!==expected[3] || s.services.projects!==expected[4])throw Error('Metas comerciais '+scenario);
+ if(s.series.length!==12 || s.series.some((m,i)=>i>0 && m.cumulativeRevenue+0.001<s.series[i-1].cumulativeRevenue))throw Error('A receita acumulada deve ser crescente: '+scenario);
+ if(Math.abs(s.series.at(-1).cumulativeRevenue-s.revenue)>0.01)throw Error('Receita acumulada não fecha o ano '+scenario);
+ if(Math.abs(s.lastCash-(3000+s.result))>0.01)throw Error('Caixa e resultado inconsistentes '+scenario);
+}
+if(!html.includes('Incluir remuneração parcial de R$ 2.500/mês') || !html.includes('id="finance-warning"') || !html.includes('viewBox="0 0 650 240"'))throw Error('Aviso de viabilidade ou gráfico compacto ausente');
 for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);
 console.log('OK: 10 slides, sintaxe JS, três cenários e logos');
