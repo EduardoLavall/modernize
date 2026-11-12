@@ -60,6 +60,7 @@ tests/qa.spec.py           roteiro automatizado Playwright (se navegador dispon�
 ## Revisão da auditoria
 - Slide 3: TAM/SAM/SOM ilustrativos 120/72/8, não contagem atual local.
 - Slide 9: remuneração parcial adicional de R$ 2.500/mês (checkbox, ligada por padrão), margem e menor caixa estimados; não é folha completa. Workshop R$ 1.500, projeto R$ 4.000 e custo direto de serviços 30% são **hipóteses**, não preços/custos observados.
+- Atualização GitHub Pages: `node scripts/build-pages.mjs` monta o mesmo `_site` verificado no CI, incluindo `/slides-live.html` com scripts e CSS próprios; essa rota contorna cache antigo. O Service Worker v6 remove caches persistentes antigos e deixa a rede responder diretamente aos HTML/JS.
 - Slide 10: preencher apenas nomes reais em `js/team.js` (3–5 integrantes).
 - Demo: salvar revisão humana confirmada, corrigir divergências e reenviar arquivos fictícios ausentes/ilegíveis.
 - Planilha XLSX corrigida e sumário PDF devem acompanhar a entrega como artefatos separados.
