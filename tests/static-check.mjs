@@ -43,6 +43,8 @@ for(const [scenario,expected] of Object.entries(expectedCompany)){
  if(Math.abs(s.series.at(-1).cumulativeRevenue-s.revenue)>0.01)throw Error('Receita acumulada não fecha o ano '+scenario);
  if(Math.abs(s.lastCash-(3000+s.result))>0.01)throw Error('Caixa e resultado inconsistentes '+scenario);
 }
+if(!read('sw.js').includes("modernize-online-v6") || read('sw.js').includes("caches.match(request"))throw Error('Service Worker ainda pode servir arquivos antigos');
+if(!read('scripts/build-pages.mjs').includes('slides-live.html'))throw Error('Rota sem cache não foi gerada');
 if(!html.includes('Incluir remuneração parcial de R$ 2.500/mês') || !html.includes('id="finance-warning"') || !html.includes('viewBox="0 0 650 240"'))throw Error('Aviso de viabilidade ou gráfico compacto ausente');
 for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);
 console.log('OK: 10 slides, sintaxe JS, três cenários e logos');
