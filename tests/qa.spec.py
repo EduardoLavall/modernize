@@ -108,10 +108,10 @@ with sync_playwright() as p:
         if value['scroll']-value['client']>10 or value['sw']-value['cw']>10:
             raise AssertionError(f'Slide {i+1} transborda no projetor: {value}')
     # Em resolução compacta, o aviso financeiro precisa caber sem ser cortado.
-    compact = browser.new_page(viewport={'width':1200,'height':600}, device_scale_factor=1)
+    compact = browser.new_context(viewport={'width':1200,'height':600}, device_scale_factor=1, service_workers='block').new_page()
     guard(compact)
     compact.goto(BASE+'/slides.html#slide-9',wait_until='domcontentloaded')
-    compact.screenshot(path=str(OUT/'slide-09-finance-1200x600.png'))
+    compact.screenshot(path=str(OUT/'slide-09-finance-1200x600.png'), animations='disabled', timeout=15000)
     finance_bounds = compact.evaluate('''() => {
       const slide = document.querySelector('#slide-9');
       const warning = document.querySelector('#finance-warning');
