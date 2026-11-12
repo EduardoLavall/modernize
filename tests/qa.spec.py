@@ -31,6 +31,14 @@ with sync_playwright() as p:
     page.locator('.overview-tile').nth(8).click()
     assert page.locator('#slide-counter').inner_text()=='09 / 10'
     assert '22.136' in page.locator('#finance-revenue').inner_text()
+    assert '52.030' in page.locator('#finance-expenses').inner_text()
+    assert '29.894' in page.locator('#finance-result').inner_text()
+    assert 'Saldo acumulado' in page.locator('.chart-legend').inner_text()
+    # Espaço no botão focado seleciona cenário, sem avançar de slide.
+    page.locator('[data-scenario="pessimista"]').focus()
+    page.keyboard.press('Space')
+    assert page.locator('#slide-counter').inner_text() == '09 / 10'
+    assert '9.572' in page.locator('#finance-revenue').inner_text()
     page.locator('[data-scenario="pessimista"]').click()
     assert '9.572' in page.locator('#finance-revenue').inner_text()
     assert '−' in page.locator('#finance-result').inner_text()
