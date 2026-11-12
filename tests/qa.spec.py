@@ -17,7 +17,7 @@ with sync_playwright() as p:
     context=browser.new_context(viewport={'width':1366,'height':768},device_scale_factor=1)
     page=context.new_page()
     guard(page)
-    page.goto(BASE+'/slides.html',wait_until='networkidle')
+    page.goto(BASE+'/slides.html',wait_until='domcontentloaded')
     assert page.locator('.slide').count()==10
     assert page.locator('.slide:not([hidden])').count()==1
     assert page.locator('#slide-counter').inner_text()=='01 / 10'
@@ -66,7 +66,7 @@ with sync_playwright() as p:
     # Rota sem cache legado deve servir o slide 9 atual, inclusive CSS e JS específicos.
     live = context.new_page()
     guard(live)
-    live.goto(BASE+'/slides-live.html#slide-9',wait_until='networkidle')
+    live.goto(BASE+'/slides-live.html#slide-9',wait_until='domcontentloaded')
     assert live.locator('#slide-counter').inner_text()=='09 / 10'
     assert 'RECEITA ACUMULADA PROJETADA' in live.locator('#slide-9').inner_text()
     assert '68.136' in live.locator('#finance-revenue').inner_text()
@@ -110,7 +110,7 @@ with sync_playwright() as p:
     # Em resolução compacta, o aviso financeiro precisa caber sem ser cortado.
     compact = browser.new_page(viewport={'width':1200,'height':600}, device_scale_factor=1)
     guard(compact)
-    compact.goto(BASE+'/slides.html#slide-9',wait_until='networkidle')
+    compact.goto(BASE+'/slides.html#slide-9',wait_until='domcontentloaded')
     compact.screenshot(path=str(OUT/'slide-09-finance-1200x600.png'))
     finance_bounds = compact.evaluate('''() => {
       const slide = document.querySelector('#slide-9');
@@ -124,7 +124,7 @@ with sync_playwright() as p:
     # Ao sair da demonstração, a sequência continua no slide 7.
     demo_link=page.locator('#launch-demo').get_attribute('href')
     assert 'demo.html' in demo_link
-    page.goto(BASE+'/demo.html',wait_until='networkidle')
+    page.goto(BASE+'/demo.html',wait_until='domcontentloaded')
     assert page.locator('.back-to-deck').first.get_attribute('href')=='slides.html#slide-7'
     assert page.locator('#dashboard-stats .stat-card').count()==4
     page.screenshot(path=str(OUT/'demo-dashboard.png'))
@@ -136,23 +136,23 @@ with sync_playwright() as p:
     portal=context.new_page()
     portal.set_viewport_size({'width':1200,'height':830})
     guard(portal)
-    portal.goto(BASE+'/demo.html?mode=upload&id='+testid,wait_until='networkidle')
+    portal.goto(BASE+'/demo.html?mode=upload&id='+testid,wait_until='domcontentloaded')
     assert portal.locator('[data-synthetic="missing"]').count()==1
     portal.screenshot(path=str(OUT/'demo-portal.png'))
     portal.locator('[data-synthetic="missing"]').click()
     portal.wait_for_timeout(850)
     print('PORTAL STATUS AFTER UPLOAD', portal.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id)?.status', testid), flush=True)
-    page.reload(wait_until='networkidle')
+    page.reload(wait_until='domcontentloaded')
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',testid)
     print('MAIN STATUS AFTER RELOAD', page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id)?.status', testid), flush=True)
     page.screenshot(path=str(OUT/'demo-after-missing.png'))
     assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'issue'
     assert page.locator('[data-action="complete"]').is_disabled()
     page.screenshot(path=str(OUT/'demo-pending.png'))
-    portal.reload(wait_until='networkidle')
+    portal.reload(wait_until='domcontentloaded')
     portal.locator('[data-synthetic="complete"]').click()
     portal.wait_for_timeout(850)
-    page.reload(wait_until='networkidle')
+    page.reload(wait_until='domcontentloaded')
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',testid)
     assert page.evaluate('(id) => window.ModernizeDemo.getState().cases.find(c=>c.id===id).status', testid) == 'review'
     assert page.locator('[data-action="complete"]').is_disabled()
@@ -171,11 +171,11 @@ with sync_playwright() as p:
     mismatch_id=page.evaluate("window.ModernizeDemo.getState().cases.at(-1).id")
     problem=context.new_page()
     guard(problem)
-    problem.goto(BASE+'/demo.html?mode=upload&id='+mismatch_id,wait_until='networkidle')
+    problem.goto(BASE+'/demo.html?mode=upload&id='+mismatch_id,wait_until='domcontentloaded')
     problem.locator('[data-synthetic="mismatch"]').click()
     problem.wait_for_timeout(850)
     problem.close()
-    page.reload(wait_until='networkidle')
+    page.reload(wait_until='domcontentloaded')
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',mismatch_id)
     assert page.locator('[data-action="complete"]').is_disabled()
     page.locator('[data-action="resolve"]').click()
@@ -194,18 +194,18 @@ with sync_playwright() as p:
     illegible_id=page.evaluate("window.ModernizeDemo.getState().cases.at(-1).id")
     upload=context.new_page()
     guard(upload)
-    upload.goto(BASE+'/demo.html?mode=upload&id='+illegible_id,wait_until='networkidle')
+    upload.goto(BASE+'/demo.html?mode=upload&id='+illegible_id,wait_until='domcontentloaded')
     upload.locator('[data-synthetic="illegible"]').click()
     upload.wait_for_timeout(850)
-    page.reload(wait_until='networkidle')
+    page.reload(wait_until='domcontentloaded')
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',illegible_id)
     assert page.locator('[data-action="complete"]').is_disabled()
     assert page.locator('[data-action="resolve"]').count()==0
-    upload.reload(wait_until='networkidle')
+    upload.reload(wait_until='domcontentloaded')
     upload.locator('[data-synthetic="complete"]').click()
     upload.wait_for_timeout(850)
     upload.close()
-    page.reload(wait_until='networkidle')
+    page.reload(wait_until='domcontentloaded')
     page.evaluate('(id)=>window.ModernizeDemo.goto("details",id)',illegible_id)
     page.locator('#review-form input[name="verified"]').check()
     page.locator('#review-form button[type="submit"]').click()
