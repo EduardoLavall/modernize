@@ -34,6 +34,7 @@ with sync_playwright() as p:
     assert '52.030' in page.locator('#finance-expenses').inner_text()
     assert '29.894' in page.locator('#finance-result').inner_text()
     assert 'Saldo acumulado' in page.locator('.chart-legend').inner_text()
+    assert 'nenhum cenário' in page.locator('#finance-warning').inner_text().lower()
     # Espaço no botão focado seleciona cenário, sem avançar de slide.
     page.locator('[data-scenario="pessimista"]').focus()
     page.keyboard.press('Space')
@@ -47,6 +48,8 @@ with sync_playwright() as p:
     page.locator('#finance-include-team').check()
     assert '19.751' in page.locator('#finance-result').inner_text()
     page.locator('#finance-include-team').uncheck()
+    assert 'sem remuneração' in page.locator('#finance-warning').inner_text().lower()
+    page.locator('#finance-include-team').check()
     page.screenshot(path=str(OUT/'slide-09-finance.png'))
     page.evaluate('window.ModernizeSlides.goTo(2)')
     assert page.locator('#slide-3').get_by_text('Diagnóstico e consultoria').count()==1
@@ -78,6 +81,20 @@ with sync_playwright() as p:
         value=page.locator(f'#slide-{i+1}').evaluate('(el)=>({scroll:el.scrollHeight,client:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
         if value['scroll']-value['client']>10 or value['sw']-value['cw']>10:
             raise AssertionError(f'Slide {i+1} transborda no projetor: {value}')
+    # Em resolução compacta, o aviso financeiro precisa caber sem ser cortado.
+    compact = browser.new_page(viewport={'width':1200,'height':600}, device_scale_factor=1)
+    guard(compact)
+    compact.goto(BASE+'/slides.html#slide-9',wait_until='networkidle')
+    compact.screenshot(path=str(OUT/'slide-09-finance-1200x600.png'))
+    finance_bounds = compact.evaluate('''() => {
+      const slide = document.querySelector('#slide-9');
+      const warning = document.querySelector('#finance-warning');
+      const sr = slide.getBoundingClientRect();
+      const wr = warning.getBoundingClientRect();
+      return { visible: wr.bottom <= sr.bottom + 1 && wr.top >= sr.top - 1, slideBottom: sr.bottom, warningBottom: wr.bottom };
+    }''')
+    assert finance_bounds['visible'], f'Aviso financeiro cortado em 1200x600: {finance_bounds}'
+    compact.close()
     # Ao sair da demonstração, a sequência continua no slide 7.
     demo_link=page.locator('#launch-demo').get_attribute('href')
     assert 'demo.html' in demo_link
