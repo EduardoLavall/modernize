@@ -243,3 +243,10 @@ h3{font-weight:820;font-size:23px;line-height:1.13}
  .pain-card{min-height:180px}
  .slide--night,.slide--red{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
+
+/* Ajuste do hero para projetores 1366×768 e 1200×600: nenhum elemento fora da página. */
+@media screen and (min-width:850px) and (max-height:800px){
+  .slide--cover .cover-grid{min-height:calc(100% - 22px)}
+  .slide--cover .cover-art{width:37%;right:4%;top:48%}
+  .slide--cover .orbit-label--bottom{right:3%}
+}
