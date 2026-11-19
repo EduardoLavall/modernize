@@ -38,12 +38,13 @@ with sync_playwright() as p:
     page.evaluate('window.ModernizeSlides.goTo(4)')
     manual=page.locator('.compare-side--manual')
     assisted=page.locator('.compare-side--ai')
-    assert '20' in manual.inner_text() and 'R$ 10' in manual.inner_text()
-    assert '7' in assisted.inner_text() and 'R$ 3' in assisted.inner_text()
-    assert '5min REVISÃO' in assisted.inner_text()
+    assert '40' in manual.inner_text() and 'R$ 1.200' in manual.inner_text()
+    assert '14' in assisted.inner_text() and 'R$ 360' in assisted.inner_text()
+    assert '5MIN REVISÃO' in page.locator('.compare-caveat').inner_text()
     assert '−65%' in page.locator('.compare-savings').inner_text()
     assert '−70%' in page.locator('.compare-savings').inner_text()
     assert 'VALORES SIMULADOS' in page.locator('.compare-caveat').inner_text()
+    assert page.locator('#slide-5').get_attribute('data-batch-size')=='120'
     assert 'SEM IA REAL' in page.locator('.compare-caveat').inner_text()
     assert page.locator('#launch-demo').get_attribute('href')=='demo.html?from=slides'
     assert 'DADOS FICTÍCIOS' in page.locator('#slide-5').inner_text()
