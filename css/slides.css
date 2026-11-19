@@ -411,3 +411,78 @@ h3{font-weight:820;font-size:23px;line-height:1.13}
  .slide--cover .cover-art{width:auto;height:73%;aspect-ratio:1;right:5%;top:49%}
  .slide--cover .cover-foot{bottom:4px}
 }
+
+
+/* Slide 05 — análise documental: cenário hipotético, comparação manual × IA com conferência humana. */
+.slide--comparison{background:radial-gradient(circle at 76% 32%,#8425362a,transparent 42%),#101118}
+.compare-content{gap:0}
+.compare-title{font-size:clamp(47px,5.25vw,77px);margin-bottom:20px}
+.compare-columns{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);align-items:center;gap:12px}
+.compare-side{border-radius:15px;min-width:0;min-height:246px;padding:19px 25px 17px;display:flex;flex-direction:column;background:#22242d;border:1px solid #4b4550}
+.compare-side--ai{background:linear-gradient(135deg,#c82b43,#9f2339);border-color:#ed6177;box-shadow:0 16px 40px #ac21392d}
+.compare-side-top{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#bcb9c6;font-size:12px;letter-spacing:.14em;font-weight:900}
+.compare-side--ai .compare-side-top{color:#ffdde3}
+.compare-side-top b{font-size:26px;font-weight:400;line-height:1;color:#ed7a89}
+.compare-side--ai .compare-side-top b{color:#fff}
+.compare-time{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:auto 0}
+.compare-time strong{display:flex;align-items:baseline;gap:5px;font-size:clamp(70px,7vw,105px);line-height:1;letter-spacing:-.09em;font-weight:850;font-variant-numeric:tabular-nums;color:#fff}
+.compare-time strong small{font-size:clamp(25px,2.3vw,36px);font-weight:750;letter-spacing:-.04em;line-height:1}
+.compare-time>span{font-size:10px;letter-spacing:.09em;line-height:1.45;max-width:142px;text-align:right;color:#b7b4c1;font-weight:850}
+.compare-side--ai .compare-time>span{color:#ffe8ed}
+.compare-cost{border-top:1px solid #ffffff29;padding-top:12px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.compare-cost span{color:#a5a2b1;font-size:11px;font-weight:850;letter-spacing:.13em}
+.compare-side--ai .compare-cost span{color:#ffd9e0}
+.compare-cost strong{font-size:clamp(29px,3.1vw,44px);font-weight:850;letter-spacing:-.06em;white-space:nowrap}
+.compare-versus{font-size:19px;color:#ac95a0;letter-spacing:.06em;font-weight:900;text-align:center}
+.compare-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:17px}
+.compare-savings{display:flex;align-items:baseline;gap:25px;flex-wrap:wrap}
+.compare-savings>span{font-size:12px;letter-spacing:.08em;font-weight:850;color:#c7c4d0;display:flex;align-items:baseline;gap:7px;white-space:nowrap}
+.compare-savings b{font-size:clamp(26px,3.1vw,44px);color:#ff687c;letter-spacing:-.06em;line-height:1}
+.compare-demo{min-width:190px;padding:12px 15px}
+.compare-caveat{margin:14px 0 0;color:#aaa8b4;font-size:10px;letter-spacing:.055em;line-height:1.32}
+@media screen and (min-width:850px) and (max-height:800px){
+ .compare-title{font-size:clamp(39px,4.5vw,61px);margin-bottom:11px}
+ .compare-side{min-height:180px;padding:11px 17px}
+ .compare-side-top{font-size:10px}
+ .compare-time strong{font-size:clamp(63px,6.4vw,86px)}
+ .compare-time strong small{font-size:25px}
+ .compare-cost{padding-top:7px}
+ .compare-cost strong{font-size:30px}
+ .compare-footer{margin-top:10px}
+ .compare-savings b{font-size:30px}
+ .compare-demo{padding:8px 14px;font-size:12px;min-width:160px}
+ .compare-caveat{margin-top:10px;font-size:9px}
+}
+@media screen and (min-width:850px) and (max-height:650px){
+ .compare-title{font-size:clamp(38px,4vw,52px);margin-bottom:9px}
+ .compare-side{min-height:160px;padding:9px 15px}
+ .compare-time strong{font-size:68px}
+ .compare-cost strong{font-size:28px}
+ .compare-footer{margin-top:9px}
+ .compare-savings b{font-size:27px}
+ .compare-caveat{margin-top:7px}
+}
+@media(max-width:849px){
+ .compare-title{font-size:clamp(34px,8.8vw,53px);margin-bottom:13px}
+ .compare-columns{grid-template-columns:1fr;gap:6px}
+ .compare-side{min-height:145px;padding:13px 17px}
+ .compare-side-top{font-size:10px}.compare-side-top b{font-size:20px}
+ .compare-time strong{font-size:clamp(55px,12vw,76px)}
+ .compare-time strong small{font-size:24px}
+ .compare-time>span{font-size:9px;max-width:160px}
+ .compare-cost{padding-top:6px}
+ .compare-cost strong{font-size:27px}
+ .compare-versus{font-size:13px;line-height:1}
+ .compare-footer{margin-top:12px;flex-wrap:wrap}
+ .compare-savings{gap:13px}
+ .compare-savings>span{font-size:10px}
+ .compare-savings b{font-size:30px}
+ .compare-demo{min-width:140px;padding:10px 13px}
+ .compare-caveat{font-size:9px;line-height:1.42;margin-top:10px}
+}
+@media print{
+ .compare-title{font-size:57px!important}
+ .compare-side{min-height:205px}
+ .compare-time strong{font-size:84px}
+ .compare-caveat{font-size:10px}
+}
