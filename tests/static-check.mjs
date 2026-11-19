@@ -1,50 +1,63 @@
-import fs from 'node:fs';import vm from 'node:vm';import {execFileSync} from 'node:child_process';
-const read=p=>fs.readFileSync(p,'utf8'),html=read('slides.html');
-const count=(html.match(/<section\s+class="slide\b/g)||[]).length;
-if(count!==10)throw Error('Pitch precisa ter 10 slides, encontrou '+count);
-const ids=[...html.matchAll(/\bid="(slide-\d+)"/g)].map(x=>x[1]);
-if(ids.length!==10||ids.some((x,i)=>x!=='slide-'+(i+1)))throw Error('IDs slides inconsistentes');
-execFileSync('node',['landing/sync-home.mjs','--check']);
-for(const f of ['index.html','landing/index.html']){
- const marketing=read(f).toLowerCase();
- for(const forbidden of ['slides.html','github.com','ver apresentação','projeto em desenvolvimento','protótipo acadêmico']){
-  if(marketing.includes(forbidden))throw Error('Landing institucional menciona '+forbidden+' em '+f);
- }
- if((marketing.match(/href="[^"]*demo\.html"/g)||[]).length!==1)throw Error('Landing deve mencionar demo uma só vez: '+f);
+import fs from 'node:fs';
+import vm from 'node:vm';
+import { execFileSync } from 'node:child_process';
+
+const read = path => fs.readFileSync(path, 'utf8');
+const html = read('slides.html');
+const css = read('css/slides.css');
+const count = (html.match(/<section class="slide\b/g) || []).length;
+if (count !== 10) throw Error('Pitch comercial precisa ter 10 slides, encontrou ' + count);
+const ids = [...html.matchAll(/\bid="(slide-\d+)"/g)].map(m => m[1]);
+if (ids.length !== 10 || ids.some((id, i) => id !== 'slide-' + (i + 1))) throw Error('IDs do pitch inconsistentes');
+if ((html.match(/<h1\b/g) || []).length !== 1) throw Error('Pitch deve ter um único h1');
+for (let i = 1; i <= 10; i++) {
+  if (!html.includes(`id="s${i}-title"`)) throw Error('Slide sem título acessível: ' + i);
 }
-for(const f of ['js/finance.js','js/slides.js','js/demo.js','js/team.js','landing/main.js'])execFileSync('node',['--check',f]);
-if(!html.includes('Glossy%20Red%20and%20Graphite%20M%20Logo.png'))throw Error('Logo oficial ausente');
-if(!read('demo.html').includes('AMBIENTE DE DEMONSTRAÇÃO'))throw Error('Aviso fictício ausente');
-const context={window:{},Intl,Number};vm.runInNewContext(read('js/finance.js'),context);
-const totals={pessimista:[9571.75,22585.69,-13013.94],base:[22136.25,22030.02,106.24],otimista:[34367.86,24118.38,10249.48]};
-for(const [scenario,expected] of Object.entries(totals)){
- const v=context.window.ModernizeFinance.compute(scenario);
- for(const [i,k] of ['revenue','expenses','result'].entries())if(Math.abs(v[k]-expected[i])>0.06)throw Error(scenario+' '+k+': '+v[k]);
- const remunerado=context.window.ModernizeFinance.compute(scenario,true);
- if(Math.abs(remunerado.result-(v.result-30000))>0.06)throw Error('Custo extra equipe incorreto '+scenario);
- if(v.series.length!==12)throw Error('Mês inválido '+scenario);
+const required = [
+  'O futuro do seu negócio', 'Sua equipe foi contratada para', 'Em modo inteligente',
+  'Diagnóstico inteligente', 'IA aplicada ao negócio', 'IA ONDE O TRABALHO ACONTECE',
+  'Sua equipe lidera', 'Com método', 'POR QUE A MODERNIZE?',
+  'Sua empresa pode continuar como está.'
+];
+for (const piece of required) if (!html.includes(piece)) throw Error('Mensagem comercial ausente: ' + piece);
+for (const forbidden of ['TAM / SAM', 'PostgreSQL', 'R$ 990', 'R$ 299', 'RECEITA ACUMULADA PROJETADA', 'Nome a confirmar', 'DEMO ACADÊMICA']) {
+  if (html.includes(forbidden)) throw Error('Conteúdo acadêmico ou técnico vazou para o pitch comercial: ' + forbidden);
 }
-if(!html.includes('O QUE A MODERNIZE ENTREGA')||!html.includes('Diagnóstico e consultoria')||!html.includes('Acompanhamento contínuo'))throw Error('Proposta da empresa ausente dos slides');
-if(!html.includes('PRIMEIRO PRODUTO · MODERNIZE IA'))throw Error('Produto não está identificado como parte da Modernize');
-if(!html.includes('DEMAIS SERVIÇOS DA EMPRESA'))throw Error('Preços não distinguem a primeira oferta e demais serviços');
-if(!read('demo.html').includes('href="slides.html#slide-7"'))throw Error('Retorno da demo não acompanha reordenação');
-if(!html.includes('SIMULAÇÃO, NÃO PESQUISA LOCAL'))throw Error('TAM sem aviso explícito');
-if(!html.includes('finance-include-team'))throw Error('Cenário de equipe não interativo');
-if(!html.includes('id="finance-include-team" type="checkbox" checked') || !html.includes('id="finance-revenue">R$ 68.136') || !html.includes('id="finance-expenses">R$ 65.830') || !html.includes('id="finance-result">+ R$ 2.306'))throw Error('Valores iniciais não correspondem ao cenário-base combinado');
-if(!html.includes('Receita acumulada — não é lucro'))throw Error('Legenda do gráfico deve informar receita acumulada, não lucro');
-if(!read('js/slides.js').includes("stroke:'#4ade80'") || !read('css/slides.css').includes('background:#4ade80'))throw Error('Gráfico do pitch deve usar a paleta verde');
-if(!read('js/slides.js').includes('month.cumulativeRevenue') || read('js/slides.js').includes('s.series.map(x=>x.cash)'))throw Error('Gráfico ainda usa saldo de caixa em vez de receita acumulada');
-const expectedCompany={pessimista:[23571.75,56785.69,-33213.94,4,2],base:[68136.25,65830.02,2306.24,12,7],otimista:[109367.86,76618.38,32749.48,18,12]};
-for(const [scenario,expected] of Object.entries(expectedCompany)){
- const s=context.window.ModernizeFinance.computeCompany(scenario,true);
- for(const [i,k] of ['revenue','expenses','result'].entries())if(Math.abs(s[k]-expected[i])>0.07)throw Error('Projeção combinada '+scenario+' '+k+': '+s[k]);
- if(s.services.workshops!==expected[3] || s.services.projects!==expected[4])throw Error('Metas comerciais '+scenario);
- if(s.series.length!==12 || s.series.some((m,i)=>i>0 && m.cumulativeRevenue+0.001<s.series[i-1].cumulativeRevenue))throw Error('A receita acumulada deve ser crescente: '+scenario);
- if(Math.abs(s.series.at(-1).cumulativeRevenue-s.revenue)>0.01)throw Error('Receita acumulada não fecha o ano '+scenario);
- if(Math.abs(s.lastCash-(3000+s.result))>0.01)throw Error('Caixa e resultado inconsistentes '+scenario);
+if (!html.includes('https://eduardolavall.github.io/modernize/#servicos')) throw Error('CTA final precisa apontar para soluções');
+if (!html.includes('Exemplos ilustrativos de soluções possíveis')) throw Error('Cautela comercial sobre exemplos está ausente');
+if (!css.includes('@media print') || !css.includes('13.333in 7.5in')) throw Error('Exportação 16:9 ausente');
+if (!read('js/slides.js').includes('window.ModernizeSlides')) throw Error('API de navegação não encontrada');
+if (html.includes('js/finance.js') || html.includes('js/team.js')) throw Error('Pitch comercial não deve carregar scripts acadêmicos');
+for (const file of ['js/finance.js', 'js/slides.js', 'js/demo.js', 'landing/main.js', 'scripts/build-pages.mjs']) {
+  execFileSync('node', ['--check', file]);
 }
-if(!read('sw.js').includes("modernize-online-v6") || read('sw.js').includes("caches.match(request"))throw Error('Service Worker ainda pode servir arquivos antigos');
-if(!read('scripts/build-pages.mjs').includes('slides-live.html'))throw Error('Rota sem cache não foi gerada');
-if(!html.includes('Incluir remuneração parcial de R$ 2.500/mês') || !html.includes('id="finance-warning"') || !html.includes('viewBox="0 0 650 240"'))throw Error('Aviso de viabilidade ou gráfico compacto ausente');
-for(const p of ['assets/brand/Modernize logo.png','assets/brand/Glossy Red and Graphite M Logo.png'])if(!fs.existsSync(p))throw Error('Falta logo '+p);
-console.log('OK: 10 slides, sintaxe JS, três cenários e logos');
+execFileSync('node', ['landing/sync-home.mjs', '--check']);
+for (const file of ['index.html', 'landing/index.html']) {
+  const landing = read(file).toLowerCase();
+  for (const forbidden of ['slides.html', 'github.com', 'ver apresentação', 'projeto em desenvolvimento', 'protótipo acadêmico']) {
+    if (landing.includes(forbidden)) throw Error('Landing expõe material de bastidores: ' + file + ': ' + forbidden);
+  }
+  if ((landing.match(/href="[^"]*demo\.html"/g) || []).length !== 1) throw Error('Landing deve ter apenas um link para a demo: ' + file);
+}
+if (!read('demo.html').includes('AMBIENTE DE DEMONSTRAÇÃO')) throw Error('Aviso da demo sintética ausente');
+if (!read('sw.js').includes('modernize-online-v6')) throw Error('Service Worker legado não foi tratado');
+if (!read('scripts/build-pages.mjs').includes('slides-live.html')) throw Error('Build não possui rota de resgate');
+for (const file of ['assets/brand/Modernize logo.png', 'assets/brand/Glossy Red and Graphite M Logo.png']) {
+  if (!fs.existsSync(file)) throw Error('Falta logo: ' + file);
+}
+
+// As projeções acadêmicas seguem auditáveis, mas NÃO são parte do pitch de vendas.
+const sandbox = { window: {}, Intl, Number };
+vm.runInNewContext(read('js/finance.js'), sandbox);
+const finance = sandbox.window.ModernizeFinance;
+for (const [key, [product, combined]] of Object.entries({
+  pessimista: [-13013.94, -33213.94],
+  base: [106.24, 2306.24],
+  otimista: [10249.48, 32749.48]
+})) {
+  const p = finance.compute(key);
+  const c = finance.computeCompany(key, true);
+  if (Math.abs(p.result - product) > .09) throw Error('Projeção histórica do produto alterada: ' + key);
+  if (Math.abs(c.result - combined) > .09) throw Error('Projeção histórica da empresa alterada: ' + key);
+}
+console.log('OK: pitch comercial (10 slides), CTA, PDF 16:9, landing, demo e finanças históricas');

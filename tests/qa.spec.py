@@ -1,4 +1,4 @@
-import re, time, json, pathlib, os
+import pathlib, os
 from playwright.sync_api import sync_playwright
 
 BASE='http://127.0.0.1:8767'
@@ -7,123 +7,89 @@ OUT.mkdir(exist_ok=True)
 errors=[]
 
 def guard(page):
-    page.on('pageerror',lambda e: errors.append(str(e)))
+    page.on('pageerror', lambda exc: errors.append(str(exc)))
 
 with sync_playwright() as p:
-    launch_args={'headless':True,'args':['--no-sandbox']}
+    opts={'headless':True,'args':['--no-sandbox']}
     if not os.environ.get('CI') and os.path.exists('/usr/bin/chromium'):
-        launch_args['executable_path']='/usr/bin/chromium'
-    browser=p.chromium.launch(**launch_args)
-    context=browser.new_context(viewport={'width':1366,'height':768},device_scale_factor=1, service_workers='block')
+        opts['executable_path']='/usr/bin/chromium'
+    browser=p.chromium.launch(**opts)
+    context=browser.new_context(viewport={'width':1366,'height':768},device_scale_factor=1,service_workers='block')
     page=context.new_page()
     guard(page)
     page.goto(BASE+'/slides.html',wait_until='domcontentloaded')
     assert page.locator('.slide').count()==10
     assert page.locator('.slide:not([hidden])').count()==1
     assert page.locator('#slide-counter').inner_text()=='01 / 10'
-    # A empresa deve aparecer ANTES do caso de uso imobiliário.
-    assert 'consultoria' in page.locator('.hero-sub').inner_text().lower() or 'diagnóstico' in page.locator('.hero-sub').inner_text().lower()
-    assert 'acompanhamento' in page.locator('.hero-sub').inner_text().lower()
-    page.screenshot(path=str(OUT/'slide-01.png'))
+    assert 'O futuro do seu negócio' in page.locator('#s1-title').inner_text()
+    assert page.locator('h1').count()==1
+    assert page.locator('script[src="js/finance.js"]').count()==0
+    page.screenshot(path=str(OUT/'slide-01.png'),animations='disabled')
     page.keyboard.press('ArrowRight')
     assert page.locator('#slide-counter').inner_text()=='02 / 10'
-    page.keyboard.press('Escape'); assert page.locator('#overview').is_visible()
-    page.locator('.overview-tile').nth(8).click()
-    assert page.locator('#slide-counter').inner_text()=='09 / 10'
-    assert '68.136' in page.locator('#finance-revenue').inner_text()
-    assert '65.830' in page.locator('#finance-expenses').inner_text()
-    assert '2.306' in page.locator('#finance-result').inner_text()
-    assert '3,4%' in page.locator('#finance-margin').inner_text()
-    assert 'RECEITA ACUMULADA' in page.locator('#slide-9').inner_text()
-    assert 'não é lucro' in page.locator('.chart-legend').inner_text()
-    assert page.locator('#finance-workshops').inner_text() == '12'
-    assert page.locator('#finance-projects').inner_text() == '7'
-    # A linha do gráfico sobe no cenário-base: compara coordenadas Y (menor Y = maior valor).
-    points = page.locator('#finance-chart polyline').get_attribute('points').split()
-    assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
-    # Tecla Espaço no botão focado muda o cenário e não a página.
-    page.locator('[data-scenario="pessimista"]').focus()
-    page.keyboard.press('Space')
-    assert page.locator('#slide-counter').inner_text() == '09 / 10'
-    assert '23.572' in page.locator('#finance-revenue').inner_text()
-    assert '33.214' in page.locator('#finance-result').inner_text()
-    assert 'Déficit' in page.locator('#finance-warning').inner_text()
-    points = page.locator('#finance-chart polyline').get_attribute('points').split()
-    assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
-    page.locator('[data-scenario="otimista"]').click()
-    assert '109.368' in page.locator('#finance-revenue').inner_text()
-    assert '32.749' in page.locator('#finance-result').inner_text()
-    assert page.locator('#finance-workshops').inner_text() == '18'
-    assert page.locator('#finance-projects').inner_text() == '12'
-    points = page.locator('#finance-chart polyline').get_attribute('points').split()
-    assert float(points[-1].split(',')[1]) < float(points[0].split(',')[1])
-    page.locator('#finance-include-team').uncheck()
-    assert '62.749' in page.locator('#finance-result').inner_text()
-    assert 'sem r$ 30 mil' in page.locator('#finance-warning').inner_text().lower()
-    page.locator('#finance-include-team').check()
-    page.locator('[data-scenario="base"]').click()
-    page.screenshot(path=str(OUT/'slide-09-finance.png'))
-    # Rota sem cache legado deve servir o slide 9 atual, inclusive CSS e JS específicos.
-    live = context.new_page()
-    guard(live)
-    live.goto(BASE+'/slides-live.html#slide-9',wait_until='domcontentloaded')
-    assert live.locator('#slide-counter').inner_text()=='09 / 10'
-    assert 'RECEITA ACUMULADA PROJETADA' in live.locator('#slide-9').inner_text()
-    assert '68.136' in live.locator('#finance-revenue').inner_text()
-    assert live.locator('script[src="js/slides-live.js"]').count()==1
-    assert live.locator('script[src="js/finance-live.js"]').count()==1
-    assert live.locator('link[href="css/slides-live.css"]').count()==1
-    live_points=live.locator('#finance-chart polyline').get_attribute('points').split()
-    assert float(live_points[-1].split(',')[1]) < float(live_points[0].split(',')[1]), 'A curva do pitch sem cache ainda desce'
-    live.screenshot(path=str(OUT/'slide-09-live-sem-cache.png'))
-    live.close()
-    page.evaluate('window.ModernizeSlides.goTo(2)')
-    assert page.locator('#slide-3').get_by_text('Diagnóstico e consultoria').count()==1
-    assert page.locator('#slide-3').get_by_text('Treinamento e capacitação').count()==1
-    assert page.locator('#slide-3').get_by_text('Implementação',exact=True).count()==1
-    assert page.locator('#slide-3').get_by_text('Acompanhamento contínuo',exact=True).count()==1
-    page.screenshot(path=str(OUT/'slide-03-servicos.png'))
-    page.evaluate('window.ModernizeSlides.goTo(5)')
-    assert page.locator('#launch-demo').is_visible()
-    assert 'Modernize IA' in page.locator('#slide-6').inner_text()
-    page.screenshot(path=str(OUT/'slide-06-demo.png'))
-    page.evaluate('window.ModernizeSlides.goTo(3)')
-    assert page.locator('.market-sizing-panel').get_by_text('SIMULAÇÃO, NÃO PESQUISA LOCAL').count()==1
+    assert 'copiar e colar' in page.locator('#s2-title').inner_text()
+    page.keyboard.press('Escape')
+    assert page.locator('#overview').is_visible()
+    assert page.locator('.overview-tile').count()==10
+    page.locator('.overview-tile').nth(3).click()
+    assert page.locator('#slide-counter').inner_text()=='04 / 10'
+    assert 'IA aplicada ao negócio' in page.locator('#slide-4').inner_text()
+    page.screenshot(path=str(OUT/'slide-04-solucoes.png'),animations='disabled')
+    page.evaluate('window.ModernizeSlides.goTo(4)')
+    assert 'Menos discurso.' in page.locator('#slide-5').inner_text()
+    assert 'Exemplos ilustrativos' in page.locator('.case-note').inner_text()
+    page.screenshot(path=str(OUT/'slide-05-ia-pratica.png'),animations='disabled')
     page.evaluate('window.ModernizeSlides.goTo(6)')
-    assert page.locator('.position-revenue').get_by_text('R$ 990').count()==1
-    assert page.locator('.position-revenue').get_by_text('R$ 299').count()==1
-    assert 'DEMAIS SERVIÇOS DA EMPRESA' in page.locator('#slide-7').inner_text()
+    assert 'Com método.' in page.locator('#slide-7').inner_text()
+    assert page.locator('.method-node').count()==5
+    page.screenshot(path=str(OUT/'slide-07-metodo.png'),animations='disabled')
+    page.evaluate('window.ModernizeSlides.goTo(8)')
+    assert 'POR QUE A MODERNIZE?' in page.locator('#slide-9').inner_text()
+    page.screenshot(path=str(OUT/'slide-09-diferencial.png'),animations='disabled')
+    page.keyboard.press('End')
+    assert page.locator('#slide-counter').inner_text()=='10 / 10'
+    assert 'Ou pode modernizar.' in page.locator('#slide-10').inner_text()
+    assert page.locator('#slide-10 a[href*="/modernize/#servicos"]').count()==1
+    page.screenshot(path=str(OUT/'slide-10-convite.png'),animations='disabled')
+    page.keyboard.press('Home')
+    assert page.locator('#slide-counter').inner_text()=='01 / 10'
+
+    # Rota de resgate contra o antigo Service Worker precisa servir a nova versão.
+    live=context.new_page()
+    guard(live)
+    live.goto(BASE+'/slides-live.html#slide-10',wait_until='domcontentloaded')
+    assert live.locator('#slide-counter').inner_text()=='10 / 10'
+    assert 'Sua empresa pode continuar como está.' in live.locator('#slide-10').inner_text()
+    assert live.locator('script[src="js/slides-live.js"]').count()==1
+    assert live.locator('link[href="css/slides-live.css"]').count()==1
+    live.screenshot(path=str(OUT/'slide-10-live-sem-cache.png'),animations='disabled')
+    live.close()
+
     page.evaluate('window.ModernizeSlides.goTo(9)')
-    assert page.locator('#team-list').get_by_text('Nome a confirmar').count()==4
     pdf=page.pdf(print_background=True,prefer_css_page_size=True)
     (OUT/'pitch-10-slides.pdf').write_bytes(pdf)
     from pypdf import PdfReader
     pages=PdfReader(OUT/'pitch-10-slides.pdf').pages
-    assert len(pages)==10, f'PDF gerou {len(pages)} páginas em vez de 10'
+    assert len(pages)==10, f'PDF precisa ter 10 páginas, gerou {len(pages)}'
     assert all(abs(float(pg.mediabox.width)/float(pg.mediabox.height)-16/9)<.04 for pg in pages)
-    # inspect layout overflow of each slide at projector resolution
+
+    # Overflow visual em projetor, todos os 10 slides.
     for i in range(10):
-        page.evaluate('(i) => window.ModernizeSlides.goTo(i)',i)
-        value=page.locator(f'#slide-{i+1}').evaluate('(el)=>({scroll:el.scrollHeight,client:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
-        if value['scroll']-value['client']>10 or value['sw']-value['cw']>10:
-            raise AssertionError(f'Slide {i+1} transborda no projetor: {value}')
-    # Em resolução compacta, o aviso financeiro precisa caber sem ser cortado.
-    compact = browser.new_context(viewport={'width':1200,'height':600}, device_scale_factor=1, service_workers='block').new_page()
+        page.evaluate('(i)=>window.ModernizeSlides.goTo(i)',i)
+        data=page.locator(f'#slide-{i+1}').evaluate('(el)=>({sh:el.scrollHeight,ch:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
+        if data['sh']-data['ch']>10 or data['sw']-data['cw']>10:
+            raise AssertionError(f'Slide {i+1} transborda em 1366×768: {data}')
+    # Verificação compacta do fechamento em 1200×600.
+    compact=browser.new_context(viewport={'width':1200,'height':600},device_scale_factor=1,service_workers='block').new_page()
     guard(compact)
-    compact.goto(BASE+'/slides.html#slide-9',wait_until='domcontentloaded')
-    compact.screenshot(path=str(OUT/'slide-09-finance-1200x600.png'), animations='disabled', timeout=15000)
-    finance_bounds = compact.evaluate('''() => {
-      const slide = document.querySelector('#slide-9');
-      const warning = document.querySelector('#finance-warning');
-      const sr = slide.getBoundingClientRect();
-      const wr = warning.getBoundingClientRect();
-      return { visible: wr.bottom <= sr.bottom + 1 && wr.top >= sr.top - 1, slideBottom: sr.bottom, warningBottom: wr.bottom };
-    }''')
-    assert finance_bounds['visible'], f'Aviso financeiro cortado em 1200x600: {finance_bounds}'
+    compact.goto(BASE+'/slides.html#slide-10',wait_until='domcontentloaded')
+    assert compact.locator('#slide-counter').inner_text()=='10 / 10'
+    compact.screenshot(path=str(OUT/'slide-10-1200x600.png'),animations='disabled')
+    data=compact.locator('#slide-10').evaluate('(el)=>({sh:el.scrollHeight,ch:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
+    assert data['sh']-data['ch']<=10 and data['sw']-data['cw']<=10, data
     compact.close()
+
     # Ao sair da demonstração, a sequência continua no slide 7.
-    demo_link=page.locator('#launch-demo').get_attribute('href')
-    assert 'demo.html' in demo_link
     page.goto(BASE+'/demo.html',wait_until='domcontentloaded')
     assert page.locator('.back-to-deck').first.get_attribute('href')=='slides.html#slide-7'
     assert page.locator('#dashboard-stats .stat-card').count()==4
