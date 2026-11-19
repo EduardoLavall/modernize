@@ -37,6 +37,7 @@ const assumption = name => {
   if (!found) throw Error('Premissa ausente: ' + name);
   return Number(found[1]);
 };
+const batchSize = assumption('batch-size');
 const manualMinutes = assumption('manual-minutes');
 const aiMinutes = assumption('ai-minutes');
 const reviewMinutes = assumption('review-minutes');
@@ -48,14 +49,14 @@ const assistedBRL = reviewMinutes / 60 * hourlyBRL + aiCaseBRL;
 const percentTime = Math.round((1 - assistedMinutes / manualMinutes) * 100);
 const percentCost = Math.round((1 - assistedBRL / manualBRL) * 100);
 for (const label of [
-  `${manualMinutes}<small>min</small>`, `${assistedMinutes}<small>min</small>`,
-  `R$ ${manualBRL.toFixed(0)}`, `R$ ${assistedBRL.toFixed(0)}`,
+  `${manualMinutes / 60 * batchSize}<small>h</small>`, `${assistedMinutes / 60 * batchSize}<small>h</small>`,
+  `R$ ${(manualBRL * batchSize).toLocaleString('pt-BR')}`, `R$ ${(assistedBRL * batchSize).toLocaleString('pt-BR')}`,
   `−${percentTime}%`, `−${percentCost}%`,
-  'SEM IMPLANTAÇÃO', 'SEM IA REAL', '5min REVISÃO'
+  'SEM FIXOS', 'SEM IA REAL', '5MIN REVISÃO'
 ]) {
   if (!comparison.includes(label)) throw Error('Valor ou ressalva incorreto: ' + label);
 }
-if (manualMinutes !== 20 || assistedMinutes !== 7 || manualBRL !== 10 || assistedBRL !== 3) {
+if (batchSize !== 120 || manualMinutes !== 20 || assistedMinutes !== 7 || manualBRL !== 10 || assistedBRL !== 3) {
   throw Error('Premissas alteradas sem atualizar o cenário');
 }
 
