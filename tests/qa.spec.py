@@ -21,72 +21,78 @@ with sync_playwright() as p:
     assert page.locator('.slide').count()==10
     assert page.locator('.slide:not([hidden])').count()==1
     assert page.locator('#slide-counter').inner_text()=='01 / 10'
-    assert 'O futuro do seu negócio' in page.locator('#s1-title').inner_text()
-    assert page.locator('h1').count()==1
-    assert page.locator('script[src="js/finance.js"]').count()==0
+    assert 'Em modo inteligente.' in page.locator('#s1-title').inner_text()
     page.screenshot(path=str(OUT/'slide-01.png'),animations='disabled')
     page.keyboard.press('ArrowRight')
     assert page.locator('#slide-counter').inner_text()=='02 / 10'
-    assert 'copiar e colar' in page.locator('#s2-title').inner_text()
+    assert 'continuar no manual' in page.locator('#s2-title').inner_text()
     page.keyboard.press('Escape')
     assert page.locator('#overview').is_visible()
     assert page.locator('.overview-tile').count()==10
     page.locator('.overview-tile').nth(3).click()
     assert page.locator('#slide-counter').inner_text()=='04 / 10'
-    assert 'IA aplicada ao negócio' in page.locator('#slide-4').inner_text()
-    page.screenshot(path=str(OUT/'slide-04-solucoes.png'),animations='disabled')
+    assert '120' in page.locator('#slide-4').inner_text()
+    assert '72' in page.locator('#slide-4').inner_text()
+    assert 'SIMULAÇÃO DIDÁTICA' in page.locator('#slide-4').inner_text()
+    page.screenshot(path=str(OUT/'slide-04-mercado.png'),animations='disabled')
     page.evaluate('window.ModernizeSlides.goTo(4)')
-    assert 'Menos discurso.' in page.locator('#slide-5').inner_text()
-    assert 'Exemplos ilustrativos' in page.locator('.case-note').inner_text()
-    page.screenshot(path=str(OUT/'slide-05-ia-pratica.png'),animations='disabled')
+    assert page.locator('#launch-demo').get_attribute('href')=='demo.html?from=slides'
+    assert 'DADOS FICTÍCIOS' in page.locator('#slide-5').inner_text()
+    page.screenshot(path=str(OUT/'slide-05-mvp.png'),animations='disabled')
+    page.evaluate('window.ModernizeSlides.goTo(5)')
+    assert 'TypeScript' in page.locator('#slide-6').inner_text()
+    assert 'PostgreSQL' in page.locator('#slide-6').inner_text()
+    assert 'ainda não implementada' in page.locator('#slide-6').inner_text()
+    page.screenshot(path=str(OUT/'slide-06-arquitetura.png'),animations='disabled')
     page.evaluate('window.ModernizeSlides.goTo(6)')
-    assert 'Com método.' in page.locator('#slide-7').inner_text()
-    assert page.locator('.method-node').count()==5
-    page.screenshot(path=str(OUT/'slide-07-metodo.png'),animations='disabled')
+    assert 'R$ 990' in page.locator('#slide-7').inner_text()
+    assert 'R$ 299' in page.locator('#slide-7').inner_text()
+    page.evaluate('window.ModernizeSlides.goTo(7)')
+    for number in ['68,1 mil','65,8 mil','2,3 mil','3,4%']:
+        assert number in page.locator('#slide-8').inner_text(), number
+    page.screenshot(path=str(OUT/'slide-08-financeiro.png'),animations='disabled')
     page.evaluate('window.ModernizeSlides.goTo(8)')
-    assert 'POR QUE A MODERNIZE?' in page.locator('#slide-9').inner_text()
-    page.screenshot(path=str(OUT/'slide-09-diferencial.png'),animations='disabled')
+    assert 'CLIENTES COMPROVADOS' in page.locator('#slide-9').inner_text()
+    assert '3–5' in page.locator('#slide-9').inner_text()
+    page.screenshot(path=str(OUT/'slide-09-equipe.png'),animations='disabled')
     page.keyboard.press('End')
     assert page.locator('#slide-counter').inner_text()=='10 / 10'
-    assert 'Ou pode modernizar.' in page.locator('#slide-10').inner_text()
-    assert page.locator('#slide-10 a[href*="/modernize/#servicos"]').count()==1
-    page.screenshot(path=str(OUT/'slide-10-convite.png'),animations='disabled')
+    assert 'O futuro começa' in page.locator('#slide-10').inner_text()
+    assert 'EMPRESAS PILOTO' in page.locator('#slide-10').inner_text()
+    page.screenshot(path=str(OUT/'slide-10-pedido.png'),animations='disabled')
     page.keyboard.press('Home')
     assert page.locator('#slide-counter').inner_text()=='01 / 10'
 
-    # Rota de resgate contra o antigo Service Worker precisa servir a nova versão.
     live=context.new_page()
     guard(live)
-    live.goto(BASE+'/slides-live.html#slide-10',wait_until='domcontentloaded')
-    assert live.locator('#slide-counter').inner_text()=='10 / 10'
-    assert 'Sua empresa pode continuar como está.' in live.locator('#slide-10').inner_text()
+    live.goto(BASE+'/slides-live.html#slide-8',wait_until='domcontentloaded')
+    assert live.locator('#slide-counter').inner_text()=='08 / 10'
+    assert 'R$ 68,1 mil' in live.locator('#slide-8').inner_text()
     assert live.locator('script[src="js/slides-live.js"]').count()==1
     assert live.locator('link[href="css/slides-live.css"]').count()==1
-    live.screenshot(path=str(OUT/'slide-10-live-sem-cache.png'),animations='disabled')
     live.close()
 
-    page.evaluate('window.ModernizeSlides.goTo(9)')
+    # Validação de exportação: 10 páginas em 16:9, sem páginas brancas adicionais.
     pdf=page.pdf(print_background=True,prefer_css_page_size=True)
     (OUT/'pitch-10-slides.pdf').write_bytes(pdf)
     from pypdf import PdfReader
     pages=PdfReader(OUT/'pitch-10-slides.pdf').pages
-    assert len(pages)==10, f'PDF precisa ter 10 páginas, gerou {len(pages)}'
+    assert len(pages)==10, f'PDF deveria ter 10 páginas, gerou {len(pages)}'
     assert all(abs(float(pg.mediabox.width)/float(pg.mediabox.height)-16/9)<.04 for pg in pages)
 
-    # Overflow visual em projetor, todos os 10 slides.
+    # Projetor: todos os componentes essenciais devem caber, sem scrolling.
     for i in range(10):
-        page.evaluate('(i)=>window.ModernizeSlides.goTo(i)',i)
-        data=page.locator(f'#slide-{i+1}').evaluate('(el)=>({sh:el.scrollHeight,ch:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
-        if data['sh']-data['ch']>10 or data['sw']-data['cw']>10:
-            raise AssertionError(f'Slide {i+1} transborda em 1366×768: {data}')
-    # Verificação compacta do fechamento em 1200×600.
+        page.evaluate('(i) => window.ModernizeSlides.goTo(i)',i)
+        value=page.locator(f'#slide-{i+1}').evaluate('(el)=>({scroll:el.scrollHeight,client:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
+        assert value['scroll']-value['client']<=10 and value['sw']-value['cw']<=10, f'Slide {i+1} transborda em 1366×768: {value}'
     compact=browser.new_context(viewport={'width':1200,'height':600},device_scale_factor=1,service_workers='block').new_page()
     guard(compact)
-    compact.goto(BASE+'/slides.html#slide-10',wait_until='domcontentloaded')
-    assert compact.locator('#slide-counter').inner_text()=='10 / 10'
-    compact.screenshot(path=str(OUT/'slide-10-1200x600.png'),animations='disabled')
-    data=compact.locator('#slide-10').evaluate('(el)=>({sh:el.scrollHeight,ch:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
-    assert data['sh']-data['ch']<=10 and data['sw']-data['cw']<=10, data
+    compact.goto(BASE+'/slides.html#slide-8',wait_until='domcontentloaded')
+    for idx in [0,3,5,7,8,9]:
+        compact.evaluate('(i)=>window.ModernizeSlides.goTo(i)',idx)
+        v=compact.locator(f'#slide-{idx+1}').evaluate('(el)=>({scroll:el.scrollHeight,client:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
+        assert v['scroll']-v['client']<=10 and v['sw']-v['cw']<=10, f'Slide {idx+1} transborda em 1200×600: {v}'
+    compact.screenshot(path=str(OUT/'slide-08-financeiro-compacto.png'),animations='disabled')
     compact.close()
 
     # Ao sair da demonstração, a sequência continua no slide 7.
