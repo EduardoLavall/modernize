@@ -2,8 +2,8 @@
   'use strict';
   const slides = [...document.querySelectorAll('.slide')];
   const chapters = [
-    'O COMEÇO','O PROBLEMA','A TRANSFORMAÇÃO','NOSSAS SOLUÇÕES','IA NA PRÁTICA',
-    'PESSOAS + IA','NOSSO MÉTODO','SUA REALIDADE','NOSSO DIFERENCIAL','O CONVITE'
+    'A VISÃO','O PROBLEMA','A SOLUÇÃO','O MERCADO','O MVP',
+    'A TECNOLOGIA','AS RECEITAS','AS FINANÇAS','A EQUIPE','O PEDIDO'
   ];
   const $ = id => document.getElementById(id);
   const overview = $('overview');
