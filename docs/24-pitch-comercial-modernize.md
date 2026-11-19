@@ -19,7 +19,7 @@ Unir duas necessidades sem deixar o pitch parecer uma apostila:
 | 02. Problema | 20s | **Quanto custa continuar no manual?** + 3 ícones | Retrabalho, espera e informação dispersa ocupam equipes; a frequência da dor ainda carece de validação de campo. |
 | 03. Proposta | 25s | **IA útil. Negócios mais ágeis.** + ciclo visual | Diagnóstico → automação → capacitação → melhoria contínua. IA não elimina responsabilidade humana. |
 | 04. Mercado | 25s | **120 → 72 → 8**, TAM/SAM/SOM | São **hipóteses didáticas para imobiliárias**, sem levantamento local; a proposta da empresa tem ambição multissetorial B2B. Segmentar e validar antes de escalar. |
-| 05. MVP | 45s | **Solicitação → análise simulada → revisão** + botão demo | Modernize IA é o caso inicial; a demo permite percorrer o fluxo com dados sintéticos, sem backend produtivo ou IA real. Ao clicar, demonstrar um cadastro fictício; não simular upload de documentos reais. |
+| 05. MVP e comparação | 45s | **20 min / R$ 10 → 7 min / R$ 3** + botão demo | Exemplo puramente hipotético de conferência documental: IA faz pré-análise e uma pessoa valida. O sistema demonstrativo usa dados sintéticos, sem IA real. |
 | 06. Tecnologia | 30s | **Web → API privada → IA/dados privados** | Arquitetura de referência: TypeScript, Node.js, PostgreSQL, armazenamento privado, autenticação e isolamento por empresa; LGPD e revisão humana como requisitos. **Ainda não implantada.** |
 | 07. Receitas | 25s | **R$ 990 / R$ 299 / R$ 1.500 / R$ 4.000** | Implantação e mensalidade por imobiliária; workshops e projetos como serviços da empresa. Preços hipotéticos, não clientes ou contratos realizados. |
 | 08. Finanças | 30s | **Receita R$ 68,1 mil / despesa R$ 65,8 mil / resultado +R$ 2,3 mil** | Simulação da empresa combinada, ano 1, cenário-base; margem **3,4%**, remuneração **parcial** R$ 2,5 mil/mês, caixa inicial hipotético R$ 3 mil, menor caixa R$ 1,5 mil. Não confundir faturamento com lucro. Pessimista fecha em **−R$ 33,2 mil**; capital necessário depende do cenário. |
@@ -27,6 +27,23 @@ Unir duas necessidades sem deixar o pitch parecer uma apostila:
 | 10. Pedido | 25s | **O futuro começa com um piloto.** | Pedido simulado à banca: acesso a empresas piloto, mentoria e apoio para validação; não declarar investimento captado. Chamada ao site institucional da Modernize. |
 
 **Total:** 270 s = **4min30s**. Se demonstrar a demo por mais de 45 segundos, reduzir fala de outros slides.
+
+## Como o comparativo do slide 05 foi calculado
+
+**Importante:** isto é um **cenário didático para ilustrar a proposta da Modernize**. Não representa um teste de benchmark, resultado de clientes, cotação de IA ou economia já comprovada.
+
+| Premissa da análise de um cadastro documental | Processo manual | Processo com IA assistiva |
+| --- | ---: | ---: |
+| Conferência/organização manual | 20 min | 5 min de revisão humana |
+| Pré-análise automatizada | 0 min | 2 min |
+| Tempo total serial (hipótese) | **20 min** | **7 min** |
+| Custo do trabalho humano | R$ 30/h | R$ 30/h |
+| Custo de processamento de IA por cadastro | R$ 0 | R$ 0,50 |
+| Custo direto resultante | **R$ 10** | **R$ 3** |
+
+**Cálculos auditáveis:** manual = 20/60 × R$ 30 = **R$ 10**. Com IA + pessoa = 5/60 × R$ 30 + R$ 0,50 = **R$ 3**. Tempo com IA = 2 + 5 = **7 min**. Redução de tempo = (20−7)/20 = **65%**. Redução de custo direto = (10−3)/10 = **70%**.
+
+**Limites:** não inclui implantação, treinamento, integração, licenças fixas, privacidade, falhas da IA, reprocessamentos, controle de qualidade, revisão jurídica e custos indiretos. A IA pode errar; por isso, a decisão permanece humana. Não generalizar as taxas do exemplo como ganhos assegurados. O protótipo de `demo.html` não executa IA real: ele **simula** a jornada.
 
 ## Critérios e entregáveis do enunciado
 
