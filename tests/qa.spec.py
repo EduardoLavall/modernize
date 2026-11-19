@@ -67,9 +67,14 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT/'slide-09-equipe.png'),animations='disabled')
     page.keyboard.press('End')
     assert page.locator('#slide-counter').inner_text()=='10 / 10'
-    assert 'O futuro começa' in page.locator('#slide-10').inner_text()
+    assert '88%' in page.locator('#slide-10').inner_text()
+    assert 'O mercado já está' in page.locator('#s10-title').inner_text()
+    assert 'ficar para trás.' in page.locator('#slide-10').inner_text()
+    assert 'STANFORD AI INDEX 2026' in page.locator('#slide-10').inner_text()
+    assert 'AMOSTRA GLOBAL' in page.locator('#slide-10').inner_text()
+    assert page.locator('.market-close-source').get_attribute('href')=='https://hai.stanford.edu/ai-index/2026-ai-index-report/economy'
     assert 'EMPRESAS PILOTO' in page.locator('#slide-10').inner_text()
-    page.screenshot(path=str(OUT/'slide-10-pedido.png'),animations='disabled')
+    page.screenshot(path=str(OUT/'slide-10-mercado-ia.png'),animations='disabled')
     page.keyboard.press('Home')
     assert page.locator('#slide-counter').inner_text()=='01 / 10'
 

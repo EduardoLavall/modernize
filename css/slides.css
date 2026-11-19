@@ -486,3 +486,58 @@ h3{font-weight:820;font-size:23px;line-height:1.13}
  .compare-time strong{font-size:84px}
  .compare-caveat{font-size:10px}
 }
+
+
+/* Slide 10 — fechamento editorial: dado global verificado, convite e pedido da banca. */
+.slide--market-close{background:radial-gradient(ellipse at 23% 45%,#b3213c26,transparent 51%),linear-gradient(130deg,#101118 40%,#1a111e)}
+.market-close-layout{min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+.market-close-grid{display:grid;grid-template-columns:.83fr 1.17fr;gap:clamp(22px,5vw,80px);align-items:center}
+.market-close-stat{border-right:1px solid #ffffff22;padding:9px clamp(19px,3vw,46px) 9px 0;min-width:0}
+.market-close-number{display:block;white-space:nowrap;font-size:clamp(150px,17vw,265px);line-height:.85;letter-spacing:-.12em;font-weight:900;color:#ff5b73;text-shadow:0 20px 100px #c9274c47;font-variant-numeric:tabular-nums}
+.market-close-number small{font-size:.41em;vertical-align:top;letter-spacing:-.08em;line-height:1.06}
+.market-close-stat p{max-width:410px;font-size:clamp(16px,1.7vw,24px);line-height:1.28;letter-spacing:-.03em;color:#f1ebef;margin:18px 0}
+.market-close-stat p b{color:#fff}
+.market-close-source{font-size:10px;font-weight:850;letter-spacing:.08em;color:#ffbdc9;text-decoration:underline;text-decoration-color:#c7596f;text-underline-offset:4px;line-height:1.5;display:inline-block}
+.market-close-message h2{font-size:clamp(48px,5.2vw,84px);letter-spacing:-.075em;line-height:.99;margin:0 0 21px}
+.market-close-message h2 em{color:#ff5f74}
+.market-close-tagline{font-size:clamp(19px,2.1vw,30px);font-weight:550;line-height:1.25;letter-spacing:-.04em;color:#d3cdd5;margin:0 0 27px}
+.market-close-tagline strong{color:#fff}
+.market-close-actions .action{min-width:265px}
+.market-close-bottom{display:flex;gap:15px;justify-content:space-between;align-items:center;border-top:1px solid #ffffff21;margin-top:29px;padding-top:15px}
+.market-close-bottom>span{font-size:10px;line-height:1.4;letter-spacing:.08em;color:#a9a5b3;font-weight:700}
+.market-close-bottom strong{color:#fff}
+.market-close-bottom>span:last-child{text-align:right;max-width:370px;font-size:9px}
+@media screen and (min-width:850px) and (max-height:800px){
+ .market-close-layout{padding-top:10px;padding-bottom:10px}
+ .market-close-number{font-size:clamp(132px,14vw,202px)}
+ .market-close-stat p{font-size:clamp(14px,1.4vw,18px);margin:12px 0}
+ .market-close-message h2{font-size:clamp(42px,4.4vw,62px);margin-bottom:13px}
+ .market-close-tagline{font-size:clamp(17px,1.7vw,23px);margin-bottom:15px}
+ .market-close-actions .action{padding:10px 14px;min-width:218px}
+ .market-close-bottom{margin-top:16px;padding-top:10px}
+ .market-close-source{font-size:9px}
+}
+@media screen and (min-width:850px) and (max-height:650px){
+ .market-close-number{font-size:clamp(112px,12.5vw,172px)}
+ .market-close-message h2{font-size:clamp(37px,4vw,56px)}
+ .market-close-bottom{margin-top:12px;padding-top:8px}
+}
+@media(max-width:849px){
+ .market-close-layout{justify-content:flex-start;padding-top:27px}
+ .market-close-grid{grid-template-columns:1fr;gap:17px}
+ .market-close-stat{border-right:0;border-bottom:1px solid #ffffff26;padding:0 0 18px}
+ .market-close-number{font-size:clamp(126px,24vw,190px)}
+ .market-close-stat p{font-size:17px;max-width:440px;margin:8px 0 10px}
+ .market-close-message h2{font-size:clamp(40px,8.7vw,62px);margin-bottom:14px}
+ .market-close-tagline{font-size:20px;margin-bottom:16px}
+ .market-close-bottom{align-items:flex-start;flex-direction:column;gap:9px;margin-top:20px}
+ .market-close-bottom>span:last-child{text-align:left}
+}
+@media print{
+ .market-close-layout{min-height:100%!important;justify-content:center!important}
+ .market-close-grid{grid-template-columns:.83fr 1.17fr!important}
+ .market-close-number{font-size:210px!important}
+ .market-close-message h2{font-size:58px!important}
+ .market-close-stat p{font-size:18px!important}
+ .market-close-bottom{margin-top:18px!important}
+}
