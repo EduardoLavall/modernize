@@ -85,6 +85,11 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+      # A API de artifacts pode demorar a indexar o upload recém-finalizado.
+      # Não reexecutar apenas o job de deploy após erro: duplica github-pages.
+      - name: Aguardar indexação do artefato do Pages
+        if: steps.pages_check.outputs.enabled == 'true'
+        run: sleep 15
       - name: Publicar
         if: steps.pages_check.outputs.enabled == 'true'
         id: deployment
