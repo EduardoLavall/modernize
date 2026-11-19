@@ -32,7 +32,7 @@ for (const [from, to] of [
   if (!html.includes(from)) throw new Error('Referência ausente do pitch: ' + from);
   html = html.replace(from, to);
 }
-if (!html.includes('O futuro começa')) {
+if (!html.includes('STANFORD AI INDEX 2026') || !html.includes('ficar para trás.')) {
   throw new Error('O pitch comercial novo não foi incluído no build');
 }
 const cleanup = `<script>
