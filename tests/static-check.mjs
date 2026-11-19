@@ -24,7 +24,7 @@ const mustHave = [
   'R$ 990', 'R$ 299', 'R$ 1.500', 'R$ 4.000',
   'R$ 68,1 mil', 'R$ 65,8 mil', '+ R$ 2,3 mil', '3,4%',
   'CLIENTES COMPROVADOS', 'INTEGRANTES PREVISTOS', 'EMPRESAS PILOTO',
-  'MENTORIA', 'VALIDAÇÃO'
+  'MENTORIA', 'VALIDAÇÃO', 'STANFORD AI INDEX 2026', 'se modernizando.', 'ficar para trás.'
 ];
 for (const piece of mustHave) if (!html.includes(piece)) throw Error('Critério/prova do pitch ausente: ' + piece);
 for (const caution of ['TAM/SAM NÃO VERIFICADOS', 'SEM IA REAL', 'ainda não implementada', 'sem contratos ou vendas confirmadas', 'ainda precisam ser inseridos']) {
@@ -60,6 +60,18 @@ if (batchSize !== 120 || manualMinutes !== 20 || assistedMinutes !== 7 || manual
   throw Error('Premissas alteradas sem atualizar o cenário');
 }
 
+const finalSlide = slides[9];
+for (const required of [
+  '<strong class="market-close-number">88<small>%</small></strong>',
+  'organizações <b>pesquisadas</b>', 'relataram usar IA', 'DADOS DE 2025',
+  'https://hai.stanford.edu/ai-index/2026-ai-index-report/economy',
+  'NÃO REPRESENTA TODAS AS EMPRESAS',
+  'EMPRESAS PILOTO + MENTORIA + VALIDAÇÃO',
+  'Modernize seu negócio'
+]) {
+  if (!finalSlide.includes(required)) throw Error('Evidência, CTA ou pedido não aparece no slide final: ' + required);
+}
+if (!css.includes('market-close-number')) throw Error('Estilo do dado de adoção não foi incluído');
 if (!html.includes('href="demo.html?from=slides"')) throw Error('Falta link da demonstração');
 if (!html.includes('https://eduardolavall.github.io/modernize/#servicos')) throw Error('Falta chamada comercial');
 if (!css.includes('@media print') || !css.includes('13.333in 7.5in')) throw Error('PDF 16:9 não configurado');
