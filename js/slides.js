@@ -1,123 +1,103 @@
 (() => {
   'use strict';
   const slides = [...document.querySelectorAll('.slide')];
-  const chapters = ['EMPRESA','OPORTUNIDADE','SERVIÇOS','MERCADO','MODERNIZE IA','DEMO','NEGÓCIO','TECNOLOGIA','FINANÇAS','PRÓXIMOS PASSOS'];
-  const overview = document.getElementById('overview');
-  const help = document.getElementById('help-dialog');
-  const fromHash = () => { const match = location.hash.match(/^#slide-(\d+)$/); return match ? Math.max(0, Math.min(slides.length-1,Number(match[1])-1)) : 0; };
-  let index = fromHash();
-  let priorFocus = null;
+  const chapters = [
+    'O COMEÇO','O PROBLEMA','A TRANSFORMAÇÃO','NOSSAS SOLUÇÕES','IA NA PRÁTICA',
+    'PESSOAS + IA','NOSSO MÉTODO','SUA REALIDADE','NOSSO DIFERENCIAL','O CONVITE'
+  ];
   const $ = id => document.getElementById(id);
-  function goTo(target) {
-    if (target < 0 || target >= slides.length) return;
-    index = target;
-    slides.forEach((slide,i) => {slide.hidden = i !== index; slide.classList.toggle('is-active',i === index); slide.setAttribute('aria-hidden', String(i !== index));});
-    $('slide-counter').textContent = `${String(index+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
-    $('chapter-label').textContent = chapters[index];
-    $('toolbar-progress-fill').style.width = `${(index+1)/slides.length*100}%`;
-    $('slide-prev').disabled = index === 0;
-    $('slide-next').disabled = index === slides.length-1;
-    history.replaceState(null,'',`#slide-${index+1}`);
-    document.title = `Modernize — ${chapters[index]}`;
-    document.querySelectorAll('.overview-tile').forEach((n,i) => n.classList.toggle('active',i===index));
+  const overview = $('overview');
+  const help = $('help-dialog');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fromHash = () => {
+    const found = location.hash.match(/^#slide-(\d+)$/);
+    return found ? Math.max(0, Math.min(slides.length - 1, Number(found[1]) - 1)) : 0;
+  };
+  let current = fromHash();
+  let previousFocus = null;
+
+  function goTo(index) {
+    if (!Number.isInteger(index) || index < 0 || index >= slides.length) return;
+    current = index;
+    slides.forEach((slide, i) => {
+      const active = i === current;
+      slide.hidden = !active;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', String(!active));
+      slide.scrollTop = 0;
+    });
+    $('chapter-label').textContent = chapters[current];
+    $('slide-counter').textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    $('toolbar-progress-fill').style.width = `${(current + 1) / slides.length * 100}%`;
+    $('slide-prev').disabled = current === 0;
+    $('slide-next').disabled = current === slides.length - 1;
+    document.querySelectorAll('.overview-tile').forEach((item, i) => item.classList.toggle('active', i === current));
+    history.replaceState(null, '', `#slide-${current + 1}`);
+    document.title = `Modernize — ${chapters[current]}`;
   }
-  function closeOverview() {overview.hidden=true; document.body.classList.remove('modal-open');(priorFocus||$('overview-open')).focus();}
-  function openOverview() {priorFocus=document.activeElement;overview.hidden=false;document.body.classList.add('modal-open');document.querySelector('.overview-tile.active')?.focus();}
-  function toggleFullscreen() { if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>{}); }
-  const indexGrid=$('overview-grid');
-  slides.forEach((slide,i)=>{const btn=document.createElement('button');btn.className='overview-tile';btn.type='button';btn.innerHTML=`<small>${String(i+1).padStart(2,'0')} / 10</small><strong>${chapters[i]}</strong>`;btn.addEventListener('click',()=>{closeOverview();goTo(i);});indexGrid.appendChild(btn);});
-  $('slide-next').addEventListener('click',()=>goTo(index+1));
-  $('slide-prev').addEventListener('click',()=>goTo(index-1));
-  document.querySelectorAll('[data-next]').forEach(btn=>btn.addEventListener('click',()=>goTo(index+1)));
-  $('overview-open').addEventListener('click',openOverview);
-  $('overview-close').addEventListener('click',closeOverview);
-  overview.addEventListener('click',e=>{if(e.target===overview)closeOverview();});
-  $('fullscreen').addEventListener('click',toggleFullscreen);
-  $('print-slides').addEventListener('click',()=>window.print());
-  $('help-open').addEventListener('click',()=>help.showModal());
-  $('help-close').addEventListener('click',()=>help.close());
-  document.addEventListener('keydown',e=>{
-    const el=e.target;
-    if (['INPUT','TEXTAREA','SELECT'].includes(el.tagName) || el.isContentEditable) return;
-    if(help.open) return;
-    // Espaço deve acionar o controle focado (ex.: cenários, ajuda, links), não trocar de slide.
-    if(e.key === ' ' && el.closest?.('button, a, summary, [role="button"], [role="tab"]')) return;
-    if(!overview.hidden){if(e.key==='Escape'){e.preventDefault();closeOverview();}return;}
-    const key=e.key.toLowerCase();
-    if(['arrowright','arrowdown','pagedown',' '].includes(key)){e.preventDefault();goTo(index+1);}
-    else if(['arrowleft','arrowup','pageup'].includes(key)){e.preventDefault();goTo(index-1);}
-    else if(key==='home'){e.preventDefault();goTo(0);}
-    else if(key==='end'){e.preventDefault();goTo(slides.length-1);}
-    else if(key==='escape'){e.preventDefault();openOverview();}
-    else if(key==='f'){toggleFullscreen();}
-    else if(key==='p'){e.preventDefault();window.print();}
-    else if(key==='d'){location.href='demo.html?from=slides';}
+
+  function openOverview() {
+    previousFocus = document.activeElement;
+    overview.hidden = false;
+    document.querySelector('.overview-tile.active')?.focus();
+  }
+  function closeOverview() {
+    overview.hidden = true;
+    (previousFocus?.isConnected ? previousFocus : $('overview-open')).focus();
+  }
+  function toggleFullscreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.().catch(() => {});
+    } else {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+    }
+  }
+
+  slides.forEach((slide, i) => {
+    const button = document.createElement('button');
+    button.className = 'overview-tile';
+    button.type = 'button';
+    const number = document.createElement('small');
+    number.textContent = `${String(i + 1).padStart(2, '0')} / 10`;
+    const title = document.createElement('strong');
+    title.textContent = chapters[i];
+    button.append(number, title);
+    button.addEventListener('click', () => { closeOverview(); goTo(i); });
+    $('overview-grid').append(button);
   });
-  window.addEventListener('hashchange',()=>goTo(fromHash()));
-  const chart=$('finance-chart');
-  const svg=(tag,attrs={},text='')=>{const n=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;return n;};
-  function drawFinance(key){
-    const includeTeam=$('finance-include-team').checked;
-    const s=window.ModernizeFinance.computeCompany(key,includeTeam);
-    const money=window.ModernizeFinance.money;
-    const pct=v=>new Intl.NumberFormat('pt-BR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(v);
-    $('finance-revenue').textContent=money(s.revenue);
-    $('finance-expenses').textContent=money(s.expenses);
-    $('finance-result').textContent=(s.result>=0?'+ ':'− ')+money(Math.abs(s.result));
-    $('finance-margin').textContent=pct(s.margin);
-    $('finance-min-cash').textContent=money(s.minCash);
-    $('finance-warning').textContent=includeTeam
-      ? (s.result>=0
-          ? 'Meta hipotética, sem vendas realizadas. A margem é sensível a custos e ainda não remunera toda a equipe.'
-          : 'Déficit nesta simulação. A receita acumulada cresce, mas não representa lucro ou sustentabilidade.')
-      : 'Resultado sem R$ 30 mil/ano de remuneração parcial: não equivale ao lucro real da empresa.';
-    $('finance-team-note').textContent=includeTeam?'Custos parciais incluídos nos indicadores':'Sem remuneração parcial nos indicadores';
-    $('finance-chart-label').textContent='Cenário '+s.label.toLowerCase();
-    $('finance-customers').textContent=s.newClients;
-    $('finance-workshops').textContent=s.services.workshops;
-    $('finance-projects').textContent=s.services.projects;
-    document.querySelectorAll('[data-scenario]').forEach(b=>{
-      const selected=b.dataset.scenario===key;
-      b.classList.toggle('is-selected',selected);
-      b.setAttribute('aria-pressed',String(selected));
-    });
-    chart.replaceChildren();
-    // A curva representa RE-CEI-TA acumulada, não lucro, saldo ou caixa.
-    // Portanto sobe conforme existem vendas previstas, inclusive no cenário pessimista.
-    const values=s.series.map(month=>month.cumulativeRevenue);
-    const W=650,H=240,left=57,right=12,top=12,bottom=32;
-    const x=i=>left+i*(W-left-right)/11;
-    const max=Math.max(1000,...values)*1.08;
-    const y=v=>top+(max-v)/max*(H-top-bottom);
-    for(let i=0;i<5;i++){
-      const value=max*i/4,Y=y(value);
-      chart.appendChild(svg('line',{x1:left,x2:W-right,y1:Y,y2:Y,stroke:'#ffffff1c','stroke-width':1}));
-      chart.appendChild(svg('text',{x:0,y:Y+4,fill:'#b0bbc5','font-size':11},Math.round(value/1000)+'k'));
+
+  $('slide-prev').addEventListener('click', () => goTo(current - 1));
+  $('slide-next').addEventListener('click', () => goTo(current + 1));
+  document.querySelectorAll('[data-next]').forEach(button => button.addEventListener('click', () => goTo(current + 1)));
+  $('overview-open').addEventListener('click', openOverview);
+  $('overview-close').addEventListener('click', closeOverview);
+  overview.addEventListener('click', event => { if (event.target === overview) closeOverview(); });
+  $('print-slides').addEventListener('click', () => window.print());
+  $('fullscreen').addEventListener('click', toggleFullscreen);
+  $('help-open').addEventListener('click', () => help.showModal());
+  $('help-close').addEventListener('click', () => help.close());
+
+  document.addEventListener('keydown', event => {
+    const target = event.target;
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName) || target?.isContentEditable) return;
+    if (help.open) return;
+    if (!overview.hidden) {
+      if (event.key === 'Escape') { event.preventDefault(); closeOverview(); }
+      return;
     }
-    const points=values.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
-    chart.appendChild(svg('polygon',{points:`${x(0)},${y(0)} ${points} ${x(11)},${y(0)}`,fill:'#22c55e20'}));
-    chart.appendChild(svg('polyline',{points,fill:'none',stroke:'#4ade80','stroke-width':3.5,'stroke-linejoin':'round','stroke-linecap':'round'}));
-    values.forEach((v,i)=>{
-      if(i===0||i===5||i===11)chart.appendChild(svg('circle',{cx:x(i),cy:y(v),r:4.5,fill:'#4ade80',stroke:'#171c23','stroke-width':2}));
-      if(i===0||i===5||i===11)chart.appendChild(svg('text',{x:x(i),y:H-8,'text-anchor':'middle',fill:'#acb0b9','font-size':12},'M'+(i+1)));
-    });
-    chart.setAttribute('aria-label',`Receita acumulada projetada, cenário ${s.label}: ${money(s.revenue)} no ano 1. Não é lucro. Resultado anual estimado: ${money(s.result)}.`);
-  }
-  document.querySelectorAll('[data-scenario]').forEach(button=>button.addEventListener('click',()=>drawFinance(button.dataset.scenario)));
-  $('finance-include-team').addEventListener('change',()=>drawFinance(document.querySelector('[data-scenario].is-selected').dataset.scenario));
-  function renderTeam(){
-    const list=$('team-list');
-    list.replaceChildren();
-    const members=(window.ModernizeTeam||[]).filter(m=>m&&m.role);
-    for(const member of members){
-      const item=document.createElement('span');
-      const label=document.createElement('strong');label.textContent=member.name?.trim()||'Nome a confirmar';
-      const role=document.createElement('small');role.textContent=member.role;
-      item.append(label,role);list.append(item);
-    }
-    const pending=members.filter(m=>!m.name?.trim()).length;
-    $('team-disclaimer').textContent=pending?`${pending} integrante(s) sem nome — preencher apenas com dados reais antes da banca.`:'Equipe declarada conforme arquivo de configuração.';
-  }
-  renderTeam();goTo(index);drawFinance('base');
-  window.ModernizeSlides = {goTo,current:()=>index,slideCount:slides.length};
+    if (event.key === ' ' && target?.closest?.('button, a, summary, [role="button"]')) return;
+    const key = event.key.toLowerCase();
+    if (['arrowright', 'pagedown', ' '].includes(key)) { event.preventDefault(); goTo(current + 1); }
+    else if (['arrowleft', 'pageup'].includes(key)) { event.preventDefault(); goTo(current - 1); }
+    else if (key === 'home') { event.preventDefault(); goTo(0); }
+    else if (key === 'end') { event.preventDefault(); goTo(slides.length - 1); }
+    else if (key === 'escape') { event.preventDefault(); openOverview(); }
+    else if (key === 'f') { event.preventDefault(); toggleFullscreen(); }
+    else if (key === 'p') { event.preventDefault(); window.print(); }
+  });
+
+  window.addEventListener('hashchange', () => goTo(fromHash()));
+  if (!reducedMotion) document.documentElement.classList.add('motion-allowed');
+  goTo(current);
+  window.ModernizeSlides = Object.freeze({ goTo, current: () => current, slideCount: slides.length });
 })();
