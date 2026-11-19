@@ -36,9 +36,18 @@ with sync_playwright() as p:
     assert 'SIMULAÇÃO DIDÁTICA' in page.locator('#slide-4').inner_text()
     page.screenshot(path=str(OUT/'slide-04-mercado.png'),animations='disabled')
     page.evaluate('window.ModernizeSlides.goTo(4)')
+    manual=page.locator('.compare-side--manual')
+    assisted=page.locator('.compare-side--ai')
+    assert '20' in manual.inner_text() and 'R$ 10' in manual.inner_text()
+    assert '7' in assisted.inner_text() and 'R$ 3' in assisted.inner_text()
+    assert '5min REVISÃO' in assisted.inner_text()
+    assert '−65%' in page.locator('.compare-savings').inner_text()
+    assert '−70%' in page.locator('.compare-savings').inner_text()
+    assert 'VALORES SIMULADOS' in page.locator('.compare-caveat').inner_text()
+    assert 'SEM IA REAL' in page.locator('.compare-caveat').inner_text()
     assert page.locator('#launch-demo').get_attribute('href')=='demo.html?from=slides'
     assert 'DADOS FICTÍCIOS' in page.locator('#slide-5').inner_text()
-    page.screenshot(path=str(OUT/'slide-05-mvp.png'),animations='disabled')
+    page.screenshot(path=str(OUT/'slide-05-comparativo-ia.png'),animations='disabled')
     page.evaluate('window.ModernizeSlides.goTo(5)')
     assert 'TypeScript' in page.locator('#slide-6').inner_text()
     assert 'PostgreSQL' in page.locator('#slide-6').inner_text()
@@ -88,7 +97,7 @@ with sync_playwright() as p:
     compact=browser.new_context(viewport={'width':1200,'height':600},device_scale_factor=1,service_workers='block').new_page()
     guard(compact)
     compact.goto(BASE+'/slides.html#slide-8',wait_until='domcontentloaded')
-    for idx in [0,3,5,7,8,9]:
+    for idx in [0,3,4,5,7,8,9]:
         compact.evaluate('(i)=>window.ModernizeSlides.goTo(i)',idx)
         v=compact.locator(f'#slide-{idx+1}').evaluate('(el)=>({scroll:el.scrollHeight,client:el.clientHeight,sw:el.scrollWidth,cw:el.clientWidth})')
         assert v['scroll']-v['client']<=10 and v['sw']-v['cw']<=10, f'Slide {idx+1} transborda em 1200×600: {v}'

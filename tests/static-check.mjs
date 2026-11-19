@@ -20,7 +20,7 @@ for (const [i, slide] of slides.entries()) {
 const mustHave = [
   'Em modo inteligente.', 'continuar no manual?', 'IA útil.', 'TAM · POTENCIAL',
   'SAM · ATENDÍVEIS', 'SOM · META', 'SIMULAÇÃO DIDÁTICA', 'DADOS FICTÍCIOS',
-  'ANÁLISE SIMULADA', 'TypeScript', 'Node.js', 'PostgreSQL', 'Revisão humana',
+  'VALORES SIMULADOS', 'MANUAL', 'IA + HUMANO', '−65%', '−70%', 'TypeScript', 'Node.js', 'PostgreSQL', 'Revisão humana',
   'R$ 990', 'R$ 299', 'R$ 1.500', 'R$ 4.000',
   'R$ 68,1 mil', 'R$ 65,8 mil', '+ R$ 2,3 mil', '3,4%',
   'CLIENTES COMPROVADOS', 'INTEGRANTES PREVISTOS', 'EMPRESAS PILOTO',
@@ -30,6 +30,35 @@ for (const piece of mustHave) if (!html.includes(piece)) throw Error('Critério/
 for (const caution of ['TAM/SAM NÃO VERIFICADOS', 'SEM IA REAL', 'ainda não implementada', 'sem contratos ou vendas confirmadas', 'ainda precisam ser inseridos']) {
   if (!html.includes(caution)) throw Error('Ressalva factual ausente: ' + caution);
 }
+// Comparativo: valores derivados de hipóteses declaradas, não de medições.
+const comparison = slides[4];
+const assumption = name => {
+  const found = comparison.match(new RegExp(`data-${name}="([0-9.]+)"`));
+  if (!found) throw Error('Premissa ausente: ' + name);
+  return Number(found[1]);
+};
+const manualMinutes = assumption('manual-minutes');
+const aiMinutes = assumption('ai-minutes');
+const reviewMinutes = assumption('review-minutes');
+const hourlyBRL = assumption('hourly-cost-brl');
+const aiCaseBRL = assumption('ai-cost-brl');
+const assistedMinutes = aiMinutes + reviewMinutes;
+const manualBRL = manualMinutes / 60 * hourlyBRL;
+const assistedBRL = reviewMinutes / 60 * hourlyBRL + aiCaseBRL;
+const percentTime = Math.round((1 - assistedMinutes / manualMinutes) * 100);
+const percentCost = Math.round((1 - assistedBRL / manualBRL) * 100);
+for (const label of [
+  `${manualMinutes}<small>min</small>`, `${assistedMinutes}<small>min</small>`,
+  `R$ ${manualBRL.toFixed(0)}`, `R$ ${assistedBRL.toFixed(0)}`,
+  `−${percentTime}%`, `−${percentCost}%`,
+  'SEM IMPLANTAÇÃO', 'SEM IA REAL', '5min REVISÃO'
+]) {
+  if (!comparison.includes(label)) throw Error('Valor ou ressalva incorreto: ' + label);
+}
+if (manualMinutes !== 20 || assistedMinutes !== 7 || manualBRL !== 10 || assistedBRL !== 3) {
+  throw Error('Premissas alteradas sem atualizar o cenário');
+}
+
 if (!html.includes('href="demo.html?from=slides"')) throw Error('Falta link da demonstração');
 if (!html.includes('https://eduardolavall.github.io/modernize/#servicos')) throw Error('Falta chamada comercial');
 if (!css.includes('@media print') || !css.includes('13.333in 7.5in')) throw Error('PDF 16:9 não configurado');

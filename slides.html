@@ -92,19 +92,34 @@
       <span class="slide-number">04 / 10</span>
     </section>
 
-    <!-- 05 — MVP -->
-    <section class="slide slide--night" id="slide-5" aria-labelledby="s5-title" hidden>
-      <div class="slide-content vis-slide">
-        <p class="kicker kicker--light"><span class="kicker-bar"></span> MODERNIZE IA / PRIMEIRO CASO DE USO</p>
-        <h2 id="s5-title" class="vis-title">Da ideia<br><em>à demonstração.</em></h2>
-        <div class="vis-mvp">
-          <div class="vis-mvp-stage"><b>＋</b><strong>SOLICITAÇÃO</strong></div>
-          <span>→</span>
-          <div class="vis-mvp-stage vis-mvp-highlight"><b>✳</b><strong>ANÁLISE SIMULADA</strong></div>
-          <span>→</span>
-          <div class="vis-mvp-stage"><b>✓</b><strong>REVISÃO HUMANA</strong></div>
+    <!-- 05 — MVP + COMPARATIVO HIPOTÉTICO -->
+    <section class="slide slide--night slide--comparison" id="slide-5" aria-labelledby="s5-title"
+      data-manual-minutes="20" data-ai-minutes="2" data-review-minutes="5"
+      data-hourly-cost-brl="30" data-ai-cost-brl="0.50" hidden>
+      <div class="slide-content vis-slide compare-content">
+        <p class="kicker kicker--light"><span class="kicker-bar"></span> MODERNIZE IA / DOCUMENTOS</p>
+        <h2 id="s5-title" class="vis-title compare-title">Mesmos documentos.<br><em>Outra velocidade.</em></h2>
+        <div class="compare-columns" aria-label="Exemplo ilustrativo: vinte minutos e dez reais manualmente versus sete minutos e três reais com IA e conferência humana">
+          <article class="compare-side compare-side--manual">
+            <div class="compare-side-top"><span>MANUAL</span><b aria-hidden="true">⌛</b></div>
+            <div class="compare-time"><strong>20<small>min</small></strong><span>ANÁLISE</span></div>
+            <div class="compare-cost"><span>CUSTO</span><strong>R$ 10</strong></div>
+          </article>
+          <span class="compare-versus" aria-hidden="true">VS</span>
+          <article class="compare-side compare-side--ai">
+            <div class="compare-side-top"><span>IA + HUMANO</span><b aria-hidden="true">✳</b></div>
+            <div class="compare-time"><strong>7<small>min</small></strong><span>2min IA + 5min REVISÃO</span></div>
+            <div class="compare-cost"><span>CUSTO</span><strong>R$ 3</strong></div>
+          </article>
         </div>
-        <div class="vis-mvp-bottom"><a href="demo.html?from=slides" id="launch-demo" class="action action--light">Explorar a demo <span aria-hidden="true">↗</span></a><small>DADOS FICTÍCIOS · AINDA SEM IA REAL</small></div>
+        <div class="compare-footer">
+          <div class="compare-savings" aria-label="Reduções calculadas para a hipótese ilustrativa">
+            <span><b>−65%</b> TEMPO</span>
+            <span><b>−70%</b> CUSTO</span>
+          </div>
+          <a href="demo.html?from=slides" id="launch-demo" class="action action--light compare-demo">Ver demo <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="compare-caveat">VALORES SIMULADOS · R$ 30/H · IA R$ 0,50/CASO · SEM IMPLANTAÇÃO · DADOS FICTÍCIOS · SEM IA REAL.</p>
       </div>
       <span class="slide-number">05 / 10</span>
     </section>
