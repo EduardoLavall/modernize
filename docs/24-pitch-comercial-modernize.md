@@ -24,9 +24,19 @@ Unir duas necessidades sem deixar o pitch parecer uma apostila:
 | 07. Receitas | 25s | **R$ 990 / R$ 299 / R$ 1.500 / R$ 4.000** | Implantação e mensalidade por imobiliária; workshops e projetos como serviços da empresa. Preços hipotéticos, não clientes ou contratos realizados. |
 | 08. Finanças | 30s | **Receita R$ 68,1 mil / despesa R$ 65,8 mil / resultado +R$ 2,3 mil** | Simulação da empresa combinada, ano 1, cenário-base; margem **3,4%**, remuneração **parcial** R$ 2,5 mil/mês, caixa inicial hipotético R$ 3 mil, menor caixa R$ 1,5 mil. Não confundir faturamento com lucro. Pessimista fecha em **−R$ 33,2 mil**; capital necessário depende do cenário. |
 | 09. Equipe + validação | 30s | **Demo pronta / zero clientes comprovados / 3–5 integrantes previstos** | Não inventar tração. Apresentar nomes reais e papéis dos participantes **assim que o grupo fornecer**; produto, tecnologia, comercial, UX são funções planejadas. |
-| 10. Pedido | 25s | **O futuro começa com um piloto.** | Pedido simulado à banca: acesso a empresas piloto, mentoria e apoio para validação; não declarar investimento captado. Chamada ao site institucional da Modernize. |
+| 10. Mercado + pedido | 25s | **88%** das organizações pesquisadas já usavam IA em 2025 + **Não deixe sua empresa ficar para trás** | Fonte: Stanford HAI, AI Index 2026, seção Economy; refere-se à amostra de organizações pesquisadas, não a todas as empresas. Fechamento comercial com CTA e pedido simulado de empresas piloto, mentoria e validação. |
 
 **Total:** 270 s = **4min30s**. Se demonstrar a demo por mais de 45 segundos, reduzir fala de outros slides.
+
+## Evidência para a frase final (slide 10)
+
+**Fonte primária:** [Stanford HAI — AI Index Report 2026, seção Economy](https://hai.stanford.edu/ai-index/2026-ai-index-report/economy), tópico **Organizational AI adoption**.
+
+**Dado:** **88% das organizações pesquisadas** relataram usar IA em pelo menos uma função de negócios em **2025** (78% em 2024, segundo levantamento McKinsey reproduzido pelo AI Index). **Amostra global de respondentes: não é uma estatística censitária de todas as empresas do mundo nem de empresas brasileiras.** Não converter a frase em "88% de todas as empresas" ou "88% dos clientes".
+
+**Estratégia de comunicação:** número grande como prova de que a adoção está avançando, headline "O mercado já está se modernizando. Não deixe sua empresa ficar para trás.", CTA para as soluções Modernize e pedido acadêmico de pilotos, mentoria e validação no rodapé. A intensidade comercial não substitui a nuance metodológica na fonte.
+
+**Dado de contexto brasileiro (fora do slide para preservar legibilidade):** [TIC Empresas 2025 / Cetic.br, publicado em junho de 2026](https://nic.br/noticia/releases/uso-de-inteligencia-artificial-por-empresas-brasileiras-avanca-e-atinge-17-aponta-pesquisa-do-cetic-br/) reporta adoção de IA por 17% das empresas brasileiras na população pesquisada (empresas com 10 ou mais pessoas ocupadas), versus 13% em 2024; 15% entre pequenas e 50% entre grandes empresas em 2025. A amostra e o método diferem do estudo global; não comparar os percentuais diretamente.
 
 ## Como o comparativo do slide 05 foi calculado
 
