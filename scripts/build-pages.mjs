@@ -1,5 +1,5 @@
 // GitHub Pages — artefato publicado, sem ferramentas de build externas.
-// Mantém landing e demo legadas; o pitch principal é exclusivamente comercial.
+// Mantém landing e demo legadas; o pitch combina narrativa comercial e critérios do professor.
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -32,7 +32,7 @@ for (const [from, to] of [
   if (!html.includes(from)) throw new Error('Referência ausente do pitch: ' + from);
   html = html.replace(from, to);
 }
-if (!html.includes('Sua empresa pode continuar como está.')) {
+if (!html.includes('O futuro começa')) {
   throw new Error('O pitch comercial novo não foi incluído no build');
 }
 const cleanup = `<script>

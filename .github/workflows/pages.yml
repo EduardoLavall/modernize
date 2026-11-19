@@ -37,7 +37,7 @@ jobs:
           python -m http.server 8767 --bind 127.0.0.1 --directory _site >/tmp/modernize-server.log 2>&1 &
           sleep 2
           curl -fsS http://127.0.0.1:8767/slides-live.html > /tmp/modernize-live-local.html || { cat /tmp/modernize-server.log; exit 1; }
-          grep -Fq 'Sua empresa pode continuar como está.' /tmp/modernize-live-local.html
+          grep -Fq 'O futuro começa' /tmp/modernize-live-local.html
           python tests/qa.spec.py
       - name: Verificar landing institucional com Chromium
         run: |
@@ -98,7 +98,7 @@ jobs:
           SITE="${PAGE_URL%/}"
           echo "Verificando a rota publicada em $SITE"
           curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL "$SITE/slides-live.html?release=$GITHUB_SHA" >/tmp/modernize-live-remote.html
-          grep -Fq 'Sua empresa pode continuar como está.' /tmp/modernize-live-remote.html
+          grep -Fq 'O futuro começa' /tmp/modernize-live-remote.html
           grep -Fq 'src="js/slides-live.js"' /tmp/modernize-live-remote.html
           curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL "$SITE/js/slides-live.js?release=$GITHUB_SHA" >/tmp/modernize-live-remote.js
           grep -Fq 'window.ModernizeSlides' /tmp/modernize-live-remote.js

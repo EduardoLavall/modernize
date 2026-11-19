@@ -2,7 +2,7 @@
 
 **Atualizado em 19/11/2026.** Existem duas experiências diferentes neste repositório. Não misturá-las:
 
-- **Pitch comercial atual** (`slides.html`): dez slides sobre a Modernize como empresa de modernização com IA. É apresentação institucional; não é uma prova de tecnologia implantada, nem uma projeção financeira.
+- **Pitch Sprint visual atual** (`slides.html`): dez telas curtas que vendem a Modernize e contemplam a rubrica do professor (mercado, MVP, stack, preços, 12 meses, equipe e pedido). Os números exibidos são **simulações**, não vendas reais.
 - **Demo acadêmica histórica** (`demo.html`): jornada simulada de cadastro documental para imobiliárias. Dados fictícios, sem backend, sem IA real, sem OAuth Google e sem upload real de documentos.
 
 A página inicial (`index.html`) é a landing institucional, gerada a partir de `landing/index.html`. A landing também pode ser publicada separadamente na Vercel com Root Directory = `landing`.
@@ -27,7 +27,7 @@ Existe também `/slides-live.html`, com arquivos de CSS/JS de nomes alternativos
 
 ## Apresentação comercial
 
-Narrativa: gancho → retrabalho → transformação → soluções → aplicações práticas de IA → supervisão humana → método → diferentes setores → diferencial → convite para conhecer as soluções.
+Narrativa: impacto → dor → proposta de valor → mercado → MVP → viabilidade técnica → monetização → projeção financeira → tração/equipe → pedido. Duração sugerida: **4min30s** com apresentação demonstrativa curta.
 
 O deck inclui:
 
@@ -60,4 +60,4 @@ Para Playwright, instalar `playwright`, `pypdf` e Chromium, servir `_site` na po
 
 ## Material histórico
 
-Os relatórios acadêmicos, CSVs financeiros, `js/finance.js` e as decisões sobre Modernize IA continuam versionados, mas não aparecem no pitch comercial atual. A arquitetura de produção anteriormente proposta (OAuth, banco, storage privado, processamento assíncrono) permanece **planejamento, não funcionalidade entregue**. Uma evolução real deve exigir segurança, isolamento por empresa, LGPD e validação com clientes.
+Os relatórios acadêmicos, CSVs financeiros, `js/finance.js` e as decisões sobre Modernize IA continuam versionados. O slide 8 apresenta **somente um resumo visual do cenário-base da empresa**, e a documentação mantém o restante. A arquitetura de produção anteriormente proposta (OAuth, banco, storage privado, processamento assíncrono) permanece **planejamento, não funcionalidade entregue**. Uma evolução real deve exigir segurança, isolamento por empresa, LGPD e validação com clientes.

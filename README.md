@@ -1,6 +1,6 @@
 # Modernize — Modernização de empresas com IA
 
-**Apresentação comercial atual (19/11/2026):** [slides.html](slides.html) mostra a empresa Modernize como parceira de modernização com inteligência artificial, automações, treinamento e acompanhamento. O pitch tem dez slides de vendas, sem finanças, TAM, arquitetura técnica ou foco exclusivo em imobiliárias. Veja o [roteiro comercial](docs/24-pitch-comercial-modernize.md).
+**Pitch Sprint visual (19/11/2026):** [slides.html](slides.html) vende a Modernize como parceira de modernização com IA, mas recupera os critérios da disciplina: problema, mercado, MVP, arquitetura, precificação, finanças, equipe e pedido, **em até 10 slides e aproximadamente 4min30s**. Texto na tela reduzido; justificativas e notas completas no [roteiro do pitch](docs/24-pitch-comercial-modernize.md).
 
 
 **Documentação do projeto acadêmico revisada em 15/10/2026.** A Modernize ainda é proposta de negócio, sem clientes, produto real ou validação comercial.
@@ -24,10 +24,10 @@
 - [22 — Auditoria crítica e pontos pendentes](docs/22-auditoria-pre-implementacao.md).
 - [13 — Escopo do MVP](docs/13-mvp-modernize-ia.md); [09 — Marca e logos aprovados](docs/09-identidade-visual.md); [Decisões D-001–D-027](decisions/registro-decisoes.md); [Fontes](research/fontes-e-referencias.md).
 
-**Financeiro e proposta acadêmica anterior:** os documentos financeiros em `docs/08-plano-financeiro.md`, `docs/23-projecao-financeira-empresa.md` e `finance/` permanecem auditáveis, mas não são apresentados no pitch comercial atual. A empresa ainda não tem receita ou resultados reais comprovados nesse material.
+**Financeiro e plano acadêmico:** o slide 8 resume o cenário-base hipotético da empresa; os documentos em `docs/08-plano-financeiro.md`, `docs/23-projecao-financeira-empresa.md` e `finance/` guardam os três cenários, os cálculos e as limitações. O público não deve confundir projeção com lucro realizado. A empresa ainda não tem receita ou resultados reais comprovados nesse material.
 
 **Rigor:** toda validação com imobiliárias está pendente. Pesquisa nacional de adoção de IA não comprova dor local. Concorrentes como Kenlo e Superlógica já realizam partes do processo. Uma demo sintética não é SaaS real nem tratamento LGPD homologado.
 
 **Página inicial oficial:** a [landing institucional](index.html) é a homepage da Modernize em `https://eduardolavall.github.io/modernize/`. A mesma landing pode ser publicada independentemente na Vercel a partir da pasta [`landing/`](landing/) (Root Directory = `landing`). A [apresentação](slides.html) e a [demo](demo.html) continuam em URLs próprias. O HTML raiz é sincronizado a partir de `landing/index.html` usando `node landing/sync-home.mjs`; o teste estático bloqueia divergências.
 
-**Código disponível:** [pitch comercial](slides.html), [demo sintética acadêmica](demo.html), estilos, navegação, cálculos históricos, testes e workflow GitHub Pages. A apresentação comercial não exige backend. A demo continua **sem SaaS, Google OAuth, backend, armazenamento real ou IA externa**. [Detalhes de implementação](README-IMPLEMENTACAO.md). Para publicar, a origem do GitHub Pages deve ser GitHub Actions.
+**Código disponível:** [pitch visual para a banca](slides.html), [demo sintética acadêmica](demo.html), estilos, navegação, cálculos históricos, testes e workflow GitHub Pages. A apresentação comercial não exige backend. A demo continua **sem SaaS, Google OAuth, backend, armazenamento real ou IA externa**. [Detalhes de implementação](README-IMPLEMENTACAO.md). Para publicar, a origem do GitHub Pages deve ser GitHub Actions.
