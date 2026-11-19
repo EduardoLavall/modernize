@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  pull_request:
+    branches: [main]
 permissions:
   contents: read
   pages: write
@@ -52,6 +54,7 @@ jobs:
             landing/tests/artifacts/
           if-no-files-found: ignore
   deploy:
+    if: github.event_name != 'pull_request'
     needs: qa
     environment:
       name: github-pages
