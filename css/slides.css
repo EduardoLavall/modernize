@@ -400,3 +400,14 @@ h3{font-weight:820;font-size:23px;line-height:1.13}
  .vis-fin-result{min-height:205px}
  .vis-proof-item{min-height:205px}
 }
+
+/* Capa em projetores compactos: reservar espaço para o footer sem scroll. */
+@media screen and (min-width:850px) and (max-height:650px){
+ .slide--cover .cover-grid{height:100%;min-height:0;padding-top:7px;padding-bottom:18px}
+ .slide--cover .cover-copy h1{font-size:clamp(44px,4.6vw,58px);line-height:.97;margin:0 0 11px}
+ .slide--cover .cover-copy .kicker{margin-bottom:8px}
+ .slide--cover .main-lead{font-size:16px;line-height:1.32;margin-bottom:14px}
+ .slide--cover .action{padding:11px 15px;font-size:13px;min-width:220px}
+ .slide--cover .cover-art{width:auto;height:73%;aspect-ratio:1;right:5%;top:49%}
+ .slide--cover .cover-foot{bottom:4px}
+}
